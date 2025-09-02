@@ -23,8 +23,12 @@ public class Lieu  {
         return this.adresse;
     }
 
-    public void setAdresse(String pAdresse) {           // trouver un regex exemple :  2 rue de la paix
-        this.adresse = pAdresse;
+    public void setAdresse(String pAdresse) throws SaisieException {
+        if (!validateAdresse(pAdresse)) {
+            throw new SaisieException("Error adresse invalide : ");
+        }else{
+            this.adresse = pAdresse;
+        }
     }
 
     public String getEmail() {
@@ -68,12 +72,14 @@ public class Lieu  {
     }
 
     public void setCodePostal(int pCodePostal) throws SaisieException {
-        if (!positifInt(String.valueOf(pCodePostal)) && String.valueOf(pCodePostal).length() == 5) {
-            throw new SaisieException("Error sur code postal : ");
-        }else{
-            this.codePostal = pCodePostal;
+        String codeStr = String.valueOf(pCodePostal);
+
+        if (!positifInt(codeStr) || codeStr.length() != 5) {
+            throw new SaisieException("Erreur sur code postal : " + pCodePostal);
         }
+        this.codePostal = pCodePostal;
     }
+
 
     // Recupere le super.toString de la classe personne et le toString de la classe Lieu
     @Override

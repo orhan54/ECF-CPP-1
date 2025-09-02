@@ -26,6 +26,9 @@ public class RegexUtility {
     // Regex type double
     private static final String POSITIF_DOUBLE_REGEX = "[+-]?\\d*(\\.\\d+)?([eE][+-]?\\d+)?";
 
+    // Regex pour adresse postal
+    private static final String ADRESSE_VALIDE = "^[0-9]+\\s+[a-zA-ZéèêàâôûùïüçÉÈÊÀÂÔÛÙÏÜÇ]+(\\s+[a-zA-ZéèêàâôûùïüçÉÈÊÀÂÔÛÙÏÜÇ]+)*$";
+
 
 
     public static boolean dateValide(String input) {
@@ -54,4 +57,7 @@ public class RegexUtility {
         return input != null && input.matches(POSITIF_DOUBLE_REGEX);
     }
 
+    public static boolean validateAdresse(String input) {
+        return input != null && input.matches(ADRESSE_VALIDE);
+    }
 }
