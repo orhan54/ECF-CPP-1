@@ -1,13 +1,26 @@
 package sparadrap.afpa.model;
 
-public class Client extends Personne {
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Patient extends Personne {
 
     // Attribut de la classe Client
     private int numeroSecuriteSociale;
 
-    public Client(String nom, String prenom) {
-        super(nom, prenom);
+    // Lis des patients enregistrer
+    private static List<Patient> patients = new ArrayList<Patient>();
+
+    // Constructeur avec les extends de la classe Personne et de la classe Lieu
+    public Patient(String nom, String prenom, String adresse, String email, String telephone, String ville, int codePostal) {
+        super(nom, prenom, adresse, email, telephone, ville, codePostal);
         this.setNumeroSecuriteSociale(numeroSecuriteSociale);
+    }
+
+    // Afficher la list des patients
+    public static List<Patient> getPatients() {
+        return patients;
     }
 
     // Getters et Setters

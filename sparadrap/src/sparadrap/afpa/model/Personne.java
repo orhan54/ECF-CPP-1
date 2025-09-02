@@ -1,12 +1,13 @@
 package sparadrap.afpa.model;
 
-public class Personne {
+public class Personne extends Lieu {
 
     // Attribut de la classe personne
     private String nom, prenom;
 
     // Constructeur de la classe Personne
-    public Personne(String nom, String prenom) {
+    public Personne(String nom, String prenom, String adresse, String email, String telephone, String ville, int codePostal) {
+        super(adresse, email, telephone, ville, codePostal);
         this.setNom(nom);
         this.setPrenom(prenom);
     }
@@ -29,11 +30,10 @@ public class Personne {
     }
 
     // Le toString de la classe Personne dpuis un StringBuilder
-    public String toString(){
-        StringBuilder p = new StringBuilder();
-        p.append("- Nom : ").append(this.nom).append("\n");
-        p.append("- Prenom : ").append(this.prenom).append("\n");
-
-        return p.toString();
+    @Override
+    public String toString() {
+        return super.toString() +
+            "- Nom : " + nom + ("\n") +
+            "- Prenom : " + prenom + ("\n");
     }
 }

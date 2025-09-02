@@ -1,17 +1,17 @@
 package sparadrap.afpa.model;
 
-public class Lieu extends Personne {
+public class Lieu  {
 
     // attibuts de la classe Lieu
     private String adresse, email, telephone, ville;
     private int codePostal;
 
-    public Lieu(String nom, String prenom,  String adresse, String email, String telephone, String ville, int codePostal) {
-        super(nom, prenom);
+    public Lieu(String adresse, String email, String telephone, String ville, int codePostal) {
         this.setAdresse(adresse);
         this.setEmail(email);
         this.setTelephone(telephone);
         this.setVille(ville);
+        this.setCodePostal(codePostal);
     }
 
     // Getters et Setters de la classe Lieu qui extends de Personne
@@ -58,11 +58,13 @@ public class Lieu extends Personne {
     // Recupere le super.toString de la classe personne et le toString de la classe Lieu
     @Override
     public String toString() {
-        return super.toString()
-        + "- Adrsese : " + adresse + ("\n")
-        + "- Email : " + email + ("\n")
-        + "- Telephone : " + telephone + ("\n")
-        + "- Ville : " + ville + ("\n")
-        + "-Code postal : " + codePostal + ("\n");
+        StringBuilder sbl = new StringBuilder();
+        sbl.append("- Adresse: ").append(this.adresse).append("\n");
+        sbl.append("- Email: ").append(this.email).append("\n");
+        sbl.append("- Telephone: ").append(this.telephone).append("\n");
+        sbl.append("- Ville: ").append(this.ville).append("\n");
+        sbl.append("- CodePostal: ").append(this.codePostal).append("\n");
+
+        return sbl.toString();
     }
 }
