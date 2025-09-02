@@ -1,5 +1,7 @@
 package sparadrap.afpa.model;
 
+import sparadrap.afpa.exception.SaisieException;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +16,8 @@ public class Mutuelle extends Lieu {
     private static List<Mutuelle> mutuelles = new ArrayList<Mutuelle>();
 
     // Constucteur qui extends de la classe Lieu
-    public Mutuelle(String adresse, String email, String telephone, String ville, int codePostal) {
-        super(adresse, email, telephone, ville, codePostal);
+    public Mutuelle(String pAdresse, String pEmail, String pTelephone, String pVille, int pCodePostal) throws SaisieException {
+        super(pAdresse, pEmail, pTelephone, pVille, pCodePostal);
         this.setNom(nom);
         this.setTauxPriseEnCharge(tauxPriseEnCharge);
         this.setDepartement(departement);
@@ -30,24 +32,24 @@ public class Mutuelle extends Lieu {
     public  String getNom() {
         return this.nom;
     }
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNom(String pNom) {
+        this.nom = pNom;
     }
 
     public double getTauxPriseEnCharge() {
         return this.tauxPriseEnCharge;
     }
 
-    public void setTauxPriseEnCharge(double tauxPriseEnCharge) {
-        this.tauxPriseEnCharge = tauxPriseEnCharge;
+    public void setTauxPriseEnCharge(double pTauxPriseEnCharge) {
+        this.tauxPriseEnCharge = pTauxPriseEnCharge;
     }
 
     public int getDepartement() {
         return this.departement;
     }
 
-    public void setDepartement(int departement) {
-        this.departement = departement;
+    public void setDepartement(int pDepartement) {
+        this.departement = pDepartement;
     }
 
     // affichage du super.toString avec la classe lieu

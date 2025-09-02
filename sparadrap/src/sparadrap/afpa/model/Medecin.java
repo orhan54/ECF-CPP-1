@@ -1,7 +1,11 @@
 package sparadrap.afpa.model;
 
+import sparadrap.afpa.exception.SaisieException;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static sparadrap.afpa.utility.RegexUtility.positifInt;
 
 public class Medecin extends Personne {
     // Attribut de la classe Medecin
@@ -11,8 +15,8 @@ public class Medecin extends Personne {
     private static List<Medecin> medecins = new ArrayList<Medecin>();
 
     // Constructeur avec les extends de la classe Personne et de la classe Lieu
-    public Medecin(String nom, String prenom, String adresse, String email, String telephone, String ville, int codePostal) {
-        super(nom, prenom, adresse, email, telephone, ville, codePostal);
+    public Medecin(String pNom, String pPrenom, String pAdresse, String pEmail, String pTelephone, String pVille, int pCodePostal) throws SaisieException {
+        super(pNom, pPrenom, pAdresse, pEmail, pTelephone, pVille, pCodePostal);
         this.setNumeroAgreement(numeroAgreement);
     }
 
@@ -26,8 +30,12 @@ public class Medecin extends Personne {
         return this.numeroAgreement;
     }
 
-    public void setNumeroAgreement(int numeroAgreement) {
-        this.numeroAgreement = numeroAgreement;
+    public void setNumeroAgreement(int pNumeroAgreement) throws SaisieException {
+        if (!positifInt(String.valueOf(pNumeroAgreement)) && String.valueOf(pNumeroAgreement).length() == 9) {
+            throw new SaisieException("Error sur numéro agreement : ");
+        }else{
+            this.numeroAgreement = pNumeroAgreement;
+        }
     }
 
     // toString de la classe Personne et de la classe Medecin
