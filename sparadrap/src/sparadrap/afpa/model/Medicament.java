@@ -16,7 +16,7 @@ public class Medicament {
     private double prix;
     private String categorie, nom;
 
-    // List des medicaments
+    // List des medicaments 
     private static List<Medicament> medicaments = new ArrayList<Medicament>();
 
     // Constucteur de la classe Medicament
