@@ -16,8 +16,8 @@ public class Patient extends Personne {
     private static List<Patient> patients = new ArrayList<Patient>();
 
     // Constructeur avec les extends de la classe Personne et de la classe Lieu
-    public Patient(String pNom, String pPrenom, String pAdresse, String pEmail, String pTelephone, String pVille, int pCodePostal) throws SaisieException {
-        super(pNom, pPrenom, pAdresse, pEmail, pTelephone, pVille, pCodePostal);
+    public Patient(String pNom, String pPrenom, Lieu lieu) throws SaisieException {
+        super(pNom, pPrenom, lieu);
         this.numeroSecuriteSociale = generateNumSecu();
     }
 
@@ -61,7 +61,15 @@ public class Patient extends Personne {
     // toString de la classe Personne et de la classe Client
     @Override
     public String toString() {
-        return super.toString()
-            + "- Numero de sécurité social : " + this.getNumeroSecuriteSociale();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Patient :\n");
+        sb.append("- Nom : ").append(getNom()).append("\n");
+        sb.append("- Prénom : ").append(getPrenom()).append("\n");
+        sb.append("- Numéro de sécurité sociale : ").append(numeroSecuriteSociale).append("\n");
+        if (getLieu() != null) {
+            sb.append(getLieu().toString());
+        }
+        return sb.toString();
     }
+
 }

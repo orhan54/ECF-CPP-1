@@ -9,14 +9,14 @@ import static sparadrap.afpa.utility.RegexUtility.positifInt;
 
 public class Medecin extends Personne {
     // Attribut de la classe Medecin
-    private int numeroAgreement;
+    private String numeroAgreement;
 
     // List des medecins enregistrer
     private static List<Medecin> medecins = new ArrayList<Medecin>();
 
     // Constructeur avec les extends de la classe Personne et de la classe Lieu
-    public Medecin(String pNom, String pPrenom, String pAdresse, String pEmail, String pTelephone, String pVille, int pCodePostal) throws SaisieException {
-        super(pNom, pPrenom, pAdresse, pEmail, pTelephone, pVille, pCodePostal);
+    public Medecin(String pNom, String pPrenom, String numeroAgreement, Lieu lieu) throws SaisieException {
+        super(pNom, pPrenom, lieu);
         this.setNumeroAgreement(numeroAgreement);
     }
 
@@ -26,11 +26,11 @@ public class Medecin extends Personne {
     }
 
     // Getters et Setters
-    public int getNumeroAgreement() {
+    public String getNumeroAgreement() {
         return this.numeroAgreement;
     }
 
-    public void setNumeroAgreement(int pNumeroAgreement) throws SaisieException {
+    public void setNumeroAgreement(String pNumeroAgreement) throws SaisieException {
         if (!positifInt(String.valueOf(pNumeroAgreement)) && String.valueOf(pNumeroAgreement).length() == 9) {
             throw new SaisieException("Error sur numéro agreement : " + pNumeroAgreement);
         }else{
@@ -38,11 +38,16 @@ public class Medecin extends Personne {
         }
     }
 
-    // toString de la classe Personne et de la classe Medecin
-
     @Override
     public String toString() {
-        return super.toString()
-        + "- Numero Agreement: " + numeroAgreement;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Médecin :\n");
+        sb.append("- Nom : ").append(getNom()).append("\n");
+        sb.append("- Prénom : ").append(getPrenom()).append("\n");
+        sb.append("- Numero agréement : ").append(numeroAgreement).append("\n");
+        if (getLieu() != null) {
+            sb.append(getLieu().toString());
+        }
+        return sb.toString();
     }
 }
