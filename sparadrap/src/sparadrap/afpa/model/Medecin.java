@@ -32,7 +32,7 @@ public class Medecin extends Personne {
 
     public void setNumeroAgreement(int pNumeroAgreement) throws SaisieException {
         if (!positifInt(String.valueOf(pNumeroAgreement)) && String.valueOf(pNumeroAgreement).length() == 9) {
-            throw new SaisieException("Error sur numéro agreement : ");
+            throw new SaisieException("Error sur numéro agreement : " + pNumeroAgreement);
         }else{
             this.numeroAgreement = pNumeroAgreement;
         }

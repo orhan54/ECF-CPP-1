@@ -50,10 +50,10 @@ public class Patient extends Personne {
         return this.numeroSecuriteSociale;
     }
 
-    public void setNumeroSecuriteSociale(String pNumeroSecuriteSociale) {
+    public void setNumeroSecuriteSociale(String pNumeroSecuriteSociale) throws  SaisieException {
         if (numeroSecuriteSociale.length()!=15) {
-            System.out.println("Error sur le numero de sécurité social : ");
-        }else if (numeroSecuriteSociale.length()==15) {
+            System.out.println("Error sur le numero de sécurité social : " + pNumeroSecuriteSociale);
+        }else {
             this.numeroSecuriteSociale = pNumeroSecuriteSociale;
         }
     }

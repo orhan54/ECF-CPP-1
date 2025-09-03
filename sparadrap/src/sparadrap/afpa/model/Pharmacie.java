@@ -2,6 +2,8 @@ package sparadrap.afpa.model;
 
 import sparadrap.afpa.exception.SaisieException;
 
+import static sparadrap.afpa.utility.RegexUtility.regexAlpha;
+
 public class Pharmacie {
     // Attribut de la classe Pharmacie
     private String nom;
@@ -16,8 +18,12 @@ public class Pharmacie {
         return this.nom;
     }
 
-    public void setNom(String pNom) {
-        this.nom = pNom;
+    public void setNom(String pNom) throws SaisieException {
+        if(!regexAlpha(pNom) && pNom.isEmpty()){
+            throw new SaisieException("Error sur le nom de la pharmacie : " + pNom);
+        }else{
+            this.nom = pNom;
+        }
     }
 
     // toString de la classe Pharmacie avec un StringBuilder

@@ -37,7 +37,7 @@ public class Commande {
 
     public void setDateCommande(Date pDateCommande) throws SaisieException {
         if (!dateValide(String.valueOf(pDateCommande))){
-            throw new SaisieException("Erreur sur le format de la date : ");
+            throw new SaisieException("Erreur sur le format de la date : " + pDateCommande);
         }else{
             this.dateCommande = pDateCommande;
         }
@@ -48,8 +48,8 @@ public class Commande {
     }
 
     public void setNomPersonne(String pNomPersonne) throws SaisieException {
-        if (!regexAlpha(pNomPersonne)){
-            throw new SaisieException("Erreur sur le nom de la personne : ");
+        if (!regexAlpha(pNomPersonne) && !pNomPersonne.isEmpty()){
+            throw new SaisieException("Erreur sur le nom de la personne : "  + pNomPersonne);
         }else{
             this.nomPersonne = pNomPersonne;
         }
@@ -60,8 +60,8 @@ public class Commande {
     }
 
     public void setPrenomPersonne(String pPrenomPersonne) throws SaisieException {
-        if (!regexAlpha(pPrenomPersonne)){
-            throw new SaisieException("Erreur sur le prenom de la personne : ");
+        if (!regexAlpha(pPrenomPersonne) && !pPrenomPersonne.isEmpty()){
+            throw new SaisieException("Erreur sur le prenom de la personne : "   + pPrenomPersonne);
         }else{
             this.prenomPersonne = pPrenomPersonne;
         }

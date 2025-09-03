@@ -4,18 +4,18 @@ import sparadrap.afpa.exception.SaisieException;
 
 import static sparadrap.afpa.utility.RegexUtility.*;
 
-public class Lieu  {
+public class Lieu {
 
     // attibuts de la classe Lieu
     private String adresse, email, telephone, ville;
     private int codePostal;
 
     public Lieu(String pAdresse, String pEmail, String pTelephone, String pVille, int pCodePostal) throws SaisieException {
-        this.setAdresse(pAdresse);
-        this.setEmail(pEmail);
-        this.setTelephone(pTelephone);
-        this.setVille(pVille);
-        this.setCodePostal(pCodePostal);
+        this.setAdresse(adresse);
+        this.setEmail(email);
+        this.setTelephone(telephone);
+        this.setVille(ville);
+        this.setCodePostal(codePostal);
     }
 
     // Getters et Setters de la classe Lieu qui extends de Personne
@@ -25,7 +25,7 @@ public class Lieu  {
 
     public void setAdresse(String pAdresse) throws SaisieException {
         if (!validateAdresse(pAdresse)) {
-            throw new SaisieException("Error adresse invalide : ");
+            throw new SaisieException("Error adresse invalide : " + pAdresse);
         }else{
             this.adresse = pAdresse;
         }
@@ -36,8 +36,8 @@ public class Lieu  {
     }
 
     public void setEmail(String pEmail) throws SaisieException {
-        if (!validate(pEmail)) {
-            throw new SaisieException("Error sur adresse email : ");
+        if (!validate(pEmail) && pEmail.length() != 5) {
+            throw new SaisieException("Error sur adresse email : " + pEmail);
         }else{
             this.email = pEmail;
         }
@@ -48,8 +48,8 @@ public class Lieu  {
     }
 
     public void setTelephone(String pTelephone) throws SaisieException {
-        if (!validatePhone(pTelephone)) {
-            throw new SaisieException("Error sur telephone : ");
+        if (!validatePhone(pTelephone) &&  pTelephone.length() > 8 &&  pTelephone.length() < 11) {
+            throw new SaisieException("Error sur telephone : " + pTelephone);
         }else{
             this.telephone = pTelephone;
         }
@@ -60,8 +60,8 @@ public class Lieu  {
     }
 
     public void setVille(String pVille) throws SaisieException {
-        if(!regexAlpha(pVille)) {
-            throw new SaisieException("Error sur le nom de la ville : ");
+        if(!regexAlpha(pVille) && pVille.isEmpty()) {
+            throw new SaisieException("Error sur le nom de la ville : " + pVille);
         }else{
             this.ville = pVille;
         }

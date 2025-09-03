@@ -39,8 +39,8 @@ public class Medicament {
     }
 
     public void setQuantite(int pQuantite) throws SaisieException {
-        if (!positifInt(String.valueOf(pQuantite))) {
-            throw new SaisieException("Error sur la quantité des médicaments : ");
+        if (!positifInt(String.valueOf(pQuantite)) && pQuantite < 0) {
+            throw new SaisieException("Error sur la quantité des médicaments : " + pQuantite);
         }else{
             this.quantite = pQuantite;
         }
@@ -52,7 +52,7 @@ public class Medicament {
 
     public void setDateMiseEnService(Date pDateMiseEnService) throws SaisieException {
         if(!dateValide(String.valueOf(pDateMiseEnService))){
-            throw new SaisieException("Error sur la date de mise en service : ");
+            throw new SaisieException("Error sur la date de mise en service : " + pDateMiseEnService);
         }else{
             this.dateMiseEnService = pDateMiseEnService;
         }
@@ -63,8 +63,8 @@ public class Medicament {
     }
 
     public void setPrix(double pPrix) throws SaisieException {
-        if (!positifInt(String.valueOf(pPrix))) {
-            throw new SaisieException("Error sur le prix : ");
+        if (!positifInt(String.valueOf(pPrix)) && pPrix < 0) {
+            throw new SaisieException("Error sur le prix : " + pPrix);
         }else{
             this.prix = pPrix;
         }
@@ -75,8 +75,8 @@ public class Medicament {
     }
 
     public void setCategorie(String pCategorie) throws SaisieException {
-        if (!regexAlpha(pCategorie)) {
-            throw new SaisieException("Error sur le categorie : ");
+        if (!regexAlpha(pCategorie) && pCategorie.isEmpty()) {
+            throw new SaisieException("Error sur le categorie : " +  pCategorie);
         }else{
             this.categorie = pCategorie;
         }
@@ -87,8 +87,8 @@ public class Medicament {
     }
 
     public void setNom(String pNom) throws SaisieException {
-        if (!regexAlpha(pNom)) {
-            throw new SaisieException("Error sur le nom : ");
+        if (!regexAlpha(pNom) && pNom.isEmpty()) {
+            throw new SaisieException("Error sur le nom : " + pNom);
         }else {
             this.nom = pNom;
         }

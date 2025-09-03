@@ -14,7 +14,6 @@ class LieuTest {
 
     @BeforeEach
     void setUp() throws SaisieException {
-        // ⚠️ Important : enlever "Lieu" devant sinon ça crée une variable locale et pas l'attribut de classe !
         lieu = new Lieu("2 rue de la paix", "test@test.fr", "+33383819000", "pam", 54700);
     }
 
