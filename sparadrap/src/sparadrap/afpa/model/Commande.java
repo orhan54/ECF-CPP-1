@@ -2,30 +2,34 @@ package sparadrap.afpa.model;
 
 import sparadrap.afpa.exception.SaisieException;
 
-import java.awt.*;
 import java.sql.Date;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import static sparadrap.afpa.utility.RegexUtility.dateValide;
-import static sparadrap.afpa.utility.RegexUtility.regexAlpha;
 
 public class Commande {
-    // Attribut de la classe Commande
-    private Date dateCommande;
-    private String nomPersonne, prenomPersonne;
-
-    // List des commandes enregistrer
-    private static List<Commande> commandes = new ArrayList<Commande>();
-
-    // Constructeur de la classe Commande
-    public Commande(Date pDateCommande, String pNomPersonne, String pPrenomPersonne) throws SaisieException {
-        this.setDateCommande(pDateCommande);
-        this.setNomPersonne(pNomPersonne);
-        this.setPrenomPersonne(pPrenomPersonne);
+    // Enum pour gérer les 2 types d'achat
+    public enum TypeAchat {
+        DIRECT,
+        ORDONNANCE
     }
 
-    // Afficher la list de Commande
+    // Attributs
+    private Date dateCommande;
+    private TypeAchat typeAchat;
+
+    // Liste des commandes enregistrées
+    private static List<Commande> commandes = new ArrayList<>();
+
+    // Constructeur
+    public Commande(Date pDateCommande, TypeAchat pTypeAchat) throws SaisieException {
+        this.setDateCommande(pDateCommande);
+        this.setTypeAchat(pTypeAchat);
+    }
+
+    // Méthode pour récupérer toutes les commandes
     public static List<Commande> getCommandes() {
         return commandes;
     }
@@ -35,45 +39,34 @@ public class Commande {
         return this.dateCommande;
     }
 
+    // Retourne la date au format dd/MM/yyyy
+    public String getDateCommandeCreation() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return dateCommande.toLocalDate().format(formatter);
+    }
+
     public void setDateCommande(Date pDateCommande) throws SaisieException {
-        if (!dateValide(String.valueOf(pDateCommande))){
-            throw new SaisieException("Erreur sur le format de la date : " + pDateCommande);
-        }else{
+        // Conversion au format dd/MM/yyyy pour validation
+        String dateStr = pDateCommande.toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        if (!dateValide(dateStr)) {
+            throw new SaisieException("Erreur sur le format de la date : " + dateStr);
+        } else {
             this.dateCommande = pDateCommande;
         }
     }
 
-    public String getNomPersonne() {
-        return this.nomPersonne;
+    public TypeAchat getTypeAchat() {
+        return this.typeAchat;
     }
 
-    public void setNomPersonne(String pNomPersonne) throws SaisieException {
-        if (!regexAlpha(pNomPersonne) && !pNomPersonne.isEmpty()){
-            throw new SaisieException("Erreur sur le nom de la personne : "  + pNomPersonne);
-        }else{
-            this.nomPersonne = pNomPersonne;
-        }
+    public void setTypeAchat(TypeAchat pTypeAchat) {
+        this.typeAchat = pTypeAchat;
     }
 
-    public String getPrenomPersonne() {
-        return this.prenomPersonne;
-    }
-
-    public void setPrenomPersonne(String pPrenomPersonne) throws SaisieException {
-        if (!regexAlpha(pPrenomPersonne) && !pPrenomPersonne.isEmpty()){
-            throw new SaisieException("Erreur sur le prenom de la personne : "   + pPrenomPersonne);
-        }else{
-            this.prenomPersonne = pPrenomPersonne;
-        }
-    }
-
-    // toString de la classe Commande
+    // toString
     @Override
     public String toString() {
-        return
-            "- Date Commande : " + dateCommande + ("\n") +
-            "- Nom de la commande : " + nomPersonne + ("\n") +
-            "- Prenom de la commande : " + prenomPersonne + ("\n");
+        return "- Date Commande : " + getDateCommandeCreation() + "\n"
+                + "- Type Achat : " + typeAchat + "\n";
     }
-
 }
