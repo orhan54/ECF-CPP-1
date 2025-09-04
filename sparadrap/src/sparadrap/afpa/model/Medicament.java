@@ -2,7 +2,6 @@ package sparadrap.afpa.model;
 
 import sparadrap.afpa.exception.SaisieException;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -12,7 +11,7 @@ import static sparadrap.afpa.utility.RegexUtility.*;
 public class Medicament {
     // Attibut pour la classe Medicament
     private int quantite;
-    private Date dateMiseEnService;
+    private String dateMiseEnService;
     private double prix;
     private String categorie, nom;
 
@@ -30,7 +29,7 @@ public class Medicament {
      * @throws SaisieException      the saisie exception
      */
     // Constucteur de la classe Medicament
-    public Medicament(int pQuantite, Date pDateMiseEnService, double pPrix, String pCategorie, String pNom) throws SaisieException {
+    public Medicament(int pQuantite, String pDateMiseEnService, double pPrix, String pCategorie, String pNom) throws SaisieException {
         this.setQuantite(pQuantite);
         this.setDateMiseEnService(pDateMiseEnService);
         this.setPrix(pPrix);
@@ -78,7 +77,7 @@ public class Medicament {
      *
      * @return the date mise en service
      */
-    public Date getDateMiseEnService() {
+    public String getDateMiseEnService() {
         return this.dateMiseEnService;
     }
 
@@ -88,7 +87,7 @@ public class Medicament {
      * @param pDateMiseEnService    the date mise en service
      * @throws SaisieException      the saisie exception
      */
-    public void setDateMiseEnService(Date pDateMiseEnService) throws SaisieException {
+    public void setDateMiseEnService(String pDateMiseEnService) throws SaisieException {
         if(!dateValide(String.valueOf(pDateMiseEnService))){
             throw new SaisieException("Error sur la date de mise en service : " + pDateMiseEnService);
         }else{
@@ -173,6 +172,7 @@ public class Medicament {
         m.append("- Prix : ").append(this.prix).append("\n");
         m.append("- Categorie : ").append(this.categorie).append("\n");
         m.append("- Nom : ").append(this.nom).append("\n");
+        m.append("\n");
 
         return m.toString();
     }

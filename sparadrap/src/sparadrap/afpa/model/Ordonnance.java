@@ -18,14 +18,14 @@ public class Ordonnance {
     /**
      * Instantiates a new Ordonnance.
      *
-     * @param dateOrdonnance        the date ordonnance
+//     * @param dateOrdonnance        the date ordonnance
      * @param pNomMedecin           the nom medecin
      * @param pNomPatient           the nom patient
      * @param pListeDesMedicament   the liste des medicament
      * @throws SaisieException      the saisie exception
      */
     // Constructeur pour la classe Ordonnance
-    public Ordonnance(Date dateOrdonnance, String pNomMedecin, String pNomPatient, List pListeDesMedicament) throws SaisieException {
+    public Ordonnance(String pNomMedecin, String pNomPatient, List pListeDesMedicament) throws SaisieException {
         this.dateOrdonnance = LocalDateTime.now();
         this.setNomMedecin(pNomMedecin);
         this.setNomPatient(pNomPatient);
