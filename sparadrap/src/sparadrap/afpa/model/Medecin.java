@@ -14,22 +14,47 @@ public class Medecin extends Personne {
     // List des medecins enregistrer
     private static List<Medecin> medecins = new ArrayList<Medecin>();
 
-    // Constructeur avec les extends de la classe Personne et de la classe Lieu
-    public Medecin(String pNom, String pPrenom, String numeroAgreement, Lieu lieu) throws SaisieException {
+    /**
+     * Instantiates a new Medecin.
+     *
+     * @param pNom            the nom
+     * @param pPrenom         the prenom
+     * @param pNumeroAgreement the numero agreement
+     * @param lieu            the Lieu lieu
+     * @throws SaisieException the saisie exception
+     */
+    // Constructeur avec les extends de la classe Personne avec l'objet Lieu
+    public Medecin(String pNom, String pPrenom, String pNumeroAgreement, Lieu lieu) throws SaisieException {
         super(pNom, pPrenom, lieu);
-        this.setNumeroAgreement(numeroAgreement);
+        this.setNumeroAgreement(pNumeroAgreement);
     }
 
     // Afficher la List des medecins
+    /**
+     * Gets medecins.
+     *
+     * @return the medecins
+     */
     public static List<Medecin> getMedecins() {
         return medecins;
     }
 
     // Getters et Setters
+    /**
+     * Gets numero agreement.
+     *
+     * @return the numero agreement
+     */
     public String getNumeroAgreement() {
         return this.numeroAgreement;
     }
 
+    /**
+     * Sets numero agreement.
+     *
+     * @param pNumeroAgreement the numero agreement
+     * @throws SaisieException the saisie exception
+     */
     public void setNumeroAgreement(String pNumeroAgreement) throws SaisieException {
         if (!positifInt(String.valueOf(pNumeroAgreement)) && String.valueOf(pNumeroAgreement).length() == 9) {
             throw new SaisieException("Error sur numéro agreement : " + pNumeroAgreement);

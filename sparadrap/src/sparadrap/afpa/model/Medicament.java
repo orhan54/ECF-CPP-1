@@ -19,6 +19,16 @@ public class Medicament {
     // List des medicaments 
     private static List<Medicament> medicaments = new ArrayList<Medicament>();
 
+    /**
+     * Instantiates a new Medicament.
+     *
+     * @param pQuantite          the quantite
+     * @param pDateMiseEnService the date mise en service
+     * @param pPrix              the prix
+     * @param pCategorie         the categorie
+     * @param pNom               the nom
+     * @throws SaisieException the saisie exception
+     */
     // Constucteur de la classe Medicament
     public Medicament(int pQuantite, Date pDateMiseEnService, double pPrix, String pCategorie, String pNom) throws SaisieException {
         this.setQuantite(pQuantite);
@@ -28,16 +38,32 @@ public class Medicament {
         this.setNom(pNom);
     }
 
+    /**
+     * Gets medicaments.
+     *
+     * @return the medicaments
+     */
     // Afficher la list des medicaments
     public static List<Medicament> getMedicaments() {
         return medicaments;
     }
 
     // Getters et Setters pour acceder au attribut
+    /**
+     * Gets quantite.
+     *
+     * @return the quantite
+     */
     public int getQuantite() {
         return this.quantite;
     }
 
+    /**
+     * Sets quantite.
+     *
+     * @param pQuantite the quantite
+     * @throws SaisieException the saisie exception
+     */
     public void setQuantite(int pQuantite) throws SaisieException {
         if (!positifInt(String.valueOf(pQuantite)) && pQuantite < 0) {
             throw new SaisieException("Error sur la quantité des médicaments : " + pQuantite);
@@ -46,10 +72,21 @@ public class Medicament {
         }
     }
 
+    /**
+     * Gets date mise en service.
+     *
+     * @return the date mise en service
+     */
     public Date getDateMiseEnService() {
         return this.dateMiseEnService;
     }
 
+    /**
+     * Sets date mise en service.
+     *
+     * @param pDateMiseEnService the date mise en service
+     * @throws SaisieException the saisie exception
+     */
     public void setDateMiseEnService(Date pDateMiseEnService) throws SaisieException {
         if(!dateValide(String.valueOf(pDateMiseEnService))){
             throw new SaisieException("Error sur la date de mise en service : " + pDateMiseEnService);
@@ -58,10 +95,21 @@ public class Medicament {
         }
     }
 
+    /**
+     * Gets prix.
+     *
+     * @return the prix
+     */
     public double getPrix() {
         return this.prix;
     }
 
+    /**
+     * Sets prix.
+     *
+     * @param pPrix the prix
+     * @throws SaisieException the saisie exception
+     */
     public void setPrix(double pPrix) throws SaisieException {
         if (!positifInt(String.valueOf(pPrix)) && pPrix < 0) {
             throw new SaisieException("Error sur le prix : " + pPrix);
@@ -70,10 +118,21 @@ public class Medicament {
         }
     }
 
+    /**
+     * Gets categorie.
+     *
+     * @return the categorie
+     */
     public String getCategorie() {
         return this.categorie;
     }
 
+    /**
+     * Sets categorie.
+     *
+     * @param pCategorie the categorie
+     * @throws SaisieException the saisie exception
+     */
     public void setCategorie(String pCategorie) throws SaisieException {
         if (!regexAlpha(pCategorie) && pCategorie.isEmpty()) {
             throw new SaisieException("Error sur le categorie : " +  pCategorie);
@@ -82,10 +141,21 @@ public class Medicament {
         }
     }
 
+    /**
+     * Gets nom.
+     *
+     * @return the nom
+     */
     public String getNom() {
         return this.nom;
     }
 
+    /**
+     * Sets nom.
+     *
+     * @param pNom the nom
+     * @throws SaisieException the saisie exception
+     */
     public void setNom(String pNom) throws SaisieException {
         if (!regexAlpha(pNom) && pNom.isEmpty()) {
             throw new SaisieException("Error sur le nom : " + pNom);

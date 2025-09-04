@@ -1,9 +1,6 @@
 package sparadrap.afpa.controller;
 
-import sparadrap.afpa.model.Commande;
-import sparadrap.afpa.model.Lieu;
-import sparadrap.afpa.model.Medecin;
-import sparadrap.afpa.model.Patient;
+import sparadrap.afpa.model.*;
 
 import java.sql.Date;
 
@@ -24,11 +21,14 @@ public class Main {
         try{
             Lieu lieu1 = new Lieu("12 rue de le guerre", "dupontjean@live.fr.com", "+33312345678", "Paris", 54000);
             Lieu lieu2 = new Lieu("2 rue de la paix", "martinpaul@gmail.com", "+33383813059", "pam", 54700);
+            Lieu lieu3 = new Lieu("55 avenue des malades", "macif@gmail.com", "+33383812010", "dieulouard", 54380);
             Patient p = new Patient("Dupont", "Jean", lieu1);
             Medecin m = new Medecin("Martin", "Paul", "1234567891234" , lieu2);
             Commande cmd1 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT);
             Commande cmd2 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.ORDONNANCE);
+            Mutuelle m1 = new Mutuelle("macif", 30, 54, lieu3);
 
+            System.out.println(m1);
             System.out.println(p);
             System.out.println(m);
             System.out.println(cmd1);

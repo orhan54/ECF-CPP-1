@@ -3,12 +3,25 @@ package sparadrap.afpa.model;
 import sparadrap.afpa.exception.SaisieException;
 import static sparadrap.afpa.utility.RegexUtility.*;
 
+/**
+ * The type Lieu.
+ */
 public class Lieu {
 
     // attributs
     private String adresse, email, telephone, ville;
     private int codePostal;
 
+    /**
+     * Instantiates a new Lieu.
+     *
+     * @param pAdresse    the adresse
+     * @param pEmail      the email
+     * @param pTelephone  the telephone
+     * @param pVille      the ville
+     * @param pCodePostal the code postal
+     * @throws SaisieException the saisie exception
+     */
     // constructeur
     public Lieu(String pAdresse, String pEmail, String pTelephone, String pVille, int pCodePostal) throws SaisieException {
         this.setAdresse(pAdresse);
@@ -19,10 +32,21 @@ public class Lieu {
     }
 
     // Getters & Setters
+    /**
+     * Gets adresse.
+     *
+     * @return the adresse
+     */
     public String getAdresse() {
         return this.adresse;
     }
 
+    /**
+     * Sets adresse.
+     *
+     * @param pAdresse the adresse
+     * @throws SaisieException the saisie exception
+     */
     public void setAdresse(String pAdresse) throws SaisieException {
         if (!validateAdresse(pAdresse)) {
             throw new SaisieException("Erreur adresse invalide : " + pAdresse);
@@ -30,10 +54,21 @@ public class Lieu {
         this.adresse = pAdresse;
     }
 
+    /**
+     * Gets email.
+     *
+     * @return the email
+     */
     public String getEmail() {
         return this.email;
     }
 
+    /**
+     * Sets email.
+     *
+     * @param pEmail the email
+     * @throws SaisieException the saisie exception
+     */
     public void setEmail(String pEmail) throws SaisieException {
         if (!validate(pEmail)) {
             throw new SaisieException("Erreur sur adresse email : " + pEmail);
@@ -41,10 +76,21 @@ public class Lieu {
         this.email = pEmail;
     }
 
+    /**
+     * Gets telephone.
+     *
+     * @return the telephone
+     */
     public String getTelephone() {
         return this.telephone;
     }
 
+    /**
+     * Sets telephone.
+     *
+     * @param pTelephone the telephone
+     * @throws SaisieException the saisie exception
+     */
     public void setTelephone(String pTelephone) throws SaisieException {
         if (!validatePhone(pTelephone)) {
             throw new SaisieException("Erreur sur téléphone : " + pTelephone);
@@ -52,10 +98,21 @@ public class Lieu {
         this.telephone = pTelephone;
     }
 
+    /**
+     * Gets ville.
+     *
+     * @return the ville
+     */
     public String getVille() {
         return this.ville;
     }
 
+    /**
+     * Sets ville.
+     *
+     * @param pVille the ville
+     * @throws SaisieException the saisie exception
+     */
     public void setVille(String pVille) throws SaisieException {
         if (!regexAlpha(pVille) || pVille.isEmpty()) {
             throw new SaisieException("Erreur sur le nom de la ville : " + pVille);
@@ -63,10 +120,21 @@ public class Lieu {
         this.ville = pVille;
     }
 
+    /**
+     * Gets code postal.
+     *
+     * @return the code postal
+     */
     public int getCodePostal() {
         return this.codePostal;
     }
 
+    /**
+     * Sets code postal.
+     *
+     * @param pCodePostal the pCodePostal
+     * @throws SaisieException the saisie exception
+     */
     public void setCodePostal(int pCodePostal) throws SaisieException {
         String codeStr = String.valueOf(pCodePostal);
         if (!positifInt(codeStr) || codeStr.length() != 5) {
