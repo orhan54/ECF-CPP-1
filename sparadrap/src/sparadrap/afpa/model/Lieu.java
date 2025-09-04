@@ -15,14 +15,14 @@ public class Lieu {
     /**
      * Instantiates a new Lieu.
      *
-     * @param pAdresse    the adresse
-     * @param pEmail      the email
-     * @param pTelephone  the telephone
-     * @param pVille      the ville
-     * @param pCodePostal the code postal
-     * @throws SaisieException the saisie exception
+     * @param pAdresse          the adresse
+     * @param pEmail            the email
+     * @param pTelephone        the telephone
+     * @param pVille            the ville
+     * @param pCodePostal       the code postal
+     * @throws SaisieException  the saisie exception
      */
-    // constructeur
+    // constructeur de la classe Lieu
     public Lieu(String pAdresse, String pEmail, String pTelephone, String pVille, int pCodePostal) throws SaisieException {
         this.setAdresse(pAdresse);
         this.setEmail(pEmail);
@@ -44,8 +44,8 @@ public class Lieu {
     /**
      * Sets adresse.
      *
-     * @param pAdresse the adresse
-     * @throws SaisieException the saisie exception
+     * @param pAdresse          the adresse
+     * @throws SaisieException  the saisie exception
      */
     public void setAdresse(String pAdresse) throws SaisieException {
         if (!validateAdresse(pAdresse)) {
@@ -66,8 +66,8 @@ public class Lieu {
     /**
      * Sets email.
      *
-     * @param pEmail the email
-     * @throws SaisieException the saisie exception
+     * @param pEmail            the email
+     * @throws SaisieException  the saisie exception
      */
     public void setEmail(String pEmail) throws SaisieException {
         if (!validate(pEmail)) {
@@ -88,8 +88,8 @@ public class Lieu {
     /**
      * Sets telephone.
      *
-     * @param pTelephone the telephone
-     * @throws SaisieException the saisie exception
+     * @param pTelephone        the telephone
+     * @throws SaisieException  the saisie exception
      */
     public void setTelephone(String pTelephone) throws SaisieException {
         if (!validatePhone(pTelephone)) {
@@ -110,8 +110,8 @@ public class Lieu {
     /**
      * Sets ville.
      *
-     * @param pVille the ville
-     * @throws SaisieException the saisie exception
+     * @param pVille            the ville
+     * @throws SaisieException  the saisie exception
      */
     public void setVille(String pVille) throws SaisieException {
         if (!regexAlpha(pVille) || pVille.isEmpty()) {
@@ -132,8 +132,8 @@ public class Lieu {
     /**
      * Sets code postal.
      *
-     * @param pCodePostal the pCodePostal
-     * @throws SaisieException the saisie exception
+     * @param pCodePostal       the code postal
+     * @throws SaisieException  the saisie exception
      */
     public void setCodePostal(int pCodePostal) throws SaisieException {
         String codeStr = String.valueOf(pCodePostal);
@@ -143,6 +143,7 @@ public class Lieu {
         this.codePostal = pCodePostal;
     }
 
+    // StringBuilder pour afficher le toString de Lieu
     @Override
     public String toString() {
         StringBuilder sbl = new StringBuilder();

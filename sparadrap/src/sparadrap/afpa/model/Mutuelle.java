@@ -22,11 +22,11 @@ public class Mutuelle {
     /**
      * Instantiates a new Mutuelle.
      *
-     * @param pNom               the nom
-     * @param pTauxPriseEnCharge the taux prise en charge
-     * @param pDepartement       the departement
-     * @param lieu               the Lieu lieu
-     * @throws SaisieException the saisie exception
+     * @param pNom                  the nom mutuelle
+     * @param pTauxPriseEnCharge    the taux prise en charge
+     * @param pDepartement          the departement
+     * @param lieu                  the Lieu lieu
+     * @throws SaisieException      the saisie exception
      */
     // Constucteur qui extends de la classe Lieu
     public Mutuelle(String pNom, double pTauxPriseEnCharge, int pDepartement, Lieu lieu) throws SaisieException {
@@ -36,7 +36,7 @@ public class Mutuelle {
         this.setLieu(lieu);
     }
 
-    // Getters et Setters pour acceder au attribut
+    // Getters et Setters
 
     /**
      * Gets mutuelles.
@@ -60,8 +60,8 @@ public class Mutuelle {
     /**
      * Sets nom.
      *
-     * @param pNom the nom mutuelle
-     * @throws SaisieException the saisie exception
+     * @param pNom              the nom mutuelle
+     * @throws SaisieException  the saisie exception
      */
     public void setNom(String pNom) throws SaisieException {
         if (!regexAlpha(pNom) && !pNom.isEmpty()) {
@@ -83,8 +83,8 @@ public class Mutuelle {
     /**
      * Sets taux prise en charge.
      *
-     * @param pTauxPriseEnCharge the taux prise en charge
-     * @throws SaisieException the saisie exception
+     * @param pTauxPriseEnCharge    the taux prise en charge
+     * @throws SaisieException      the saisie exception
      */
     public void setTauxPriseEnCharge(double pTauxPriseEnCharge) throws SaisieException {
         if (!positifInt(String.valueOf(pTauxPriseEnCharge)) && pTauxPriseEnCharge < 0){
@@ -106,8 +106,8 @@ public class Mutuelle {
     /**
      * Sets departement.
      *
-     * @param pDepartement the departement
-     * @throws SaisieException the saisie exception
+     * @param pDepartement      the departement
+     * @throws SaisieException  the saisie exception
      */
     public void setDepartement(int pDepartement) throws SaisieException {
         if (!positifInt(String.valueOf(pDepartement)) && pDepartement < 0){
@@ -135,14 +135,14 @@ public class Mutuelle {
         this.lieu = lieu;
     }
 
-    // affichage du super.toString avec la classe lieu
+    // StringBuilder pour afficher le toString de Mutuelle
     @Override
     public String toString() {
         StringBuilder sbm = new StringBuilder();
-        sbm.append("Mutuelle : " + "\n");
-        sbm.append("- Nom : " + this.getNom() + "\n");
-        sbm.append("- Taux de prise en charge : " + this.getTauxPriseEnCharge() + "\n");
-        sbm.append("- Departement : " + this.getDepartement() + "\n");
+        sbm.append("Mutuelle : ").append("\n");
+        sbm.append("- Nom : ").append(this.getNom()).append("\n");
+        sbm.append("- Taux de prise en charge : ").append(this.getTauxPriseEnCharge()).append("\n");
+        sbm.append("- Departement : ").append(this.getDepartement()).append("\n");
         if (getLieu() != null) {
             sbm.append(getLieu().toString());
         }

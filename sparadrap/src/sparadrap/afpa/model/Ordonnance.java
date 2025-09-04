@@ -15,6 +15,15 @@ public class Ordonnance {
     private String nomMedecin, nomPatient;
     private List listeDesMedicament;
 
+    /**
+     * Instantiates a new Ordonnance.
+     *
+     * @param dateOrdonnance        the date ordonnance
+     * @param pNomMedecin           the nom medecin
+     * @param pNomPatient           the nom patient
+     * @param pListeDesMedicament   the liste des medicament
+     * @throws SaisieException      the saisie exception
+     */
     // Constructeur pour la classe Ordonnance
     public Ordonnance(Date dateOrdonnance, String pNomMedecin, String pNomPatient, List pListeDesMedicament) throws SaisieException {
         this.dateOrdonnance = LocalDateTime.now();
@@ -23,21 +32,43 @@ public class Ordonnance {
         this.setListeDesMedicament(pListeDesMedicament);
     }
 
-    // Getters et Setters pour accerder au attribut de la classe Ordonnance
+    // Getters et Setters
+
+    /**
+     * Gets date ordonnance.
+     *
+     * @return the date ordonnance
+     */
     public LocalDateTime getDateOrdonnance() {
         return this.dateOrdonnance;
     }
 
+    /**
+     * Gets date ordonnance creation.
+     *
+     * @return the date ordonnance creation formatter
+     */
     // Retourne la date formatée
     public String getDateOrdonnanceCreation() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return dateOrdonnance.format(formatter);
     }
 
+    /**
+     * Gets nom medecin.
+     *
+     * @return the nom medecin
+     */
     public String getNomMedecin() {
         return this.nomMedecin;
     }
 
+    /**
+     * Sets nom medecin.
+     *
+     * @param pNomMedecin       the nom medecin
+     * @throws SaisieException  the saisie exception
+     */
     public void setNomMedecin(String pNomMedecin) throws SaisieException {
         if (!regexAlpha(pNomMedecin) && !pNomMedecin.isEmpty()) {
             throw new SaisieException("Error sur le nom du medecin : "  + pNomMedecin);
@@ -46,10 +77,21 @@ public class Ordonnance {
         }
     }
 
+    /**
+     * Gets nom patient.
+     *
+     * @return the nom patient
+     */
     public String getNomPatient() {
         return this.nomPatient;
     }
 
+    /**
+     * Sets nom patient.
+     *
+     * @param pNomPatient       the nom patient
+     * @throws SaisieException  the saisie exception
+     */
     public void setNomPatient(String pNomPatient) throws SaisieException {
         if (!regexAlpha(pNomPatient) && !pNomPatient.isEmpty()) {
             throw new SaisieException("Error sur le nom du patient : "  + pNomPatient);
@@ -58,10 +100,21 @@ public class Ordonnance {
         }
     }
 
+    /**
+     * Gets liste des medicament.
+     *
+     * @return the liste des medicament
+     */
     public List getListeDesMedicament() {
         return this.listeDesMedicament;
     }
 
+    /**
+     * Sets liste des medicament.
+     *
+     * @param pListeDesMedicament   the liste des medicament
+     * @throws SaisieException      the saisie exception
+     */
     public void setListeDesMedicament(List pListeDesMedicament) throws SaisieException {
         if (!regexAlpha(String.valueOf(pListeDesMedicament)) && String.valueOf(pListeDesMedicament).isEmpty()) {
             throw new SaisieException("Error sur la liste des medicaments : "  + pListeDesMedicament);
@@ -72,17 +125,14 @@ public class Ordonnance {
 
     // StringBuilder pour afficher le toString de Ordonnance
     public String toString() {
-        StringBuilder o = new StringBuilder();
-        o.append("Ordonnance : ").append("\n");
-        o.append("- DateOrdonnance : ");
-        o.append(getDateOrdonnance()).append("\n");
-        o.append("- Nom medecin : ");
-        o.append(nomMedecin).append("\n");
-        o.append("- Nom patient : ");
-        o.append(nomPatient).append("\n");
-        o.append("- Liste medicament : ");
-        o.append(listeDesMedicament);
+        StringBuilder sbo = new StringBuilder();
+        sbo.append("Ordonnance : ").append("\n");
+        sbo.append("- DateOrdonnance : ").append(getDateOrdonnance()).append("\n");
+        sbo.append("- Nom medecin : ").append(nomMedecin).append("\n");
+        sbo.append("- Nom patient : ").append(nomPatient).append("\n");
+        sbo.append("Liste medicament : ").append("\n");
+        sbo.append(listeDesMedicament);
 
-        return o.toString();
+        return sbo.toString();
     }
 }

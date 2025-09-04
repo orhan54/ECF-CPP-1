@@ -22,12 +22,12 @@ public class Medicament {
     /**
      * Instantiates a new Medicament.
      *
-     * @param pQuantite          the quantite
-     * @param pDateMiseEnService the date mise en service
-     * @param pPrix              the prix
-     * @param pCategorie         the categorie
-     * @param pNom               the nom
-     * @throws SaisieException the saisie exception
+     * @param pQuantite             the quantite
+     * @param pDateMiseEnService    the date mise en service
+     * @param pPrix                 the prix
+     * @param pCategorie            the categorie
+     * @param pNom                  the nom
+     * @throws SaisieException      the saisie exception
      */
     // Constucteur de la classe Medicament
     public Medicament(int pQuantite, Date pDateMiseEnService, double pPrix, String pCategorie, String pNom) throws SaisieException {
@@ -37,6 +37,8 @@ public class Medicament {
         this.setCategorie(pCategorie);
         this.setNom(pNom);
     }
+
+    // Getters et Setters
 
     /**
      * Gets medicaments.
@@ -48,7 +50,6 @@ public class Medicament {
         return medicaments;
     }
 
-    // Getters et Setters pour acceder au attribut
     /**
      * Gets quantite.
      *
@@ -61,8 +62,8 @@ public class Medicament {
     /**
      * Sets quantite.
      *
-     * @param pQuantite the quantite
-     * @throws SaisieException the saisie exception
+     * @param pQuantite         the quantite
+     * @throws SaisieException  the saisie exception
      */
     public void setQuantite(int pQuantite) throws SaisieException {
         if (!positifInt(String.valueOf(pQuantite)) && pQuantite < 0) {
@@ -84,8 +85,8 @@ public class Medicament {
     /**
      * Sets date mise en service.
      *
-     * @param pDateMiseEnService the date mise en service
-     * @throws SaisieException the saisie exception
+     * @param pDateMiseEnService    the date mise en service
+     * @throws SaisieException      the saisie exception
      */
     public void setDateMiseEnService(Date pDateMiseEnService) throws SaisieException {
         if(!dateValide(String.valueOf(pDateMiseEnService))){
@@ -107,8 +108,8 @@ public class Medicament {
     /**
      * Sets prix.
      *
-     * @param pPrix the prix
-     * @throws SaisieException the saisie exception
+     * @param pPrix             the prix
+     * @throws SaisieException  the saisie exception
      */
     public void setPrix(double pPrix) throws SaisieException {
         if (!positifInt(String.valueOf(pPrix)) && pPrix < 0) {
@@ -130,8 +131,8 @@ public class Medicament {
     /**
      * Sets categorie.
      *
-     * @param pCategorie the categorie
-     * @throws SaisieException the saisie exception
+     * @param pCategorie        the categorie
+     * @throws SaisieException  the saisie exception
      */
     public void setCategorie(String pCategorie) throws SaisieException {
         if (!regexAlpha(pCategorie) && pCategorie.isEmpty()) {
@@ -144,7 +145,7 @@ public class Medicament {
     /**
      * Gets nom.
      *
-     * @return the nom
+     * @return the nom medecin
      */
     public String getNom() {
         return this.nom;
@@ -153,8 +154,8 @@ public class Medicament {
     /**
      * Sets nom.
      *
-     * @param pNom the nom
-     * @throws SaisieException the saisie exception
+     * @param pNom              the nom medecin
+     * @throws SaisieException  the saisie exception
      */
     public void setNom(String pNom) throws SaisieException {
         if (!regexAlpha(pNom) && pNom.isEmpty()) {

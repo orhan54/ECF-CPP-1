@@ -17,13 +17,13 @@ public class Medecin extends Personne {
     /**
      * Instantiates a new Medecin.
      *
-     * @param pNom            the nom
-     * @param pPrenom         the prenom
-     * @param pNumeroAgreement the numero agreement
-     * @param lieu            the Lieu lieu
-     * @throws SaisieException the saisie exception
+     * @param pNom              the nom
+     * @param pPrenom           the prenom
+     * @param pNumeroAgreement  the numero agreement
+     * @param lieu              the Lieu lieu
+     * @throws SaisieException  the saisie exception
      */
-    // Constructeur avec les extends de la classe Personne avec l'objet Lieu
+    // Constructeur qui extends de la classe Personne et Obj Lieu
     public Medecin(String pNom, String pPrenom, String pNumeroAgreement, Lieu lieu) throws SaisieException {
         super(pNom, pPrenom, lieu);
         this.setNumeroAgreement(pNumeroAgreement);
@@ -63,6 +63,7 @@ public class Medecin extends Personne {
         }
     }
 
+    // StringBuilder pour afficher le toString de Medecin
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

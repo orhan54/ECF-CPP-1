@@ -33,9 +33,9 @@ public class Commande {
     /**
      * Instantiates a new Commande.
      *
-     * @param pDateCommande the date commande
-     * @param pTypeAchat    the type achat
-     * @throws SaisieException the saisie exception
+    * @param pDateCommande      the date commande pharmacie
+     * @param pTypeAchat        the type achat pharmacie
+     * @throws SaisieException  the saisie exception
      */
     // Constructeur
     public Commande(Date pDateCommande, TypeAchat pTypeAchat) throws SaisieException {
@@ -48,7 +48,7 @@ public class Commande {
     /**
      * Gets commandes.
      *
-     * @return the commandes
+     * @return the commandes pharmacie
      */
     // Méthode pour récupérer toutes les commandes
     public static List<Commande> getCommandes() {
@@ -58,7 +58,7 @@ public class Commande {
     /**
      * Gets date commande.
      *
-     * @return the date commande
+     * @return the date commande pharmacie
      */
     public Date getDateCommande() {
         return this.dateCommande;
@@ -67,7 +67,7 @@ public class Commande {
     /**
      * Gets date commande creation.
      *
-     * @return the date commande creation
+     * @return the date commande creation pharmacie
      */
     // Retourne la date au format dd/MM/yyyy
     public String getDateCommandeCreation() {
@@ -78,8 +78,8 @@ public class Commande {
     /**
      * Sets date commande.
      *
-     * @param pDateCommande the date commande
-     * @throws SaisieException the saisie exception
+     * @param pDateCommande     the date commande pharmacie
+     * @throws SaisieException  the saisie exception
      */
     // Formater date
     public void setDateCommande(Date pDateCommande) throws SaisieException {
@@ -95,20 +95,28 @@ public class Commande {
     /**
      * Gets type achat.
      *
-     * @return the type achat
+     * @return the type achat pharmacie
      */
     public TypeAchat getTypeAchat() {
         return this.typeAchat;
     }
 
+    /**
+     * Sets type achat.
+     *
+     * @param pTypeAchat the type achat pharmacie
+     */
     public void setTypeAchat(TypeAchat pTypeAchat) {
         this.typeAchat = pTypeAchat;
     }
 
-    // toString
+    // StringBuilder pour afficher le toString de Commande
     @Override
     public String toString() {
-        return "- Date Commande : " + getDateCommandeCreation() + "\n"
-                + "- Type Achat : " + typeAchat + "\n";
+        StringBuilder sbc = new StringBuilder();
+        sbc.append("- Date commande : ").append(this.dateCommande.toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))).append("\n");
+        sbc.append("- TypeAchat : ").append(this.typeAchat).append("\n");
+
+        return sbc.toString();
     }
 }

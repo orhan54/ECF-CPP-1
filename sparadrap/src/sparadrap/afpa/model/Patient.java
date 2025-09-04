@@ -12,20 +12,38 @@ public class Patient extends Personne {
     // Attribut de la classe Client
     private String numeroSecuriteSociale;
 
-    // Lis des patients enregistrer
+    // List des patients enregistrer
     private static List<Patient> patients = new ArrayList<Patient>();
 
-    // Constructeur avec les extends de la classe Personne et de la classe Lieu
+    /**
+     * Instantiates a new Patient.
+     *
+     * @param pNom              the nom patient
+     * @param pPrenom           the prenom patient
+     * @param lieu              the lieu patient
+     * @throws SaisieException  the saisie exception
+     */
+    // Constructeur qui extends de la classe Personne et Obj Lieu
     public Patient(String pNom, String pPrenom, Lieu lieu) throws SaisieException {
         super(pNom, pPrenom, lieu);
         this.numeroSecuriteSociale = generateNumSecu();
     }
 
+    /**
+     * Gets patients.
+     *
+     * @return the patients
+     */
     // Afficher la list des patients
     public static List<Patient> getPatients() {
         return patients;
     }
 
+    /**
+     *
+     * @return the toString random numero securite social
+     */
+    // Création du numéro de la sécurité social
     private static String generateNumSecu() {
         Random random = new Random();
         StringBuilder numSecu = new StringBuilder();
@@ -46,10 +64,22 @@ public class Patient extends Personne {
     }
 
     // Getters et Setters
+
+    /**
+     * Gets numero securite sociale.
+     *
+     * @return the numero securite sociale
+     */
     public String getNumeroSecuriteSociale() {
         return this.numeroSecuriteSociale;
     }
 
+    /**
+     * Sets numero securite sociale.
+     *
+     * @param pNumeroSecuriteSociale    the numero securite sociale
+     * @throws SaisieException          the saisie exception
+     */
     public void setNumeroSecuriteSociale(String pNumeroSecuriteSociale) throws  SaisieException {
         if (numeroSecuriteSociale.length()!=15) {
             System.out.println("Error sur le numero de sécurité social : " + pNumeroSecuriteSociale);
@@ -58,18 +88,19 @@ public class Patient extends Personne {
         }
     }
 
-    // toString de la classe Personne et de la classe Client
+    // StringBuilder pour afficher le toString de Patient
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Patient :\n");
-        sb.append("- Nom : ").append(getNom()).append("\n");
-        sb.append("- Prénom : ").append(getPrenom()).append("\n");
-        sb.append("- Numéro de sécurité sociale : ").append(numeroSecuriteSociale).append("\n");
+        StringBuilder sbpat = new StringBuilder();
+        sbpat.append("Patient :\n");
+        sbpat.append("- Nom : ").append(getNom()).append("\n");
+        sbpat.append("- Prénom : ").append(getPrenom()).append("\n");
+        sbpat.append("- Numéro de sécurité sociale : ").append(numeroSecuriteSociale).append("\n");
         if (getLieu() != null) {
-            sb.append(getLieu().toString());
+            sbpat.append(getLieu().toString());
         }
-        return sb.toString();
+
+        return sbpat.toString();
     }
 
 }

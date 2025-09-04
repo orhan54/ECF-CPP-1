@@ -8,16 +8,34 @@ public class Pharmacie {
     // Attribut de la classe Pharmacie
     private String nom;
 
+    /**
+     * Instantiates a new Pharmacie.
+     *
+     * @param pNom              the nom pharmacie
+     * @throws SaisieException  the saisie exception
+     */
     // Constructeur de la classe Pharmacie
     public Pharmacie(String pNom) throws SaisieException {
         this.setNom(pNom);
     }
 
     // Setters et Getters de la classe Pharmacie
+
+    /**
+     * Gets nom.
+     *
+     * @return the nom pharmacie
+     */
     public String getNom() {
         return this.nom;
     }
 
+    /**
+     * Sets nom.
+     *
+     * @param pNom              the nom pharmacie
+     * @throws SaisieException  the saisie exception
+     */
     public void setNom(String pNom) throws SaisieException {
         if(!regexAlpha(pNom) && pNom.isEmpty()){
             throw new SaisieException("Error sur le nom de la pharmacie : " + pNom);
@@ -26,12 +44,12 @@ public class Pharmacie {
         }
     }
 
-    // toString de la classe Pharmacie avec un StringBuilder
+    // StringBuilder pour afficher le toString de Pharmacie
     @Override
     public String toString() {
-        StringBuilder o = new StringBuilder();
-        o.append("Le nom de la pharmacie est ").append(this.nom).append("\n");
+        StringBuilder sbo = new StringBuilder();
+        sbo.append("Le nom de la pharmacie est ").append(this.nom).append("\n");
 
-        return o.toString();
+        return sbo.toString();
     }
 }
