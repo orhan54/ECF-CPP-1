@@ -1,8 +1,7 @@
 package sparadrap.afpa.view.swingUI;
 
 import sparadrap.afpa.exception.SaisieException;
-import sparadrap.afpa.model.Medicament;
-import sparadrap.afpa.model.Ordonnance;
+import sparadrap.afpa.model.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -26,7 +25,7 @@ public class validationAchat extends JFrame {
     private JTable tableMedic;
     private JTable tableMedicDispo;
 
-    private DefaultTableModel tableModel;
+    private DefaultTableModel tableModelCommande;
     private DefaultTableModel tableModelMedicDispo;
 
     public validationAchat() {
@@ -48,9 +47,9 @@ public class validationAchat extends JFrame {
         tableMedicDispo.setModel(tableModelMedicDispo);
 
         // Création du modele de tableau commande medicament
-        String[] colonnes = {"Nom medecin", "Nom patient ", "Nom medicament" , "Quantite medic "};
-        tableModel = new DefaultTableModel(colonnes, 0);
-        tableMedic.setModel(tableModel);
+        String[] colonnes = {"Nom medecin", "Nom patient", "Nom medicament" , "Quantite medic", "Prix"};
+        tableModelCommande = new DefaultTableModel(colonnes, 0);
+        tableMedic.setModel(tableModelCommande);
 
         // Afficher Medicament List dispos ICI
         afficherListeMedicDispo();
@@ -95,6 +94,21 @@ public class validationAchat extends JFrame {
     }
 
     private  void ajouter() throws SaisieException {
+        tableModelCommande.setRowCount(0);
+        if (inputNomMedic.getText().isEmpty() || inputQuantiteMedic.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Les champs sont vides","Erreur",JOptionPane.WARNING_MESSAGE);
+        } else{
+            for(Ordonnance ordonnances : Ordonnance.getOrdonnances()){
+                tableModelCommande.addRow(new Object[]{
+                        ordonnances.getNomMedecin(),
+                        ordonnances.getNomPatient(),
+                        ordonnances.getNomMedic(),
+                        ordonnances.getQuantiteMedic(),
+
+                });
+            }
+        }
         String nomMedecin = inputNomMedecin.getText().trim().toUpperCase();
         String nomPatient = inputNomPatient.getText().trim().toUpperCase();
         String nomMedic = inputNomMedic.getText().trim().toUpperCase();
