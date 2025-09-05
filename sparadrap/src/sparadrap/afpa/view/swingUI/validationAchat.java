@@ -1,25 +1,33 @@
 package sparadrap.afpa.view.swingUI;
 
+import sparadrap.afpa.exception.SaisieException;
 import sparadrap.afpa.model.Medicament;
+import sparadrap.afpa.model.Ordonnance;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 
-import static sparadrap.afpa.utility.RegexUtility.positifInt;
 import static sparadrap.afpa.utility.RegexUtility.regexAlpha;
 
 public class validationAchat extends JFrame {
     private JPanel contentPane;
-    private JComboBox comboBoxValideAchat;
-    private JList list1;
-    private JButton buttonRetourAchat;
-    private JButton buttonValiderAchat;
+    private JButton btnRetourAchat;
+    private JButton btnValiderAchat;
     private JButton buttonQuitterAchat;
     private JLabel titreValideAchat;
-    private JTextField textFieldInputNomMedic;
-    private JTextField textFieldInputQuantiteMedic;
-    private JButton buttonAjouterMedicamentList;
+    private JTextField inputNomMedic;
+    private JTextField inputQuantiteMedic;
+    private JButton btnAjouterMedicamentList;
+    private JTextField inputNomMedecin;
+    private JTextField inputNomPatient;
+    private JButton btnDelete;
+    private JTable tableMedic;
+    private JTable tableMedicDispo;
+
+    private DefaultTableModel tableModel;
+    private DefaultTableModel tableModelMedicDispo;
 
     public validationAchat() {
 
@@ -34,16 +42,29 @@ public class validationAchat extends JFrame {
         this.setResizable(false);
         this.setContentPane(contentPane);
 
+        // Création du modele de tableau medicament disponible
+        String[] colonne = {"quantite", "Date mise en service", "Prix", "Categorie", "Nom"};
+        tableModelMedicDispo = new DefaultTableModel(colonne, 0);
+        tableMedicDispo.setModel(tableModelMedicDispo);
+
+        // Création du modele de tableau commande medicament
+        String[] colonnes = {"Nom medecin", "Nom patient ", "Nom medicament" , "Quantite medic "};
+        tableModel = new DefaultTableModel(colonnes, 0);
+        tableMedic.setModel(tableModel);
+
+        // Afficher Medicament List dispos ICI
+        afficherListeMedicDispo();
+
         this.pack();
         this.setLocationRelativeTo(null);
 
-        buttonRetourAchat.addActionListener(new ActionListener() {
+        btnRetourAchat.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 retour();
             }
         });
-        buttonValiderAchat.addActionListener(new ActionListener() {
+        btnValiderAchat.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 valider();
@@ -55,30 +76,85 @@ public class validationAchat extends JFrame {
                 quitter();
             }
         });
-        buttonAjouterMedicamentList.addActionListener(new ActionListener() {
+        btnAjouterMedicamentList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ajouter();
+                try {
+                    ajouter();
+                } catch (SaisieException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+        btnDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteMedic();
             }
         });
     }
 
-    private void ajouter() {
-//        String nomMedicament = textFieldInputNomMedic.getText();
-//        String quantiteMedicament = textFieldInputQuantiteMedic.getText();
-//        try{
-//            if (nomMedicament == null || quantiteMedicament == null) {
-//                System.out.println("Error les champs ne peut pas etre vide");
-//            } else if (!regexAlpha(nomMedicament) || !positifInt(quantiteMedicament)) {
-//                System.out.println("Error dans les champs nom ou quantité");
-//            }else{
-//                Medicament.getMedicaments().add(nomMedicament);
-//                Medicament.getMedicaments().add(quantiteMedicament);
-//            }
-//        }catch(Exception ex){
-//            System.out.println("Error dans l'ajoute du medicament !" + ex.getMessage());
-//        }
+    private  void ajouter() throws SaisieException {
+        String nomMedecin = inputNomMedecin.getText().trim().toUpperCase();
+        String nomPatient = inputNomPatient.getText().trim().toUpperCase();
+        String nomMedic = inputNomMedic.getText().trim().toUpperCase();
+        int quantite = Integer.parseInt(inputQuantiteMedic.getText().trim());
+
+
+        try{
+            quantite = Integer.parseInt(inputQuantiteMedic.getText().trim());
+        }catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "La quantité doit etre un nombre entier",
+                    "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if(nomMedecin.equals("") && nomPatient.equals("") && nomMedic.equals("")){
+            JOptionPane.showMessageDialog(this,
+                    "Le nom du medecin, du patient et du medicament ne peuvent pas etre vides",
+                    "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if(!regexAlpha(nomMedecin) || !regexAlpha(nomPatient) || !regexAlpha(nomMedic)){
+            JOptionPane.showMessageDialog(this,
+                    "Error sur le nom du medecin et le nom du patient",
+                    "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+
+        Ordonnance ordonnance = new Ordonnance(nomMedecin, nomPatient, nomMedic, quantite);
+        Ordonnance.getOrdonnances().add(ordonnance);
+
+        JOptionPane.showMessageDialog(this,
+                "Votre medicament est bien saisie",
+                "Succès", JOptionPane.ERROR_MESSAGE);
+
+        System.out.println("Votre medicament est bien saisie" + ordonnance);
     }
+
+    private void afficherListeMedicDispo() {
+        tableModelMedicDispo.setRowCount(0);
+
+        if(Medicament.getMedicaments().isEmpty()){
+            tableModelMedicDispo.addRow(new Object []{"-", "Aucun medicament", "", ""});
+        }else{
+            for(Medicament medicaments : Medicament.getMedicaments()) {
+                tableModelMedicDispo.addRow(new Object[]{
+                    medicaments.getQuantite(),
+                    medicaments.getDateMiseEnService(),
+                    medicaments.getPrix(),
+                    medicaments.getCategorie(),
+                    medicaments.getNom(),
+                });
+            }
+        }
+    }
+
+    private void deleteMedic() {
+
+    }
+
     private void retour() {
         this.dispose();
     }
