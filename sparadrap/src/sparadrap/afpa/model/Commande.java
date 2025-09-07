@@ -62,11 +62,22 @@ public class Commande {
      */
     public Date getDateCommande() { return this.dateCommande; }
 
+    /**
+     * Gets date commande creation.
+     *
+     * @return the date commande creation
+     */
     public String getDateCommandeCreation() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return dateCommande.toLocalDate().format(formatter);
     }
 
+    /**
+     * Sets date commande.
+     *
+     * @param pDateCommande the p date commande
+     * @throws SaisieException the saisie exception
+     */
     public void setDateCommande(Date pDateCommande) throws SaisieException {
         String dateStr = pDateCommande.toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         if (!dateValide(dateStr)) {
@@ -76,13 +87,53 @@ public class Commande {
         }
     }
 
+    /**
+     * Gets type achat.
+     *
+     * @return the type achat
+     */
     public TypeAchat getTypeAchat() { return this.typeAchat; }
+
+    /**
+     * Sets type achat.
+     *
+     * @param pTypeAchat the p type achat
+     */
     public void setTypeAchat(TypeAchat pTypeAchat) { this.typeAchat = pTypeAchat; }
 
-    // Getters simples
+    // Getters
+    /**
+     * Gets nom medecin.
+     *
+     * @return the nom medecin
+     */
     public String getNomMedecin() { return nomMedecin; }
+
+    /**
+     * Gets nom patient.
+     *
+     * @return the nom patient
+     */
     public String getNomPatient() { return nomPatient; }
+
+    /**
+     * Gets nom medic.
+     *
+     * @return the nom medic
+     */
     public String getNomMedic() { return nomMedic; }
+
+    /**
+     * Gets quantite.
+     *
+     * @return the quantite
+     */
     public int getQuantite() { return quantite; }
+
+    /**
+     * Gets prix.
+     *
+     * @return the prix
+     */
     public double getPrix() { return prix; }
 }

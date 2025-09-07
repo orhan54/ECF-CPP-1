@@ -39,12 +39,6 @@ public class consulterMedecin extends JFrame {
                 retour();
             }
         });
-        infoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                infoMedecin();
-            }
-        });
         quitterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,12 +46,9 @@ public class consulterMedecin extends JFrame {
             }
         });
     }
+
     private void retour() {
         this.dispose();
-    }
-
-    private void infoMedecin() {
-
     }
 
     private void quitter() {
@@ -66,4 +57,5 @@ public class consulterMedecin extends JFrame {
             System.exit(0);
         }
     }
+
 }

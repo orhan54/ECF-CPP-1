@@ -13,7 +13,7 @@ public class historiqueAchat extends JFrame {
     private JButton buttonValiderHistorique;
     private JButton buttonQuitterHistorique;
     private JLabel titreHistorique;
-    private JTable table1;
+    private JTable tableHistorique;
     private JButton modifierButton;
     private JButton supprimerButton;
     private JScrollBar scrollBar1;
@@ -36,7 +36,7 @@ public class historiqueAchat extends JFrame {
         comboBoxTypeHistoriqueAchat.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-
+                selectTypeAchat();
             }
         });
         buttonRetourHistorique.addActionListener(new ActionListener() {
@@ -45,10 +45,11 @@ public class historiqueAchat extends JFrame {
                 retour();
             }
         });
+
         buttonValiderHistorique.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                valider();
             }
         });
         buttonQuitterHistorique.addActionListener(new ActionListener() {
@@ -58,6 +59,15 @@ public class historiqueAchat extends JFrame {
             }
         });
     }
+
+    private void selectTypeAchat() {
+
+    }
+
+    private void valider() {
+
+    }
+
     private void retour() {
         this.dispose();
     }

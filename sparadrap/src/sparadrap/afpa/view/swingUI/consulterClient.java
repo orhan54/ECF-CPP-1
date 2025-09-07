@@ -14,7 +14,7 @@ public class consulterClient extends JFrame {
     private JButton retourButton;
     private JButton infoButton;
     private JButton quitterButton;
-    private JComboBox comboBox1;
+    private JButton créerUnCompteButton;
     private JButton creerButton;
 
     public consulterClient() {
@@ -32,6 +32,27 @@ public class consulterClient extends JFrame {
         this.pack();
         this.setLocationRelativeTo(null);
 
+        créerUnCompteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addClient();
+            }
+        });
+
+        modifierButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateClient();
+            }
+        });
+
+        supprimerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteClient();
+            }
+        });
+
         retourButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -39,12 +60,6 @@ public class consulterClient extends JFrame {
             }
         });
 
-        infoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                infoClient();
-            }
-        });
         quitterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -53,12 +68,20 @@ public class consulterClient extends JFrame {
         });
     }
 
-    private void retour() {
-        this.dispose();
+    private void addClient() {
+
     }
 
-    private void infoClient() {
+    private void updateClient() {
 
+    }
+
+    private void deleteClient() {
+
+    }
+
+    private void retour() {
+        this.dispose();
     }
 
     private void quitter() {
