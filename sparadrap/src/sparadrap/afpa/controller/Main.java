@@ -43,8 +43,20 @@ public class Main {
             Lieu lieu3 = new Lieu("55 avenue des malades", "macif@gmail.com", "+33383812010", "dieulouard", 54380);
             Patient p = new Patient("Dupont", "Jean", lieu1);
             Medecin m = new Medecin("Martin", "Paul", "1234567891234" , lieu2);
-            Commande cmd1 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT);
-            Commande cmd2 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.ORDONNANCE);
+            Commande cmd1 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT,
+                    "Dr Martin",
+                    "Jean Dupont",
+                    "Doliprane",
+                    2,
+                    4.5
+            );
+            Commande cmd2 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.ORDONNANCE,
+                    "Dr Bernard",
+                    "Paul Durand",
+                    "Amoxicilline",
+                    1,
+                    12.0
+            );
             Mutuelle m1 = new Mutuelle("macif", 30, 54, lieu3);
 
             System.out.println(m1);

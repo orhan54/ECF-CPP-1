@@ -5,24 +5,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class registerMedecin extends JFrame {
+public class consulterMedecin extends JFrame {
     private JPanel contentPane;
-    private JPanel titreRegisterMedecin;
-    private JPanel mainRegisterMedecin;
-    private JPanel footerRegisterMedecin;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
-    private JTextField textField7;
-    private JTextField textField8;
-    private JButton buttonRetourRegisterMedecin;
-    private JButton buttonValideRegisterMedecin;
-    private JButton button1;
+    private JLabel titreMenu;
+    private JTable table1;
+    private JButton creerButton;
+    private JButton modifierButton;
+    private JButton supprimerButton;
+    private JButton quitterButton;
+    private JButton retourButton;
+    private JButton infoButton;
+    private JComboBox comboBox1;
 
-    public registerMedecin() {
+    public consulterMedecin() {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
         Dimension dimension = new Dimension(800, 900);
 
@@ -37,38 +32,36 @@ public class registerMedecin extends JFrame {
         this.pack();
         this.setLocationRelativeTo(null);
 
-        buttonRetourRegisterMedecin.addActionListener(new ActionListener() {
+
+        retourButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 retour();
             }
         });
-        buttonValideRegisterMedecin.addActionListener(new ActionListener() {
+        infoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                valider();
+                infoMedecin();
             }
         });
-        button1.addActionListener(new ActionListener() {
+        quitterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 quitter();
             }
         });
     }
-
     private void retour() {
         this.dispose();
     }
 
-    private void valider() {
+    private void infoMedecin() {
 
     }
 
     private void quitter() {
-        int reponse = JOptionPane.showConfirmDialog(registerMedecin.this,
-                "Voulez-vous quitter l'application ?", "Quitter",
-                JOptionPane.YES_NO_OPTION);
+        int reponse = JOptionPane.showConfirmDialog(consulterMedecin.this, "Voulez-vous quitter l'application ?", "Quitter", JOptionPane.YES_NO_OPTION);
         if (reponse == JOptionPane.YES_OPTION) {
             System.exit(0);
         }

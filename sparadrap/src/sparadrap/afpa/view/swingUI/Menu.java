@@ -20,7 +20,7 @@ public class Menu extends JFrame {
     public Menu() {
 
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
-        Dimension dimension = new Dimension(800, 800);
+        Dimension dimension = new Dimension(800, 900);
 
         //les attributs
         this.setTitle("Sparadrap");
@@ -81,13 +81,13 @@ public class Menu extends JFrame {
     }
 
     private void displaymedecin() {
-        registerMedecin registerMedecin = new registerMedecin();
-        registerMedecin.setVisible(true);
+        consulterMedecin consulterMedecin = new consulterMedecin();
+        consulterMedecin.setVisible(true);
     }
 
     private void displayAddClient() {
-        registerClient registerClient = new registerClient();
-        registerClient.setVisible(true);
+        consulterClient consulterClient = new consulterClient();
+        consulterClient.setVisible(true);
     }
 
     private void quitter() {

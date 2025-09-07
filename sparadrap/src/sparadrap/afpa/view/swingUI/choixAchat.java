@@ -16,9 +16,12 @@ public class choixAchat extends JFrame {
     private JButton retourChoixAchat;
     private JLabel titreChoixAchat;
 
+    /**
+     * Instantiates a new Choix achat.
+     */
     public choixAchat() {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
-        Dimension dimension = new Dimension(800, 800);
+        Dimension dimension = new Dimension(800, 900);
 
         //les attributs
         this.setTitle("Sparadrap");
@@ -58,12 +61,12 @@ public class choixAchat extends JFrame {
     }
 
     private void typeAchatDirect() {
-        validationAchat validationAchat = new validationAchat();
+        validationAchat validationAchat = new validationAchat("direct");
         validationAchat.setVisible(true);
     }
 
     private void typeAchatOrdonnance() {
-        validationAchat validationAchat = new validationAchat();
+        validationAchat validationAchat = new validationAchat("ordonnance");
         validationAchat.setVisible(true);
     }
 

@@ -23,10 +23,11 @@ public class registerClient extends JFrame{
     private JTextField textFieldRegisterDateNaissance;
     private JTextField textFieldRegisterMutuelle;
     private JLabel titreRegister;
+    private JButton quitterButton;
 
     public registerClient() {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
-        Dimension dimension = new Dimension(800, 800);
+        Dimension dimension = new Dimension(800, 900);
 
         //les attributs
         this.setTitle("Sparadrap");
@@ -51,6 +52,12 @@ public class registerClient extends JFrame{
                 valider();
             }
         });
+        quitterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                quitter();
+            }
+        });
     }
 
     private void retour() {
@@ -59,5 +66,14 @@ public class registerClient extends JFrame{
 
     private void valider() {
 
+    }
+
+    private void quitter() {
+        int reponse = JOptionPane.showConfirmDialog(registerClient.this,
+                "Voulez-vous quitter l'application ?", "Quitter",
+                JOptionPane.YES_NO_OPTION);
+        if (reponse == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
     }
 }

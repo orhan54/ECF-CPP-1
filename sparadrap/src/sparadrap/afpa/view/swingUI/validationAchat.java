@@ -6,9 +6,6 @@ import sparadrap.afpa.model.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.*;
-
-import static sparadrap.afpa.utility.RegexUtility.regexAlpha;
 
 public class validationAchat extends JFrame {
     private JPanel contentPane;
@@ -24,16 +21,18 @@ public class validationAchat extends JFrame {
     private JButton btnDelete;
     private JTable tableMedic;
     private JTable tableMedicDispo;
+    private JLabel titreTypeLabel;
+    private boolean commandeAjoutee = false;
 
     private DefaultTableModel tableModelCommande;
     private DefaultTableModel tableModelMedicDispo;
 
-    public validationAchat() {
+    public validationAchat(String typeAchat) {
 
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
-        Dimension dimension = new Dimension(800, 800);
+        Dimension dimension = new Dimension(800, 900);
 
-        //les attributs
+        // Fenêtre
         this.setTitle("Sparadrap");
         this.setIconImage(imageIcon.getImage());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,132 +40,147 @@ public class validationAchat extends JFrame {
         this.setResizable(false);
         this.setContentPane(contentPane);
 
-        // Création du modele de tableau medicament disponible
-        String[] colonne = {"quantite", "Date mise en service", "Prix", "Categorie", "Nom"};
+        // Affichage du type d’achat
+        if (typeAchat.equalsIgnoreCase("direct")) {
+            titreTypeLabel.setText("DIRECT");
+        } else if (typeAchat.equalsIgnoreCase("ordonnance")) {
+            titreTypeLabel.setText("ORDONNANCE");
+        }
+
+        // Tableau des médicaments disponibles
+        String[] colonne = {"Quantité", "Date mise en service", "Prix", "Categorie", "Nom"};
         tableModelMedicDispo = new DefaultTableModel(colonne, 0);
         tableMedicDispo.setModel(tableModelMedicDispo);
 
-        // Création du modele de tableau commande medicament
-        String[] colonnes = {"Nom medecin", "Nom patient", "Nom medicament" , "Quantite medic", "Prix"};
+        // Tableau des commandes
+        String[] colonnes = {"Type achat", "Nom medecin", "Nom patient", "Nom medicament", "Quantite", "Prix", "Date"};
         tableModelCommande = new DefaultTableModel(colonnes, 0);
         tableMedic.setModel(tableModelCommande);
 
-        // Afficher Medicament List dispos ICI
+        // Afficher médicaments disponibles
         afficherListeMedicDispo();
 
         this.pack();
         this.setLocationRelativeTo(null);
+        btnValiderAchat.setEnabled(false);
 
-        btnRetourAchat.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                retour();
+        // Listeners
+        btnRetourAchat.addActionListener(e -> retour());
+        btnValiderAchat.addActionListener(e -> valider());
+        buttonQuitterAchat.addActionListener(e -> quitter());
+        btnAjouterMedicamentList.addActionListener(e -> {
+            try {
+                ajouter();
+            } catch (SaisieException ex) {
+                throw new RuntimeException(ex);
             }
         });
-        btnValiderAchat.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                valider();
-            }
-        });
-        buttonQuitterAchat.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                quitter();
-            }
-        });
-        btnAjouterMedicamentList.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    ajouter();
-                } catch (SaisieException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-        btnDelete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                deleteMedic();
-            }
-        });
+        btnDelete.addActionListener(e -> deleteMedic());
     }
 
-    private  void ajouter() throws SaisieException {
-        tableModelCommande.setRowCount(0);
-        if (inputNomMedic.getText().isEmpty() || inputQuantiteMedic.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                    "Les champs sont vides","Erreur",JOptionPane.WARNING_MESSAGE);
-        } else{
-            for(Ordonnance ordonnances : Ordonnance.getOrdonnances()){
-                tableModelCommande.addRow(new Object[]{
-                        ordonnances.getNomMedecin(),
-                        ordonnances.getNomPatient(),
-                        ordonnances.getNomMedic(),
-                        ordonnances.getQuantiteMedic(),
-
-                });
-            }
-        }
+    private void ajouter() throws SaisieException {
+        String typeAchatStr = titreTypeLabel.getText().trim().toUpperCase();
         String nomMedecin = inputNomMedecin.getText().trim().toUpperCase();
         String nomPatient = inputNomPatient.getText().trim().toUpperCase();
         String nomMedic = inputNomMedic.getText().trim().toUpperCase();
-        int quantite = Integer.parseInt(inputQuantiteMedic.getText().trim());
+        int quantite;
 
-
-        try{
+        // Vérification de la quantité
+        try {
             quantite = Integer.parseInt(inputQuantiteMedic.getText().trim());
-        }catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this,
-                    "La quantité doit etre un nombre entier",
+                    "La quantité doit être un nombre entier",
                     "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if(nomMedecin.equals("") && nomPatient.equals("") && nomMedic.equals("")){
+        // Recherche du médicament
+        double prix = 0;
+        Medicament medicamentTrouve = null;
+        for (Medicament medicament : Medicament.getMedicaments()) {
+            if (medicament.getNom().equalsIgnoreCase(nomMedic)) {
+                prix = medicament.getPrix();
+                medicamentTrouve = medicament;
+                break;
+            }
+        }
+
+        if (medicamentTrouve == null) {
             JOptionPane.showMessageDialog(this,
-                    "Le nom du medecin, du patient et du medicament ne peuvent pas etre vides",
+                    "Médicament introuvable",
                     "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if(!regexAlpha(nomMedecin) || !regexAlpha(nomPatient) || !regexAlpha(nomMedic)){
+        // Conversion du texte en enum TypeAchat
+        Commande.TypeAchat typeAchat;
+        if (typeAchatStr.equals("DIRECT")) {
+            typeAchat = Commande.TypeAchat.DIRECT;
+        } else if (typeAchatStr.equals("ORDONNANCE")) {
+            typeAchat = Commande.TypeAchat.ORDONNANCE;
+        } else {
             JOptionPane.showMessageDialog(this,
-                    "Error sur le nom du medecin et le nom du patient",
+                    "Type d'achat invalide (valeurs possibles : Direct ou Ordonnance)",
                     "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-        Ordonnance ordonnance = new Ordonnance(nomMedecin, nomPatient, nomMedic, quantite);
-        Ordonnance.getOrdonnances().add(ordonnance);
+        // Création de la commande
+        Commande commande = new Commande(
+                new java.sql.Date(System.currentTimeMillis()),
+                typeAchat,
+                nomMedecin,
+                nomPatient,
+                nomMedic,
+                quantite,
+                prix
+        );
+
+        Commande.getCommandes().add(commande);
+
+        // Ajout dans la JTable
+        tableModelCommande.addRow(new Object[]{
+                commande.getTypeAchat(),
+                commande.getNomMedecin(),
+                commande.getNomPatient(),
+                commande.getNomMedic(),
+                commande.getQuantite(),
+                commande.getPrix(),
+                commande.getDateCommandeCreation()
+        });
+
+        commandeAjoutee = true;
+        btnValiderAchat.setEnabled(true);
 
         JOptionPane.showMessageDialog(this,
-                "Votre medicament est bien saisie",
-                "Succès", JOptionPane.ERROR_MESSAGE);
-
-        System.out.println("Votre medicament est bien saisie" + ordonnance);
+                "Commande ajoutée avec succès !",
+                "Succès", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void afficherListeMedicDispo() {
         tableModelMedicDispo.setRowCount(0);
 
-        if(Medicament.getMedicaments().isEmpty()){
-            tableModelMedicDispo.addRow(new Object []{"-", "Aucun medicament", "", ""});
-        }else{
-            for(Medicament medicaments : Medicament.getMedicaments()) {
+        if (Medicament.getMedicaments().isEmpty()) {
+            tableModelMedicDispo.addRow(new Object[]{"-", "Aucun medicament", "", "", ""});
+        } else {
+            for (Medicament medicaments : Medicament.getMedicaments()) {
                 tableModelMedicDispo.addRow(new Object[]{
-                    medicaments.getQuantite(),
-                    medicaments.getDateMiseEnService(),
-                    medicaments.getPrix(),
-                    medicaments.getCategorie(),
-                    medicaments.getNom(),
+                        medicaments.getQuantite(),
+                        medicaments.getDateMiseEnService(),
+                        medicaments.getPrix(),
+                        medicaments.getCategorie(),
+                        medicaments.getNom(),
                 });
             }
         }
     }
 
     private void deleteMedic() {
-
+        int selectedRow = tableMedic.getSelectedRow();
+        if (selectedRow >= 0) {
+            tableModelCommande.removeRow(selectedRow);
+        }
     }
 
     private void retour() {
@@ -174,11 +188,18 @@ public class validationAchat extends JFrame {
     }
 
     private void valider() {
-
+        int reponse = JOptionPane.showConfirmDialog(validationAchat.this,
+                "Voulez-vous confirmer la commande ?", "Confirmation",
+                JOptionPane.YES_NO_OPTION);
+        if (reponse == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
     }
 
     private void quitter() {
-        int reponse = JOptionPane.showConfirmDialog(validationAchat.this, "Voulez-vous quitter l'application ?", "Quitter", JOptionPane.YES_NO_OPTION);
+        int reponse = JOptionPane.showConfirmDialog(validationAchat.this,
+                "Voulez-vous quitter l'application ?", "Quitter",
+                JOptionPane.YES_NO_OPTION);
         if (reponse == JOptionPane.YES_OPTION) {
             System.exit(0);
         }

@@ -9,15 +9,18 @@ public class historiqueAchat extends JFrame {
     private JComboBox comboBoxTypeHistoriqueAchat;
     private JTextField textFieldDateAchatDu;
     private JTextField textFieldDateAchatAu;
-    private JList list1;
     private JButton buttonRetourHistorique;
     private JButton buttonValiderHistorique;
     private JButton buttonQuitterHistorique;
     private JLabel titreHistorique;
+    private JTable table1;
+    private JButton modifierButton;
+    private JButton supprimerButton;
+    private JScrollBar scrollBar1;
 
     public historiqueAchat() {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
-        Dimension dimension = new Dimension(800, 800);
+        Dimension dimension = new Dimension(800, 900);
 
         //les attributs
         this.setTitle("Sparadrap");
