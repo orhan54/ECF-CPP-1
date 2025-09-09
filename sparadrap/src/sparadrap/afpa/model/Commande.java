@@ -136,4 +136,20 @@ public class Commande {
      * @return the prix
      */
     public double getPrix() { return prix; }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Commande").append('\n');
+        sb.append("- Date commande : ").append(getDateCommandeCreation()).append('\n');
+        sb.append("- Type achat : ").append(typeAchat).append('\n');
+        sb.append("- Nom medecin : ").append(nomMedecin).append('\n');
+        sb.append("- Nom patient : ").append(nomPatient).append('\n');
+        sb.append("- Nom medicament : ").append(nomMedic).append('\n');
+        sb.append("- Quantite : ").append(quantite).append('\n');
+        sb.append("- Prix : ").append(prix).append('\n');
+
+        return sb.toString();
+    }
+
 }

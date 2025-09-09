@@ -11,6 +11,7 @@ public class Personne {
     private String nom;
     private String prenom;
     private Lieu lieu; // composition : une personne a un lieu
+    private Mutuelle mutuelle;
 
     /**
      * Instantiates a new Personne.
@@ -21,10 +22,11 @@ public class Personne {
      * @throws SaisieException  the saisie exception
      */
     // constructeur de lma classe personne
-    public Personne(String pNom, String pPrenom, Lieu lieu) throws SaisieException {
+    public Personne(String pNom, String pPrenom, Lieu lieu, Mutuelle mutuelle) throws SaisieException {
         this.setNom(pNom);
         this.setPrenom(pPrenom);
         this.setLieu(lieu);
+        this.setMutuelle(mutuelle);
     }
 
     // Getters & Setters
@@ -93,6 +95,24 @@ public class Personne {
         this.lieu = lieu;
     }
 
+    /**
+     * Gets mutuelle.
+     *
+     * @return the mutuelle
+     */
+    public Mutuelle getMutuelle() {
+        return mutuelle;
+    }
+
+    /**
+     * Sets mutuelle.
+     *
+     * @param mutuelle the mutuelle
+     */
+    public void setMutuelle(Mutuelle mutuelle) {
+        this.mutuelle = mutuelle;
+    }
+
     // StringBuilder pour afficher le toString de Personne
     @Override
     public String toString() {
@@ -101,6 +121,9 @@ public class Personne {
         sbper.append("- Prenom : ").append(getPrenom()).append("\n");
         if (getLieu() != null) {
             sbper.append(getLieu().toString());
+        }
+        if (getMutuelle() != null) {
+            sbper.append(getMutuelle().getNom()).append("\n");
         }
         return sbper.toString();
     }

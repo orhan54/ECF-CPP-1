@@ -24,8 +24,8 @@ public class Medecin extends Personne {
      * @throws SaisieException  the saisie exception
      */
     // Constructeur qui extends de la classe Personne et Obj Lieu
-    public Medecin(String pNom, String pPrenom, String pNumeroAgreement, Lieu lieu) throws SaisieException {
-        super(pNom, pPrenom, lieu);
+    public Medecin(String pNom, String pPrenom, String pNumeroAgreement, Lieu lieu, Mutuelle mutuelle) throws SaisieException {
+        super(pNom, pPrenom, lieu, mutuelle);
         this.setNumeroAgreement(pNumeroAgreement);
     }
 

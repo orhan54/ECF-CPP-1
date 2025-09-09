@@ -24,8 +24,8 @@ public class Patient extends Personne {
      * @throws SaisieException  the saisie exception
      */
     // Constructeur qui extends de la classe Personne et Obj Lieu
-    public Patient(String pNom, String pPrenom, Lieu lieu) throws SaisieException {
-        super(pNom, pPrenom, lieu);
+    public Patient(String pNom, String pPrenom, Lieu lieu, Mutuelle mutuelle) throws SaisieException {
+        super(pNom, pPrenom, lieu, mutuelle);
         this.numeroSecuriteSociale = generateNumSecu();
     }
 
@@ -98,6 +98,9 @@ public class Patient extends Personne {
         sbpat.append("- Numéro de sécurité sociale : ").append(numeroSecuriteSociale).append("\n");
         if (getLieu() != null) {
             sbpat.append(getLieu().toString());
+        }
+        if (getMutuelle() != null) {
+            sbpat.append("- Mutuelle : ").append(getMutuelle().getNom()).append("\n");
         }
 
         return sbpat.toString();
