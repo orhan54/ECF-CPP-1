@@ -2,15 +2,18 @@ package sparadrap.afpa.model;
 
 import sparadrap.afpa.exception.SaisieException;
 
-import java.awt.*;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static sparadrap.afpa.utility.RegexUtility.dateValide;
 
 public class Patient extends Personne {
 
     // Attribut de la classe Client
     private String numeroSecuriteSociale;
+    private String dateNaissance;
 
     // List des patients enregistrer
     private static List<Patient> patients = new ArrayList<Patient>();
@@ -24,8 +27,9 @@ public class Patient extends Personne {
      * @throws SaisieException  the saisie exception
      */
     // Constructeur qui extends de la classe Personne et Obj Lieu
-    public Patient(String pNom, String pPrenom, Lieu lieu, Mutuelle mutuelle) throws SaisieException {
+    public Patient(String pNom, String pPrenom, String pDateNaissance, Lieu lieu, Mutuelle mutuelle) throws SaisieException {
         super(pNom, pPrenom, lieu, mutuelle);
+        this.setDateNaissance(String.valueOf(pDateNaissance));
         this.numeroSecuriteSociale = generateNumSecu();
     }
 
@@ -66,6 +70,28 @@ public class Patient extends Personne {
     // Getters et Setters
 
     /**
+     * Gets date naissance.
+     *
+     * @return the date naissance
+     */
+    public String getDateNaissance() {
+        return dateNaissance;
+    }
+
+    /**
+     * Sets date naissance.
+     *
+     * @param pDateNaissance the date naissance
+     */
+    public void setDateNaissance(String pDateNaissance) throws SaisieException {
+        if(!dateValide(String.valueOf(pDateNaissance))){
+            throw new SaisieException("Error sur le date de naissance : " + pDateNaissance);
+        }else{
+            this.dateNaissance = pDateNaissance;
+        }
+    }
+
+    /**
      * Gets numero securite sociale.
      *
      * @return the numero securite sociale
@@ -81,11 +107,11 @@ public class Patient extends Personne {
      * @throws SaisieException          the saisie exception
      */
     public void setNumeroSecuriteSociale(String pNumeroSecuriteSociale) throws  SaisieException {
-        if (numeroSecuriteSociale.length()!=15) {
-            System.out.println("Error sur le numero de sécurité social : " + pNumeroSecuriteSociale);
-        }else {
+        //if (numeroSecuriteSociale.length()!=15) {
+            //System.out.println("Error sur le numero de sécurité social : " + pNumeroSecuriteSociale);
+        //}else {
             this.numeroSecuriteSociale = pNumeroSecuriteSociale;
-        }
+        //}
     }
 
     // StringBuilder pour afficher le toString de Patient
@@ -96,6 +122,7 @@ public class Patient extends Personne {
         sbpat.append("- Nom : ").append(getNom()).append("\n");
         sbpat.append("- Prénom : ").append(getPrenom()).append("\n");
         sbpat.append("- Numéro de sécurité sociale : ").append(numeroSecuriteSociale).append("\n");
+        sbpat.append("- Date de naissance : ").append(dateNaissance.toString()).append("\n");
         if (getLieu() != null) {
             sbpat.append(getLieu().toString());
         }

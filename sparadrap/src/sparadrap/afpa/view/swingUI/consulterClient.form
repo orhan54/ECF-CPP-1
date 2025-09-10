@@ -124,7 +124,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="c94ce" class="javax.swing.JTable" binding="table1" default-binding="true">
+                      <component id="c94ce" class="javax.swing.JTable" binding="tableClient">
                         <constraints/>
                         <properties/>
                       </component>

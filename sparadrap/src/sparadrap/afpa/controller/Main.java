@@ -52,11 +52,11 @@ public class Main {
             Mutuelle m4 = new Mutuelle("France Maladie", 30, 88, lieu6);
             Mutuelle m5 = new Mutuelle("Mutuelle Europe", 30, 88, lieu7);
 
-            Patient p1 = new Patient("Dupont", "Jean", lieu1, m1);
-            Patient p2 = new Patient("Martin", "Claire", lieu2, m2);
-            Patient p3 = new Patient("Durand", "Paul", lieu3, m4);
-            Patient p4 = new Patient("Petit", "Sophie", lieu4, m3);
-            Patient p5 = new Patient("Bernard", "Lucas", lieu5, m1);
+            Patient p1 = new Patient("Dupont", "Jean","16-05-1985" , lieu1, m1);
+            Patient p2 = new Patient("Martin", "Claire", "20-06-1982", lieu2, m2);
+            Patient p3 = new Patient("Durand", "Paul", "19-02-1975", lieu3, m4);
+            Patient p4 = new Patient("Petit", "Sophie", "25-10-1973", lieu4, m3);
+            Patient p5 = new Patient("Bernard", "Lucas", "22-09-1965", lieu5, m1);
 
             Medecin med1 = new Medecin("Martin", "Paul", "1234567891234", lieu2, m1);
             Medecin med2 = new Medecin("Robert", "François", "2234567891234", lieu3, m3);
@@ -81,7 +81,7 @@ public class Main {
 
             System.out.println(m1);
             System.out.println(p1);
-            System.out.println(m1);
+            System.out.println(med1);
             System.out.println(cmd1);
             System.out.println(cmd2);
         }catch (Exception e) {

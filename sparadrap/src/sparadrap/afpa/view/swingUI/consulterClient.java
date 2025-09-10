@@ -1,14 +1,18 @@
 package sparadrap.afpa.view.swingUI;
 
+import sparadrap.afpa.model.Patient;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class consulterClient extends JFrame {
     private JPanel contentPane;
     private JLabel titreMenu;
-    private JTable table1;
+    private JTable tableClient;
     private JButton modifierButton;
     private JButton supprimerButton;
     private JButton retourButton;
@@ -16,6 +20,8 @@ public class consulterClient extends JFrame {
     private JButton quitterButton;
     private JButton créerUnCompteButton;
     private JButton creerButton;
+
+    private DefaultTableModel tableModelClient;
 
     public consulterClient() {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
@@ -28,6 +34,13 @@ public class consulterClient extends JFrame {
         this.setPreferredSize(dimension);
         this.setResizable(false);
         this.setContentPane(contentPane);
+
+        String[] colonnes = {"Nom", "Prenom", "Adresse", "Code postal", "Ville", "Téléphone", "Email", "Numero sécurité social", "Date de naissance", "mutuelle"};
+        tableModelClient = new DefaultTableModel(colonnes, 0);
+        tableClient.setModel(tableModelClient);
+
+        // Afficher les clients
+        afficherClient();
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -66,6 +79,27 @@ public class consulterClient extends JFrame {
                 quitter();
             }
         });
+    }
+
+    private void afficherClient() {
+    if(Patient.getPatients().isEmpty()) {
+        tableModelClient.addRow(new Object[]{"Aucun client"});
+    }else{
+        for (Patient patients : Patient.getPatients()) {
+            tableModelClient.addRow(new Object[]{
+                patients.getNom(),
+                patients.getPrenom(),
+                patients.getLieu().getAdresse(),
+                patients.getLieu().getCodePostal(),
+                patients.getLieu().getVille(),
+                patients.getLieu().getTelephone(),
+                patients.getLieu().getEmail(),
+                patients.getNumeroSecuriteSociale(),
+                patients.getDateNaissance(),
+                patients.getMutuelle()
+            });
+            }
+        }
     }
 
     private void addClient() {
