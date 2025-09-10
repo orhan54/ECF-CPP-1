@@ -1,5 +1,6 @@
 package sparadrap.afpa.view.swingUI;
 
+import sparadrap.afpa.exception.SaisieException;
 import sparadrap.afpa.model.Patient;
 
 import javax.swing.*;
@@ -23,7 +24,7 @@ public class consulterClient extends JFrame {
 
     private DefaultTableModel tableModelClient;
 
-    public consulterClient() {
+    public consulterClient() throws SaisieException {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
         Dimension dimension = new Dimension(800, 900);
 
@@ -35,7 +36,7 @@ public class consulterClient extends JFrame {
         this.setResizable(false);
         this.setContentPane(contentPane);
 
-        String[] colonnes = {"Nom", "Prenom", "Adresse", "Code postal", "Ville", "Téléphone", "Email", "Numero sécurité social", "Date de naissance", "mutuelle"};
+        String[] colonnes = {"Nom", "Prenom", "Adresse", "Code postal", "Ville", "Téléphone", "Email", "Numero sécurité social", "Date de naissance", "Mutuelle", "Medecin"};
         tableModelClient = new DefaultTableModel(colonnes, 0);
         tableClient.setModel(tableModelClient);
 
@@ -81,29 +82,36 @@ public class consulterClient extends JFrame {
         });
     }
 
-    private void afficherClient() {
-    if(Patient.getPatients().isEmpty()) {
-        tableModelClient.addRow(new Object[]{"Aucun client"});
-    }else{
-        for (Patient patients : Patient.getPatients()) {
-            tableModelClient.addRow(new Object[]{
-                patients.getNom(),
-                patients.getPrenom(),
-                patients.getLieu().getAdresse(),
-                patients.getLieu().getCodePostal(),
-                patients.getLieu().getVille(),
-                patients.getLieu().getTelephone(),
-                patients.getLieu().getEmail(),
-                patients.getNumeroSecuriteSociale(),
-                patients.getDateNaissance(),
-                patients.getMutuelle()
-            });
+    private void afficherClient() throws SaisieException {
+        tableModelClient.setRowCount(0);
+
+        if(Patient.getPatients().isEmpty()) {
+            tableModelClient.addRow(new Object[]{"Aucun client"});
+        }else{
+            for (Patient patients : Patient.getPatients()) {
+                tableModelClient.addRow(new Object[]{
+                    patients.getNom(),
+                    patients.getPrenom(),
+                    patients.getLieu().getAdresse(),
+                    patients.getLieu().getCodePostal(),
+                    patients.getLieu().getVille(),
+                    patients.getLieu().getTelephone(),
+                    patients.getLieu().getEmail(),
+                    patients.getNumeroSecuriteSociale(),
+                    patients.getDateNaissance(),
+                    patients.getMutuelle()
+                });
             }
         }
     }
 
     private void addClient() {
-
+        registerClient registerClient = new registerClient();
+        try {
+            registerClient.setVisible(true);
+        }catch(Exception e){
+            System.out.println("Erreur sur la vue créer un client" + e.getMessage());
+        }
     }
 
     private void updateClient() {
@@ -111,7 +119,10 @@ public class consulterClient extends JFrame {
     }
 
     private void deleteClient() {
-
+        int selectedRow = tableClient.getSelectedRow();
+        if (selectedRow >= 0) {
+            tableModelClient.removeRow(selectedRow);
+        }
     }
 
     private void retour() {

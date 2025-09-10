@@ -33,17 +33,17 @@ public class MainSwingUI {
             Mutuelle m4 = new Mutuelle("France Maladie", 30, 88, lieu6);
             Mutuelle m5 = new Mutuelle("Mutuelle Europe", 30, 88, lieu7);
 
-            Patient p1 = new Patient("Dupont", "Jean","16-05-1985" , lieu1, m1);
-            Patient p2 = new Patient("Martin", "Claire", "20-06-1982", lieu2, m2);
-            Patient p3 = new Patient("Durand", "Paul", "19-02-1975", lieu3, m4);
-            Patient p4 = new Patient("Petit", "Sophie", "25-10-1973", lieu4, m3);
-            Patient p5 = new Patient("Bernard", "Lucas", "22-09-1965", lieu5, m1);
+            Medecin med1 = new Medecin("Martin", "Paul", "1234567891234", lieu2);
+            Medecin med2 = new Medecin("Robert", "François", "2234567891234", lieu3);
+            Medecin med3 = new Medecin("Dubois", "Anne", "3234567891234", lieu4);
+            Medecin med4 = new Medecin("Morel", "Hélène", "4234567891234", lieu5);
+            Medecin med5 = new Medecin("Lefevre", "Julien", "5234567891234", lieu6);
 
-            Medecin med1 = new Medecin("Martin", "Paul", "1234567891234", lieu2, m1);
-            Medecin med2 = new Medecin("Robert", "François", "2234567891234", lieu3, m3);
-            Medecin med3 = new Medecin("Dubois", "Anne", "3234567891234", lieu4, m5);
-            Medecin med4 = new Medecin("Morel", "Hélène", "4234567891234", lieu5, m3);
-            Medecin med5 = new Medecin("Lefevre", "Julien", "5234567891234", lieu6, m2);
+            Patient p1 = new Patient("Dupont", "Jean","16-05-1985", lieu1, m1, med1);
+            Patient p2 = new Patient("Martin", "Claire", "20-06-1982", lieu2, m2, med2);
+            Patient p3 = new Patient("Durand", "Paul", "19-02-1975", lieu3, m3, med3);
+            Patient p4 = new Patient("Petit", "Sophie", "25-10-1973", lieu4, m4, med4);
+            Patient p5 = new Patient("Bernard", "Lucas", "22-09-1965", lieu5, m5, med5);
 
             Commande cmd1 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT,
                     "Dr Martin",
@@ -67,6 +67,13 @@ public class MainSwingUI {
             Medicament medic3 = new Medicament(80, "28-05-2025", 9.99, "Diurétiques", "Mannitol");
             Medicament medic4 = new Medicament(120, "22-01-2025", 25.99, "Hypnotiques", "Méthaqualone");
             Medicament medic5 = new Medicament(100, "02-03-2025", 15.99, "Triptans", "Élétriptan");
+
+            // Ajoute des patients
+            Patient.getPatients().add(p1);
+            Patient.getPatients().add(p2);
+            Patient.getPatients().add(p3);
+            Patient.getPatients().add(p4);
+            Patient.getPatients().add(p5);
 
             // Ajout dans la listes des medicaments
             Medicament.getMedicaments().add(medic1);

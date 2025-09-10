@@ -1,5 +1,7 @@
 package sparadrap.afpa.view.swingUI;
 
+import sparadrap.afpa.exception.SaisieException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -57,7 +59,11 @@ public class Menu extends JFrame {
         buttonAddClientMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                displayAddClient();
+                try {
+                    displayAddClient();
+                } catch (SaisieException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -85,7 +91,7 @@ public class Menu extends JFrame {
         consulterMedecin.setVisible(true);
     }
 
-    private void displayAddClient() {
+    private void displayAddClient() throws SaisieException {
         consulterClient consulterClient = new consulterClient();
         consulterClient.setVisible(true);
     }

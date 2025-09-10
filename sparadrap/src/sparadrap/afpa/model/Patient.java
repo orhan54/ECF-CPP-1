@@ -2,7 +2,6 @@ package sparadrap.afpa.model;
 
 import sparadrap.afpa.exception.SaisieException;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -12,8 +11,7 @@ import static sparadrap.afpa.utility.RegexUtility.dateValide;
 public class Patient extends Personne {
 
     // Attribut de la classe Client
-    private String numeroSecuriteSociale;
-    private String dateNaissance;
+    private String numeroSecuriteSociale, dateNaissance, nomMedecin;
 
     // List des patients enregistrer
     private static List<Patient> patients = new ArrayList<Patient>();
@@ -21,16 +19,20 @@ public class Patient extends Personne {
     /**
      * Instantiates a new Patient.
      *
-     * @param pNom              the nom patient
-     * @param pPrenom           the prenom patient
-     * @param lieu              the lieu patient
-     * @throws SaisieException  the saisie exception
+     * @param pNom    the nom patient
+     * @param pPrenom the prenom patient
+     * @param lieu    the lieu patient
+     * @throws SaisieException the saisie exception
      */
     // Constructeur qui extends de la classe Personne et Obj Lieu
-    public Patient(String pNom, String pPrenom, String pDateNaissance, Lieu lieu, Mutuelle mutuelle) throws SaisieException {
-        super(pNom, pPrenom, lieu, mutuelle);
+    public Patient(String pNom, String pPrenom, String pDateNaissance, Lieu lieu, Mutuelle mutuelle, Medecin medecin) throws SaisieException {
+        super(pNom, pPrenom, lieu, medecin);
         this.setDateNaissance(String.valueOf(pDateNaissance));
         this.numeroSecuriteSociale = generateNumSecu();
+        this.setNomMedecin(String.valueOf(pNom));
+    }
+
+    private void setNomMedecin(String s) {
     }
 
     /**
@@ -123,6 +125,7 @@ public class Patient extends Personne {
         sbpat.append("- Prénom : ").append(getPrenom()).append("\n");
         sbpat.append("- Numéro de sécurité sociale : ").append(numeroSecuriteSociale).append("\n");
         sbpat.append("- Date de naissance : ").append(dateNaissance.toString()).append("\n");
+        sbpat.append("- Nom du medecin : ").append(getMedecin().getNom()).append("\n");
         if (getLieu() != null) {
             sbpat.append(getLieu().toString());
         }

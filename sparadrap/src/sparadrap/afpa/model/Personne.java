@@ -12,17 +12,26 @@ public class Personne {
     private String prenom;
     private Lieu lieu; // composition : une personne a un lieu
     private Mutuelle mutuelle;
+    private Medecin medecin;
 
     /**
      * Instantiates a new Personne.
      *
-     * @param pNom              the nom
-     * @param pPrenom           the prenom
-     * @param lieu              the lieu
-     * @throws SaisieException  the saisie exception
+     * @param pNom    the nom
+     * @param pPrenom the prenom
+     * @param lieu    the lieu
+     * @throws SaisieException the saisie exception
      */
     // constructeur de lma classe personne
-    public Personne(String pNom, String pPrenom, Lieu lieu, Mutuelle mutuelle) throws SaisieException {
+    public Personne(String pNom, String pPrenom, Lieu lieu, Medecin medecin) throws SaisieException {
+        this.setNom(pNom);
+        this.setPrenom(pPrenom);
+        this.setLieu(lieu);
+        this.setMutuelle(mutuelle);
+        this.setMedecin(medecin);
+    }
+
+    public Personne(String pNom, String pPrenom, Lieu lieu) throws SaisieException {
         this.setNom(pNom);
         this.setPrenom(pPrenom);
         this.setLieu(lieu);
@@ -111,6 +120,14 @@ public class Personne {
      */
     public void setMutuelle(Mutuelle mutuelle) {
         this.mutuelle = mutuelle;
+    }
+
+    public Medecin getMedecin() {
+        return medecin;
+    }
+
+    public void setMedecin(Medecin medecin) {
+        this.medecin = medecin;
     }
 
     // StringBuilder pour afficher le toString de Personne

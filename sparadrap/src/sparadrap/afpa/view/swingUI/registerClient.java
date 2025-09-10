@@ -24,6 +24,7 @@ public class registerClient extends JFrame{
     private JTextField textFieldRegisterMutuelle;
     private JLabel titreRegister;
     private JButton quitterButton;
+    private JComboBox comboBoxNomMedecin;
 
     public registerClient() {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
@@ -65,7 +66,13 @@ public class registerClient extends JFrame{
     }
 
     private void valider() {
-
+//        int reponse = JOptionPane.showConfirmDialog(registerClient.this,
+//                "Voulez-vous ajouter le nouveau client ?", "Quitter",
+//                JOptionPane.YES_NO_OPTION);
+//        if (reponse == JOptionPane.YES_OPTION) {
+//            Patient patients = null;
+//            Patient.getPatients().add(patients);
+//        }
     }
 
     private void quitter() {

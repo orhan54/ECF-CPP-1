@@ -141,11 +141,11 @@ public class Mutuelle {
         StringBuilder sbm = new StringBuilder();
         sbm.append("Mutuelle : ").append("\n");
         sbm.append("- Nom : ").append(this.getNom()).append("\n");
-        sbm.append("- Taux de prise en charge : ").append(this.getTauxPriseEnCharge()).append("\n");
-        sbm.append("- Departement : ").append(this.getDepartement()).append("\n");
         if (getLieu() != null) {
             sbm.append(getLieu().toString());
         }
+        sbm.append("- Departement : ").append(this.getDepartement()).append("\n");
+        sbm.append("- Taux de prise en charge : ").append(this.getTauxPriseEnCharge()).append("\n");
         return sbm.toString();
     }
 }
