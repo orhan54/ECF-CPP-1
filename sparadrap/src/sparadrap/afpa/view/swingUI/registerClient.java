@@ -8,10 +8,8 @@ import sparadrap.afpa.model.Patient;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class registerClient extends JFrame{
+public class registerClient extends JFrame {
     private JPanel contentPane;
     private JPanel logoRegisterClient;
     private JPanel mainRegisterClient;
@@ -27,20 +25,16 @@ public class registerClient extends JFrame{
     private JTextField textFieldRegisterEmail;
     private JTextField textFieldregisterNumSecu;
     private JTextField textFieldRegisterDateNaissance;
-    private JTextField textFieldRegisterMutuelle;
     private JLabel titreRegister;
     private JButton quitterButton;
-    private JComboBox comboBoxNomMedecin;
-    private JComboBox comboBoxMutuelle;
-    private Lieu Lieu;
-    private Mutuelle Mutuelle;
-    private Medecin Medecin;
+    private JComboBox<String> comboBoxNomMedecin;
+    private JComboBox<String> comboBoxMutuelle;
 
     public registerClient() {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
-        Dimension dimension = new Dimension(800, 900);
+        Dimension dimension = new Dimension(1600, 1000);
 
-        //les attributs
+        // Attributs fenêtre
         this.setTitle("Sparadrap");
         this.setIconImage(imageIcon.getImage());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,31 +42,36 @@ public class registerClient extends JFrame{
         this.setResizable(false);
         this.setContentPane(contentPane);
 
+        remplirComboBox();
+
         this.pack();
         this.setLocationRelativeTo(null);
 
-        buttonRetourRegisterClient.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                retour();
+        // Actions boutons
+        buttonRetourRegisterClient.addActionListener(e -> retour());
+        buttonValideRegisterClient.addActionListener(e -> {
+            try {
+                valider();
+            } catch (SaisieException ex) {
+                JOptionPane.showMessageDialog(this, "Erreur : " + ex.getMessage());
             }
         });
-        buttonValideRegisterClient.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    valider();
-                } catch (SaisieException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-        quitterButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                quitter();
-            }
-        });
+        quitterButton.addActionListener(e -> quitter());
+    }
+
+    /**
+     * Remplir les JComboBox avec les listes de médecins et mutuelles
+     */
+    private void remplirComboBox() {
+        comboBoxNomMedecin.removeAllItems();
+        for (Medecin med : Medecin.getMedecins()) {
+            comboBoxNomMedecin.addItem(med.getNom() + " " + med.getPrenom());
+        }
+
+        comboBoxMutuelle.removeAllItems();
+        for (Mutuelle mut : Mutuelle.getMutuelles()) {
+            comboBoxMutuelle.addItem(mut.getNom());
+        }
     }
 
     private void retour() {
@@ -80,34 +79,57 @@ public class registerClient extends JFrame{
     }
 
     private void valider() throws SaisieException {
-        String nom = textFieldRegisterNom.getText();
-        String prenom = textFieldRegisterPrenom.getText();
-        String adresse = textFieldRegisterAdresse.getText();
-        String pCodePostal = textFieldRegisterCodePostal.getText();
-        String ville = textFieldRegisterVille.getText();
-        String tel = textFieldRegisterTel.getText();
-        String email = textFieldregisterNumSecu.getText();
-        int numSecu = Integer.parseInt(textFieldRegisterMutuelle.getText());
-        String dateNaissance = textFieldRegisterDateNaissance.getText();
-        String mutuelle = (String)comboBoxMutuelle.getSelectedItem();
-        String nomMedecin = (String)comboBoxNomMedecin.getSelectedItem();
+        try {
+            // Champs saisis
+            String nom = textFieldRegisterNom.getText();
+            String prenom = textFieldRegisterPrenom.getText();
+            String adresse = textFieldRegisterAdresse.getText();
+            int codePostal = Integer.parseInt(textFieldRegisterCodePostal.getText());
+            String ville = textFieldRegisterVille.getText();
+            String tel = textFieldRegisterTel.getText();
+            String email = textFieldRegisterEmail.getText();
+            String numSecu = textFieldregisterNumSecu.getText();
+            String dateNaissance = textFieldRegisterDateNaissance.getText();
 
-        int reponse = JOptionPane.showConfirmDialog(registerClient.this,
-                "Voulez-vous ajouter le nouveau client ?", "Quitter",
-                JOptionPane.YES_NO_OPTION);
-        if (reponse == JOptionPane.YES_OPTION) {
-            Patient newPatient = new Patient(nom, prenom, adresse, Lieu , Mutuelle , Medecin);
-            newPatient.setNom(nom);
-            newPatient.setPrenom(prenom);
-            newPatient.getLieu().setAdresse(adresse);
-            newPatient.getLieu().setVille(ville);
-            newPatient.getLieu().setCodePostal(Integer.parseInt(pCodePostal));
-            newPatient.getLieu().setTelephone(tel);
-            newPatient.getLieu().setEmail(email);
-            newPatient.setNumeroSecuriteSociale(String.valueOf(numSecu));
-            newPatient.setDateNaissance(dateNaissance);
-            newPatient.getMutuelle().setNom(mutuelle);
-            newPatient.getMedecin().setNom(nomMedecin);
+            // Sélection mutuelle et médecin
+            String mutuelleNom = (String) comboBoxMutuelle.getSelectedItem();
+            String medecinNomComplet = (String) comboBoxNomMedecin.getSelectedItem();
+
+            Mutuelle mutuelleChoisie = null;
+            for (Mutuelle m : Mutuelle.getMutuelles()) {
+                if (m.getNom().equals(mutuelleNom)) {
+                    mutuelleChoisie = m;
+                    break;
+                }
+            }
+
+            Medecin medecinChoisi = null;
+            for (Medecin med : Medecin.getMedecins()) {
+                String nomComplet = med.getNom() + " " + med.getPrenom();
+                if (nomComplet.equals(medecinNomComplet)) {
+                    medecinChoisi = med;
+                    break;
+                }
+            }
+
+            // Création du lieu
+            Lieu lieu = new Lieu(adresse, email, tel, ville, codePostal);
+
+            // Création et ajout du nouveau patient
+            Patient newPatient = new Patient(nom, prenom, dateNaissance, lieu, mutuelleChoisie, medecinChoisi);
+            newPatient.setNumeroSecuriteSociale(numSecu);
+
+            Patient.getPatients().add(newPatient);
+
+            JOptionPane.showMessageDialog(this,
+                    "Nouveau patient ajouté avec succès !",
+                    "Succès",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            this.dispose();
+
+        } catch (NumberFormatException e) {
+            throw new SaisieException("Code postal ou Numéro de sécu invalide !");
         }
     }
 

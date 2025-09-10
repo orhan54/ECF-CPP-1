@@ -22,7 +22,7 @@ public class Menu extends JFrame {
     public Menu() {
 
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
-        Dimension dimension = new Dimension(800, 900);
+        Dimension dimension = new Dimension(1600, 1000);
 
         //les attributs
         this.setTitle("Sparadrap");

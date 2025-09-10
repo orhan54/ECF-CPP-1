@@ -8,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 public class consulterClient extends JFrame {
     private JPanel contentPane;
@@ -26,7 +25,7 @@ public class consulterClient extends JFrame {
 
     public consulterClient() throws SaisieException {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
-        Dimension dimension = new Dimension(800, 900);
+        Dimension dimension = new Dimension(1600, 1000);
 
         //les attributs
         this.setTitle("Sparadrap");
@@ -99,7 +98,8 @@ public class consulterClient extends JFrame {
                     patients.getLieu().getEmail(),
                     patients.getNumeroSecuriteSociale(),
                     patients.getDateNaissance(),
-                    patients.getMutuelle()
+                    patients.getMutuelle().getNom(),
+                    patients.getMedecin().getNom()
                 });
             }
         }

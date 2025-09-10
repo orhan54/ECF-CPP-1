@@ -9,9 +9,9 @@ public class MainSwingUI {
     public static void main(String[] args) throws Exception {
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
+            initialisation();
             Menu myMenu = new Menu();
             myMenu.setVisible(true);
-            initialisation();
         }catch (Exception e) {
             System.out.println("Error au lancement de la vue Swing " + e.getMessage());
         }
@@ -68,7 +68,21 @@ public class MainSwingUI {
             Medicament medic4 = new Medicament(120, "22-01-2025", 25.99, "Hypnotiques", "Méthaqualone");
             Medicament medic5 = new Medicament(100, "02-03-2025", 15.99, "Triptans", "Élétriptan");
 
-            // Ajoute des patients
+            // Ajout des mutuelle
+            Mutuelle.getMutuelles().add(m1);
+            Mutuelle.getMutuelles().add(m2);
+            Mutuelle.getMutuelles().add(m3);
+            Mutuelle.getMutuelles().add(m4);
+            Mutuelle.getMutuelles().add(m5);
+
+            // Ajout des medecins
+            Medecin.getMedecins().add(med1);
+            Medecin.getMedecins().add(med2);
+            Medecin.getMedecins().add(med3);
+            Medecin.getMedecins().add(med4);
+            Medecin.getMedecins().add(med5);
+
+            // Ajout des patients
             Patient.getPatients().add(p1);
             Patient.getPatients().add(p2);
             Patient.getPatients().add(p3);

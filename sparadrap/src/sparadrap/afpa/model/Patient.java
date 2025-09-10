@@ -26,10 +26,11 @@ public class Patient extends Personne {
      */
     // Constructeur qui extends de la classe Personne et Obj Lieu
     public Patient(String pNom, String pPrenom, String pDateNaissance, Lieu lieu, Mutuelle mutuelle, Medecin medecin) throws SaisieException {
-        super(pNom, pPrenom, lieu, medecin);
+        super(pNom, pPrenom, lieu, mutuelle, medecin);
         this.setDateNaissance(String.valueOf(pDateNaissance));
         this.numeroSecuriteSociale = generateNumSecu();
-        this.setNomMedecin(String.valueOf(pNom));
+        this.getMutuelle().getNom();
+        this.getMedecin().getNom();
     }
 
     private void setNomMedecin(String s) {
@@ -125,13 +126,13 @@ public class Patient extends Personne {
         sbpat.append("- Prénom : ").append(getPrenom()).append("\n");
         sbpat.append("- Numéro de sécurité sociale : ").append(numeroSecuriteSociale).append("\n");
         sbpat.append("- Date de naissance : ").append(dateNaissance.toString()).append("\n");
-        sbpat.append("- Nom du medecin : ").append(getMedecin().getNom()).append("\n");
         if (getLieu() != null) {
             sbpat.append(getLieu().toString());
         }
         if (getMutuelle() != null) {
             sbpat.append("- Mutuelle : ").append(getMutuelle().getNom()).append("\n");
         }
+        sbpat.append("- Nom du medecin : ").append(getMedecin().getNom()).append("\n");
 
         return sbpat.toString();
     }

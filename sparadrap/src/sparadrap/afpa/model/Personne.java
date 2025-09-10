@@ -23,7 +23,7 @@ public class Personne {
      * @throws SaisieException the saisie exception
      */
     // constructeur de lma classe personne
-    public Personne(String pNom, String pPrenom, Lieu lieu, Medecin medecin) throws SaisieException {
+    public Personne(String pNom, String pPrenom, Lieu lieu,Mutuelle mutuelle, Medecin medecin) throws SaisieException {
         this.setNom(pNom);
         this.setPrenom(pPrenom);
         this.setLieu(lieu);
