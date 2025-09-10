@@ -1,6 +1,7 @@
 package sparadrap.afpa.view.swingUI;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -18,6 +19,8 @@ public class historiqueAchat extends JFrame {
     private JButton supprimerButton;
     private JScrollBar scrollBar1;
 
+    private DefaultTableModel tableModelHistorique;
+
     public historiqueAchat() {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
         Dimension dimension = new Dimension(1600, 1000);
@@ -29,6 +32,10 @@ public class historiqueAchat extends JFrame {
         this.setPreferredSize(dimension);
         this.setResizable(false);
         this.setContentPane(contentPane);
+
+        String[] colonnes = {"Date", "Nom medecin", "Nom patient", "Liste médicaments"};
+        tableModelHistorique = new DefaultTableModel(colonnes, 0);
+        tableHistorique.setModel(tableModelHistorique);
 
         this.pack();
         this.setLocationRelativeTo(null);

@@ -19,6 +19,7 @@ public class consulterClient extends JFrame {
     private JButton infoButton;
     private JButton quitterButton;
     private JButton créerUnCompteButton;
+    private JComboBox comboBoxClient;
     private JButton creerButton;
 
     private DefaultTableModel tableModelClient;
@@ -38,6 +39,9 @@ public class consulterClient extends JFrame {
         String[] colonnes = {"Nom", "Prenom", "Adresse", "Code postal", "Ville", "Téléphone", "Email", "Numero sécurité social", "Date de naissance", "Mutuelle", "Medecin"};
         tableModelClient = new DefaultTableModel(colonnes, 0);
         tableClient.setModel(tableModelClient);
+
+        // Ajout list item dans combobox
+        remplirComboBox();
 
         // Afficher les clients
         afficherClient();
@@ -79,6 +83,13 @@ public class consulterClient extends JFrame {
                 quitter();
             }
         });
+    }
+
+    private void remplirComboBox() {
+        comboBoxClient.removeAllItems();
+        for(Patient p : Patient.getPatients()) {
+            comboBoxClient.addItem(p.getNom() + " " + p.getPrenom());
+        }
     }
 
     private void afficherClient() throws SaisieException {
