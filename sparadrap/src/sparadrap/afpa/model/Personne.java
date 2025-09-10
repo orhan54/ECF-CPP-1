@@ -52,8 +52,7 @@ public class Personne {
     /**
      * Sets nom.
      *
-     * @param pNom              the nom
-     * @throws SaisieException  the saisie exception
+     * @throws SaisieException the saisie exception
      */
     public void setNom(String pNom) throws SaisieException {
         if (!regexAlpha(pNom)){
@@ -75,8 +74,7 @@ public class Personne {
     /**
      * Sets prenom.
      *
-     * @param pPrenom           the prenom
-     * @throws SaisieException  the saisie exception
+     * @throws SaisieException the saisie exception
      */
     public void setPrenom(String pPrenom) throws SaisieException {
         if (!regexAlpha(pPrenom)){

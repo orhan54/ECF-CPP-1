@@ -44,8 +44,7 @@ public class Lieu {
     /**
      * Sets adresse.
      *
-     * @param pAdresse          the adresse
-     * @throws SaisieException  the saisie exception
+     * @throws SaisieException the saisie exception
      */
     public void setAdresse(String pAdresse) throws SaisieException {
         if (!validateAdresse(pAdresse)) {

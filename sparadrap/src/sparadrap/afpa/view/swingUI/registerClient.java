@@ -1,5 +1,11 @@
 package sparadrap.afpa.view.swingUI;
 
+import sparadrap.afpa.exception.SaisieException;
+import sparadrap.afpa.model.Lieu;
+import sparadrap.afpa.model.Medecin;
+import sparadrap.afpa.model.Mutuelle;
+import sparadrap.afpa.model.Patient;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,6 +31,10 @@ public class registerClient extends JFrame{
     private JLabel titreRegister;
     private JButton quitterButton;
     private JComboBox comboBoxNomMedecin;
+    private JComboBox comboBoxMutuelle;
+    private Lieu Lieu;
+    private Mutuelle Mutuelle;
+    private Medecin Medecin;
 
     public registerClient() {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
@@ -50,7 +60,11 @@ public class registerClient extends JFrame{
         buttonValideRegisterClient.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                valider();
+                try {
+                    valider();
+                } catch (SaisieException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         quitterButton.addActionListener(new ActionListener() {
@@ -65,14 +79,36 @@ public class registerClient extends JFrame{
         this.dispose();
     }
 
-    private void valider() {
-//        int reponse = JOptionPane.showConfirmDialog(registerClient.this,
-//                "Voulez-vous ajouter le nouveau client ?", "Quitter",
-//                JOptionPane.YES_NO_OPTION);
-//        if (reponse == JOptionPane.YES_OPTION) {
-//            Patient patients = null;
-//            Patient.getPatients().add(patients);
-//        }
+    private void valider() throws SaisieException {
+        String nom = textFieldRegisterNom.getText();
+        String prenom = textFieldRegisterPrenom.getText();
+        String adresse = textFieldRegisterAdresse.getText();
+        String pCodePostal = textFieldRegisterCodePostal.getText();
+        String ville = textFieldRegisterVille.getText();
+        String tel = textFieldRegisterTel.getText();
+        String email = textFieldregisterNumSecu.getText();
+        int numSecu = Integer.parseInt(textFieldRegisterMutuelle.getText());
+        String dateNaissance = textFieldRegisterDateNaissance.getText();
+        String mutuelle = (String)comboBoxMutuelle.getSelectedItem();
+        String nomMedecin = (String)comboBoxNomMedecin.getSelectedItem();
+
+        int reponse = JOptionPane.showConfirmDialog(registerClient.this,
+                "Voulez-vous ajouter le nouveau client ?", "Quitter",
+                JOptionPane.YES_NO_OPTION);
+        if (reponse == JOptionPane.YES_OPTION) {
+            Patient newPatient = new Patient(nom, prenom, adresse, Lieu , Mutuelle , Medecin);
+            newPatient.setNom(nom);
+            newPatient.setPrenom(prenom);
+            newPatient.getLieu().setAdresse(adresse);
+            newPatient.getLieu().setVille(ville);
+            newPatient.getLieu().setCodePostal(Integer.parseInt(pCodePostal));
+            newPatient.getLieu().setTelephone(tel);
+            newPatient.getLieu().setEmail(email);
+            newPatient.setNumeroSecuriteSociale(String.valueOf(numSecu));
+            newPatient.setDateNaissance(dateNaissance);
+            newPatient.getMutuelle().setNom(mutuelle);
+            newPatient.getMedecin().setNom(nomMedecin);
+        }
     }
 
     private void quitter() {
