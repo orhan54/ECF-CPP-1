@@ -89,7 +89,12 @@ public class consulterClient extends JFrame {
     private void remplirComboBox() throws SaisieException {
         comboBoxClient.removeAllItems();
         for(Patient p : Patient.getPatients()) {
-            comboBoxClient.addItem(p.getNom() + " " + p.getPrenom());
+            if(comboBoxClient.getItemCount() < 1) {
+                comboBoxClient.addItem("Choisir un client");
+                comboBoxClient.setSelectedItem(0);
+            }else{
+                comboBoxClient.addItem(p.getNom() + " " + p.getPrenom());
+            }
         }
         comboBoxClient.addActionListener(new ActionListener() {
             @Override
@@ -97,7 +102,7 @@ public class consulterClient extends JFrame {
                 e.getSource();
 
                 String selected = (String) comboBoxClient.getSelectedItem();
-                System.out.println("Vous avez séléctionné : " + selected);
+                //System.out.println("Vous avez séléctionné : " + selected);
                 selectedValue = selected;
 
                 if(selected.equals(comboBoxClient.getSelectedItem())) {
@@ -121,11 +126,10 @@ public class consulterClient extends JFrame {
                         }
                     }
                 }
-                System.out.println(selectedValue);
+                //System.out.println(selectedValue);
             }
         });
     }
-
 
     private void afficherClient() throws SaisieException {
         tableModelClient.setRowCount(0);
@@ -166,8 +170,30 @@ public class consulterClient extends JFrame {
 
     private void deleteClient() {
         int selectedRow = tableClient.getSelectedRow();
-        if (selectedRow >= 0) {
-            tableModelClient.removeRow(selectedRow);
+
+        if (selectedRow >= 0 && selectedValue != null) {
+            Patient patientToRemove = null;
+
+            for (Patient p : Patient.getPatients()) {
+                if (selectedValue.equals(p.getNom() + " " + p.getPrenom())) {
+                    patientToRemove = p;
+                    break;
+                }
+            }
+
+            if (patientToRemove != null) {
+                Patient.getPatients().remove(patientToRemove);
+
+                // Mise à jour ComboBox
+                comboBoxClient.removeItem(selectedValue);
+
+                // Vider le tableau après suppression
+                tableModelClient.setRowCount(0);
+
+                // Réinitialiser la sélection
+                selectedValue = null;
+                comboBoxClient.setSelectedIndex(0); // revient sur "Choisir un client"
+            }
         }
     }
 

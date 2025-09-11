@@ -19,6 +19,7 @@ public class consulterMedecin extends JFrame {
     private JButton retourButton;
     private JButton infoButton;
     private JComboBox<String> comboBoxMedecin;
+    private String selectedValue;
 
     private DefaultTableModel tableModelMedecin;
 
@@ -39,7 +40,7 @@ public class consulterMedecin extends JFrame {
         tableMedecin.setModel(tableModelMedecin);
 
         remplirComboBox();
-        afficherMedecin();
+        //afficherMedecin();
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -62,8 +63,42 @@ public class consulterMedecin extends JFrame {
     private void remplirComboBox() {
         comboBoxMedecin.removeAllItems();
         for(Medecin m : Medecin.getMedecins()) {
-            comboBoxMedecin.addItem(m.getNom() + " " + m.getPrenom());
+            if(comboBoxMedecin.getItemCount() < 1) {
+                comboBoxMedecin.addItem("Choisir un medecin");
+                comboBoxMedecin.setSelectedIndex(0);
+            }else{
+                comboBoxMedecin.addItem(m.getNom() + " " + m.getPrenom());
+            }
         }
+        comboBoxMedecin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                e.getSource();
+
+                String selected = (String) comboBoxMedecin.getSelectedItem();
+                selectedValue = selected;
+
+                if(selected.equals(comboBoxMedecin.getSelectedItem())) {
+                    tableModelMedecin.setRowCount(0);
+
+                    for(Medecin m : Medecin.getMedecins()) {
+                        if(selectedValue.equals(m.getNom() + " " + m.getPrenom())) {
+                            tableModelMedecin.addRow(new Object[]{
+                                m.getNom(),
+                                m.getPrenom(),
+                                m.getLieu().getAdresse(),
+                                m.getLieu().getCodePostal(),
+                                m.getLieu().getVille(),
+                                m.getLieu().getTelephone(),
+                                m.getLieu().getEmail(),
+                                m.getNumeroAgreement()
+                            });
+                        }
+                    }
+                }
+
+            }
+        });
     }
 
     private void afficherMedecin() {

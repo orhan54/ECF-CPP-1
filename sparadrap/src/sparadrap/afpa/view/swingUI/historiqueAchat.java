@@ -1,5 +1,7 @@
 package sparadrap.afpa.view.swingUI;
 
+import sparadrap.afpa.model.Ordonnance;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -37,6 +39,8 @@ public class historiqueAchat extends JFrame {
         tableModelHistorique = new DefaultTableModel(colonnes, 0);
         tableHistorique.setModel(tableModelHistorique);
 
+        afficherCommande();
+
         this.pack();
         this.setLocationRelativeTo(null);
 
@@ -65,6 +69,11 @@ public class historiqueAchat extends JFrame {
                 quitter();
             }
         });
+    }
+
+    private void afficherCommande() {
+        tableModelHistorique.setRowCount(0);
+
     }
 
     private void selectTypeAchat() {

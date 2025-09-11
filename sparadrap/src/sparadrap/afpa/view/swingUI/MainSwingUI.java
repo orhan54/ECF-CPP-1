@@ -1,7 +1,6 @@
 package sparadrap.afpa.view.swingUI;
 
 import sparadrap.afpa.model.*;
-import sparadrap.afpa.exception.SaisieException;
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.sql.Date;
@@ -32,11 +31,11 @@ public class MainSwingUI {
             Lieu lieu7 = new Lieu("3 rue Sainte Catherine", "mutuelleeurope@gmail.com", "+33556874532", "Strasbourg", 67000);
 
             // Création des medicaments
-            Medicament medic1 = new Medicament(20, "10-05-2025", 10.50, "Cardiotoniques", "Digoxine");
-            Medicament medic2 = new Medicament(50, "02-09-2025", 5.99, "Bêta-bloquants", "Bisoprolol");
-            Medicament medic3 = new Medicament(80, "28-05-2025", 9.99, "Diurétiques", "Mannitol");
-            Medicament medic4 = new Medicament(120, "22-01-2025", 25.99, "Hypnotiques", "Méthaqualone");
-            Medicament medic5 = new Medicament(100, "02-03-2025", 15.99, "Triptans", "Élétriptan");
+            Medicament medic1 = new Medicament(5, "10-05-2025", 10.50, "Cardiotoniques", "Digoxine");
+            Medicament medic2 = new Medicament(2, "02-09-2025", 5.99, "Bêta-bloquants", "Bisoprolol");
+            Medicament medic3 = new Medicament(6, "28-05-2025", 9.99, "Diurétiques", "Mannitol");
+            Medicament medic4 = new Medicament(2, "22-01-2025", 25.99, "Hypnotiques", "Méthaqualone");
+            Medicament medic5 = new Medicament(4, "02-03-2025", 15.99, "Triptans", "Élétriptan");
 
             // Création de 5 ordonnances avec différents médicaments
             // Ordonnance 1 - Dr Martin pour Jean Dupont (2 médicaments)
@@ -89,24 +88,25 @@ public class MainSwingUI {
             Patient p4 = new Patient("Petit", "Sophie", "25-10-1973", lieu4, m4, med4);
             Patient p5 = new Patient("Bernard", "Lucas", "22-09-1965", lieu5, m5, med5);
 
-            // Création des commandes
-            Commande cmd1 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT,
-                    "Dr Martin",
-                    "Jean Dupont",
-                    "Doliprane",
-                    2,
-                    4.5
-            );
-
-            Commande cmd2 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.ORDONNANCE,
-                    "Dr Bernard",
-                    "Paul Durand",
-                    "Amoxicilline",
-                    1,
-                    12.0
-            );
+//            // Création des commandes
+//            Commande cmd1 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT,
+//                    "Dr Martin",
+//                    "Jean Dupont",
+//                    "Doliprane",
+//                    2,
+//                    4.5
+//            );
+//
+//            Commande cmd2 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.ORDONNANCE,
+//                    "Dr Bernard",
+//                    "Paul Durand",
+//                    "Amoxicilline",
+//                    1,
+//                    12.0
+//            );
 
             // Ajout des mutuelles dans la liste statique
+            System.out.println("=== MUTUELLES CRÉÉES ===");
             Mutuelle.getMutuelles().add(m1);
             Mutuelle.getMutuelles().add(m2);
             Mutuelle.getMutuelles().add(m3);
@@ -114,6 +114,7 @@ public class MainSwingUI {
             Mutuelle.getMutuelles().add(m5);
 
             // Ajout des medecins dans la liste statique
+            System.out.println("=== MEDECINS CRÉÉES ===");
             Medecin.getMedecins().add(med1);
             Medecin.getMedecins().add(med2);
             Medecin.getMedecins().add(med3);
@@ -121,6 +122,7 @@ public class MainSwingUI {
             Medecin.getMedecins().add(med5);
 
             // Ajout des patients dans la liste statique
+            System.out.println("=== PATIENTS CRÉÉES ===");
             Patient.getPatients().add(p1);
             Patient.getPatients().add(p2);
             Patient.getPatients().add(p3);
@@ -128,6 +130,7 @@ public class MainSwingUI {
             Patient.getPatients().add(p5);
 
             // Ajout dans la liste des medicaments
+            System.out.println("=== MEDICAMENTS CRÉÉES ===");
             Medicament.getMedicaments().add(medic1);
             Medicament.getMedicaments().add(medic2);
             Medicament.getMedicaments().add(medic3);
@@ -140,12 +143,12 @@ public class MainSwingUI {
             System.out.println(p1);
             System.out.println(p2);
             System.out.println(med1);
-            System.out.println(cmd1);
-            System.out.println(cmd2);
-            System.out.println("Medicaments disponibles : " + Medicament.getMedicaments());
+//            System.out.println(cmd1);
+//            System.out.println(cmd2);
+            System.out.println("Medicaments disponibles : " + "\n" + Medicament.getMedicaments());
 
             // Affichage des ordonnances créées
-            System.out.println("\n=== ORDONNANCES CRÉÉES ===");
+            System.out.println("=== ORDONNANCES CRÉÉES ===");
             System.out.println(ordo1);
             System.out.println(ordo2);
             System.out.println(ordo3);
