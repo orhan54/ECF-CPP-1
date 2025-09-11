@@ -21,6 +21,7 @@ public class consulterClient extends JFrame {
     private JButton créerUnCompteButton;
     private JComboBox comboBoxClient;
     private JButton creerButton;
+    private String selectedValue;
 
     private DefaultTableModel tableModelClient;
 
@@ -44,7 +45,7 @@ public class consulterClient extends JFrame {
         remplirComboBox();
 
         // Afficher les clients
-        afficherClient();
+        //afficherClient();
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -85,12 +86,46 @@ public class consulterClient extends JFrame {
         });
     }
 
-    private void remplirComboBox() {
+    private void remplirComboBox() throws SaisieException {
         comboBoxClient.removeAllItems();
         for(Patient p : Patient.getPatients()) {
             comboBoxClient.addItem(p.getNom() + " " + p.getPrenom());
         }
+        comboBoxClient.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                e.getSource();
+
+                String selected = (String) comboBoxClient.getSelectedItem();
+                System.out.println("Vous avez séléctionné : " + selected);
+                selectedValue = selected;
+
+                if(selected.equals(comboBoxClient.getSelectedItem())) {
+                    tableModelClient.setRowCount(0);
+
+                    for(Patient p : Patient.getPatients()) {
+                        if(selected.equals(p.getNom() + " " + p.getPrenom())) {
+                            tableModelClient.addRow(new Object[]{
+                                    p.getNom(),
+                                    p.getPrenom(),
+                                    p.getLieu().getAdresse(),
+                                    p.getLieu().getCodePostal(),
+                                    p.getLieu().getVille(),
+                                    p.getLieu().getTelephone(),
+                                    p.getLieu().getEmail(),
+                                    p.getNumeroSecuriteSociale(),
+                                    p.getDateNaissance(),
+                                    p.getMutuelle().getNom(),
+                                    p.getMedecin().getNom()
+                            });
+                        }
+                    }
+                }
+                System.out.println(selectedValue);
+            }
+        });
     }
+
 
     private void afficherClient() throws SaisieException {
         tableModelClient.setRowCount(0);
@@ -100,17 +135,17 @@ public class consulterClient extends JFrame {
         }else{
             for (Patient patients : Patient.getPatients()) {
                 tableModelClient.addRow(new Object[]{
-                    patients.getNom(),
-                    patients.getPrenom(),
-                    patients.getLieu().getAdresse(),
-                    patients.getLieu().getCodePostal(),
-                    patients.getLieu().getVille(),
-                    patients.getLieu().getTelephone(),
-                    patients.getLieu().getEmail(),
-                    patients.getNumeroSecuriteSociale(),
-                    patients.getDateNaissance(),
-                    patients.getMutuelle().getNom(),
-                    patients.getMedecin().getNom()
+                        patients.getNom(),
+                        patients.getPrenom(),
+                        patients.getLieu().getAdresse(),
+                        patients.getLieu().getCodePostal(),
+                        patients.getLieu().getVille(),
+                        patients.getLieu().getTelephone(),
+                        patients.getLieu().getEmail(),
+                        patients.getNumeroSecuriteSociale(),
+                        patients.getDateNaissance(),
+                        patients.getMutuelle().getNom(),
+                        patients.getMedecin().getNom()
                 });
             }
         }

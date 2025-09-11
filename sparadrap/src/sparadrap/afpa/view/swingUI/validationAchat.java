@@ -22,6 +22,9 @@ public class validationAchat extends JFrame {
     private JTable tableMedic;
     private JTable tableMedicDispo;
     private JLabel titreTypeLabel;
+    private JComboBox comboBoxPatient;
+    private JComboBox comboBoxMedicament;
+    private JComboBox comboBoxMedecin;
     private boolean commandeAjoutee = false;
 
     private DefaultTableModel tableModelCommande;
@@ -59,6 +62,9 @@ public class validationAchat extends JFrame {
 
         // Afficher médicaments disponibles
         afficherListeMedicDispo();
+        remplirComboBoxMedecin();
+        remplirComboBoxClient();
+        remplirComboBoxMedicament();
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -78,11 +84,35 @@ public class validationAchat extends JFrame {
         btnDelete.addActionListener(e -> deleteMedic());
     }
 
+    // afficher la list item combobox nom et prénom  medecin
+    private void remplirComboBoxMedecin() {
+        comboBoxMedecin.removeAllItems();
+        for(Medecin medecin : Medecin.getMedecins()) {
+            comboBoxMedecin.addItem(medecin.getNom() + " " + medecin.getPrenom());
+        }
+    }
+
+    // Afficher la list item combobox nom et prénom client
+    private void remplirComboBoxClient() {
+        comboBoxPatient.removeAllItems();
+        for(Patient patient : Patient.getPatients()) {
+            comboBoxPatient.addItem(patient.getNom() + " " + patient.getPrenom());
+        }
+    }
+
+    // Afficher la list item combobox nom medicament
+    private void remplirComboBoxMedicament() {
+        comboBoxMedicament.removeAllItems();
+        for (Medicament medicament : Medicament.getMedicaments()) {
+            comboBoxMedicament.addItem(medicament.getNom());
+        }
+    }
+
     private void ajouter() throws SaisieException {
         String typeAchatStr = titreTypeLabel.getText().trim().toUpperCase();
-        String nomMedecin = inputNomMedecin.getText().trim().toUpperCase();
-        String nomPatient = inputNomPatient.getText().trim().toUpperCase();
-        String nomMedic = inputNomMedic.getText().trim().toUpperCase();
+        String nomMedecin = comboBoxMedecin.getSelectedItem().toString().trim();
+        String nomPatient = comboBoxPatient.getSelectedItem().toString().trim();
+        String nomMedic = comboBoxMedicament.getSelectedItem().toString().trim();
         int quantite;
 
         // Vérification de la quantité
@@ -176,6 +206,7 @@ public class validationAchat extends JFrame {
         }
     }
 
+    // Supprimer commande en cours de la list
     private void deleteMedic() {
         int selectedRow = tableMedic.getSelectedRow();
         if (selectedRow >= 0) {
