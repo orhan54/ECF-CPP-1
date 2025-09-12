@@ -88,14 +88,14 @@ public class consulterClient extends JFrame {
 
     private void remplirComboBox() throws SaisieException {
         comboBoxClient.removeAllItems();
+
+        comboBoxClient.addItem("Choisir un client");
+        comboBoxClient.setSelectedItem(0);
+
         for(Patient p : Patient.getPatients()) {
-            if(comboBoxClient.getItemCount() < 1) {
-                comboBoxClient.addItem("Choisir un client");
-                comboBoxClient.setSelectedItem(0);
-            }else{
                 comboBoxClient.addItem(p.getNom() + " " + p.getPrenom());
-            }
         }
+
         comboBoxClient.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -42,30 +42,30 @@ public class MainSwingUI {
             List<Medicament> medicamentsOrdo1 = new ArrayList<>();
             medicamentsOrdo1.add(medic1); // Digoxine
             medicamentsOrdo1.add(medic2); // Bisoprolol
-            Ordonnance ordo1 = new Ordonnance("Dr Martin Paul", "Jean Dupont", medicamentsOrdo1);
+            Ordonnance ordo1 = new Ordonnance("12/05/2025","Dr Martin Paul", "Jean Dupont", medicamentsOrdo1);
 
             // Ordonnance 2 - Dr Robert pour Claire Martin (1 médicament)
             List<Medicament> medicamentsOrdo2 = new ArrayList<>();
             medicamentsOrdo2.add(medic3); // Mannitol
-            Ordonnance ordo2 = new Ordonnance("Dr Robert François", "Claire Martin", medicamentsOrdo2);
+            Ordonnance ordo2 = new Ordonnance("20/06/2025","Dr Robert François", "Claire Martin", medicamentsOrdo2);
 
             // Ordonnance 3 - Dr Dubois pour Paul Durand (3 médicaments)
             List<Medicament> medicamentsOrdo3 = new ArrayList<>();
             medicamentsOrdo3.add(medic1); // Digoxine
             medicamentsOrdo3.add(medic4); // Méthaqualone
             medicamentsOrdo3.add(medic5); // Élétriptan
-            Ordonnance ordo3 = new Ordonnance("Dr Dubois Anne", "Paul Durand", medicamentsOrdo3);
+            Ordonnance ordo3 = new Ordonnance("28/07/2025","Dr Dubois Anne", "Paul Durand", medicamentsOrdo3);
 
             // Ordonnance 4 - Dr Morel pour Sophie Petit (2 médicaments)
             List<Medicament> medicamentsOrdo4 = new ArrayList<>();
             medicamentsOrdo4.add(medic2); // Bisoprolol
             medicamentsOrdo4.add(medic3); // Mannitol
-            Ordonnance ordo4 = new Ordonnance("Dr Morel Hélène", "Sophie Petit", medicamentsOrdo4);
+            Ordonnance ordo4 = new Ordonnance("29/07/2025","Dr Morel Hélène", "Sophie Petit", medicamentsOrdo4);
 
             // Ordonnance 5 - Dr Lefevre pour Lucas Bernard (1 médicament)
             List<Medicament> medicamentsOrdo5 = new ArrayList<>();
             medicamentsOrdo5.add(medic5); // Élétriptan
-            Ordonnance ordo5 = new Ordonnance("Dr Lefevre Julien", "Lucas Bernard", medicamentsOrdo5);
+            Ordonnance ordo5 = new Ordonnance("05/08/2025","Dr Lefevre Julien", "Lucas Bernard", medicamentsOrdo5);
 
             // Création des mutuelles
             Mutuelle m1 = new Mutuelle("macif", 30, 54, lieu3);
@@ -88,22 +88,46 @@ public class MainSwingUI {
             Patient p4 = new Patient("Petit", "Sophie", "25-10-1973", lieu4, m4, med4);
             Patient p5 = new Patient("Bernard", "Lucas", "22-09-1965", lieu5, m5, med5);
 
-//            // Création des commandes
-//            Commande cmd1 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT,
-//                    "Dr Martin",
-//                    "Jean Dupont",
-//                    "Doliprane",
-//                    2,
-//                    4.5
-//            );
-//
-//            Commande cmd2 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.ORDONNANCE,
-//                    "Dr Bernard",
-//                    "Paul Durand",
-//                    "Amoxicilline",
-//                    1,
-//                    12.0
-//            );
+            // Création des commandes
+            Commande cmd1 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT,
+                    "Dr Martin",
+                    "Jean Dupont",
+                    "Digoxine",
+                    2,
+                    4.5
+            );
+
+            Commande cmd2 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.ORDONNANCE,
+                    "Dr Bernard",
+                    "Paul Durand",
+                    "Amoxicilline",
+                    5,
+                    12.0
+            );
+
+            Commande cmd3 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT,
+                    "Dr Bernard",
+                    "Paul Durand",
+                    "Diurétiques",
+                    4,
+                    12.0
+            );
+
+            Commande cmd4 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT,
+                    "Dr Bernard",
+                    "Paul Durand",
+                    "Hypnotiques",
+                    6,
+                    12.0
+            );
+
+            Commande cmd5 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.ORDONNANCE,
+                    "Dr Bernard",
+                    "Paul Durand",
+                    "Triptans",
+                    8,
+                    12.0
+            );
 
             // Ajout des mutuelles dans la liste statique
             System.out.println("=== MUTUELLES CRÉÉES ===");
@@ -137,14 +161,22 @@ public class MainSwingUI {
             Medicament.getMedicaments().add(medic4);
             Medicament.getMedicaments().add(medic5);
 
+            // Ajout des commandes
+            System.out.println("=== LISTE DES MEDICAMENTS ===");
+            Commande.getCommandes().add(cmd1);
+            Commande.getCommandes().add(cmd2);
+            Commande.getCommandes().add(cmd3);
+            Commande.getCommandes().add(cmd4);
+            Commande.getCommandes().add(cmd5);
+
             // Affichage des informations
             System.out.println("=== INFORMATIONS CRÉÉES ===");
             System.out.println(m1);
             System.out.println(p1);
             System.out.println(p2);
             System.out.println(med1);
-//            System.out.println(cmd1);
-//            System.out.println(cmd2);
+            System.out.println(cmd1);
+            System.out.println(cmd2);
             System.out.println("Medicaments disponibles : " + "\n" + Medicament.getMedicaments());
 
             // Affichage des ordonnances créées

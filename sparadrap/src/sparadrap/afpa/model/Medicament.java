@@ -11,9 +11,8 @@ import static sparadrap.afpa.utility.RegexUtility.*;
 public class Medicament {
     // Attibut pour la classe Medicament
     private int quantite;
-    private String dateMiseEnService;
+    private String dateMiseEnService, categorie, nom;
     private double prix;
-    private String categorie, nom;
 
     // List des medicaments 
     private static List<Medicament> medicaments = new ArrayList<Medicament>();
@@ -35,6 +34,9 @@ public class Medicament {
         this.setPrix(pPrix);
         this.setCategorie(pCategorie);
         this.setNom(pNom);
+    }
+
+    public void Medicament() throws SaisieException {
     }
 
     // Getters et Setters

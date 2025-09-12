@@ -12,7 +12,7 @@ import static sparadrap.afpa.utility.RegexUtility.regexAlpha;
 public class Ordonnance {
     // Attributs pour la classe Ordonnance
     private LocalDateTime dateOrdonnance;
-    private String nomMedecin, nomPatient;
+    private String date, nomMedecin, nomPatient;
 
     // Liste des médicaments pour cette ordonnance
     private List<Medicament> medicaments;
@@ -28,8 +28,24 @@ public class Ordonnance {
      * @param medicaments           la liste des médicaments
      * @throws SaisieException      exception de saisie
      */
-    public Ordonnance(String pNomMedecin, String pNomPatient, List<Medicament> medicaments) throws SaisieException {
-        this.dateOrdonnance = LocalDateTime.now();
+//    public Ordonnance(String pNomMedecin, String pNomPatient, List<Medicament> medicaments) throws SaisieException {
+//        this.dateOrdonnance = LocalDateTime.now();
+//        this.setNomMedecin(pNomMedecin);
+//        this.setNomPatient(pNomPatient);
+//
+//        // Initialiser la liste des médicaments
+//        this.medicaments = new ArrayList<>();
+//        if (medicaments != null && !medicaments.isEmpty()) {
+//            this.medicaments.addAll(medicaments);
+//        }
+//
+//        // Ajouter cette ordonnance à la liste statique
+//        Ordonnance.ordonnances.add(this);
+//    }
+
+    public Ordonnance(String date, String pNomMedecin, String pNomPatient, List<Medicament> medicaments) throws SaisieException {
+        this.setDate(date);
+//        this.dateOrdonnance = LocalDateTime.now();  *** mise en commentaire pour tester les differentes dates de initialisation ***
         this.setNomMedecin(pNomMedecin);
         this.setNomPatient(pNomPatient);
 
@@ -43,6 +59,7 @@ public class Ordonnance {
         Ordonnance.ordonnances.add(this);
     }
 
+
     /**
      * Constructeur sans liste de médicaments (ordonnance vide)
      *
@@ -50,35 +67,13 @@ public class Ordonnance {
      * @param pNomPatient           le nom du patient
      * @throws SaisieException      exception de saisie
      */
-    public Ordonnance(String pNomMedecin, String pNomPatient) throws SaisieException {
-        this(pNomMedecin, pNomPatient, new ArrayList<>());
+    public Ordonnance(String date, String pNomMedecin, String pNomPatient) throws SaisieException {
+        this(date, pNomMedecin, pNomPatient, new ArrayList<>());
     }
 
     // Méthodes pour gérer les médicaments
 
     /**
-     * Ajoute un médicament à l'ordonnance
-     *
-     * @param medicament le médicament à ajouter
-     */
-    public void ajouterMedicament(Medicament medicament) {
-        if (medicament != null) {
-            this.medicaments.add(medicament);
-        }
-    }
-
-    /**
-     * Supprime un médicament de l'ordonnance
-     *
-     * @param medicament le médicament à supprimer
-     * @return true si le médicament a été supprimé, false sinon
-     */
-    public boolean supprimerMedicament(Medicament medicament) {
-        return this.medicaments.remove(medicament);
-    }
-
-    /**
-     * Retourne la liste des médicaments (copie pour éviter les modifications externes)
      *
      * @return une copie de la liste des médicaments
      */
@@ -89,7 +84,7 @@ public class Ordonnance {
     // Méthodes statiques
 
     public static List<Ordonnance> getOrdonnances() {
-        return new ArrayList<>(ordonnances); // Retourne une copie
+        return new ArrayList<>(ordonnances);
     }
 
     // Getters et Setters
@@ -111,6 +106,14 @@ public class Ordonnance {
     public String getDateOrdonnanceCreation() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return dateOrdonnance.format(formatter);
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDate() {
+        return this.date;
     }
 
     /**
@@ -163,7 +166,8 @@ public class Ordonnance {
     public String toString() {
         StringBuilder sbo = new StringBuilder();
         sbo.append("\nOrdonnance :\n");
-        sbo.append("- Date ordonnance : ").append(getDateOrdonnanceCreation()).append("\n");
+        sbo.append("- Date ordonnance : ").append(date).append("\n");
+//        sbo.append("- Date ordonnance : ").append(getDateOrdonnanceCreation()).append("\n");
         sbo.append("- Nom médecin : ").append(nomMedecin).append("\n");
         sbo.append("- Nom patient : ").append(nomPatient).append("\n");
         sbo.append("Liste des médicaments :\n");

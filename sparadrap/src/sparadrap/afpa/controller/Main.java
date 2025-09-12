@@ -60,26 +60,26 @@ public class Main {
             Patient p4 = new Patient("Petit", "Sophie", "25-10-1973", lieu4, m4, med4);
             Patient p5 = new Patient("Bernard", "Lucas", "22-09-1965", lieu5, m5, med5);
 
-            Commande cmd1 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT,
-                    "Dr Martin",
-                    "Jean Dupont",
-                    "Doliprane",
-                    2,
-                    4.5
-            );
-            Commande cmd2 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.ORDONNANCE,
-                    "Dr Bernard",
-                    "Paul Durand",
-                    "Amoxicilline",
-                    1,
-                    12.0
-            );
+//            Commande cmd1 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT,
+//                    "Dr Martin",
+//                    "Jean Dupont",
+//                    "Doliprane",
+//                    2,
+//                    4.5
+//            );
+//            Commande cmd2 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.ORDONNANCE,
+//                    "Dr Bernard",
+//                    "Paul Durand",
+//                    "Amoxicilline",
+//                    1,
+//                    12.0
+//            );
 
             System.out.println(m1);
             System.out.println(p1);
             System.out.println(med1);
-            System.out.println(cmd1);
-            System.out.println(cmd2);
+//            System.out.println(cmd1);
+//            System.out.println(cmd2);
         }catch (Exception e) {
             System.out.println("Erreur dans le lancement de l'initialisation du programme " + e.getMessage());
         }
