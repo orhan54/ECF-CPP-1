@@ -21,20 +21,114 @@ public class Commande {
     private TypeAchat typeAchat;
     private String nomMedecin;
     private String nomPatient;
-    private String nomMedic;
+    private List<Medicament> medicaments; // Remplace nomMedic
     private int quantite;
     private double prix;
+    private Mutuelle mutuelle; // Référence à la mutuelle du patient
+    private boolean priseEnChargeMutuelle; // Si la commande utilise la mutuelle
 
     private static List<Commande> commandes = new ArrayList<>();
 
     /**
-     * Constructeur
+     * Constructeur avec liste de médicaments et mutuelle
      *
-     * @param pDateCommande the p date commande
-     * @param pTypeAchat    the p type achat
+     * @param pDateCommande         the date commande
+     * @param pTypeAchat            the type achat
+     * @param nomMedecin            the nom medecin
+     * @param nomPatient            the nom patient
+     * @param medicaments           the liste des medicaments
+     * @param quantite              the quantite
+     * @param prix                  the prix
+     * @param mutuelle              the mutuelle du patient
+     * @param priseEnChargeMutuelle the prise en charge mutuelle
+     * @throws SaisieException the saisie exception
+     */
+    public Commande(Date pDateCommande,
+                    TypeAchat pTypeAchat,
+                    String nomMedecin,
+                    String nomPatient,
+                    List<Medicament> medicaments,
+                    int quantite,
+                    double prix,
+                    Mutuelle mutuelle,
+                    boolean priseEnChargeMutuelle) throws SaisieException {
+        this.setDateCommande(pDateCommande);
+        this.setTypeAchat(pTypeAchat);
+        this.nomMedecin = nomMedecin;
+        this.nomPatient = nomPatient;
+        this.setMedicaments(medicaments);
+        this.quantite = quantite;
+        this.prix = prix;
+        this.mutuelle = mutuelle;
+        this.priseEnChargeMutuelle = priseEnChargeMutuelle;
+    }
+
+    /**
+     * Constructeur avec un seul médicament et mutuelle
+     *
+     * @param pDateCommande         the date commande
+     * @param pTypeAchat            the type achat
+     * @param nomMedecin            the nom medecin
+     * @param nomPatient            the nom patient
+     * @param medicament            the medicament unique
+     * @param quantite              the quantite
+     * @param prix                  the prix
+     * @param mutuelle              the mutuelle du patient
+     * @param priseEnChargeMutuelle the prise en charge mutuelle
+     * @throws SaisieException the saisie exception
+     */
+    public Commande(Date pDateCommande,
+                    TypeAchat pTypeAchat,
+                    String nomMedecin,
+                    String nomPatient,
+                    Medicament medicament,
+                    int quantite,
+                    double prix,
+                    Mutuelle mutuelle,
+                    boolean priseEnChargeMutuelle) throws SaisieException {
+        this.setDateCommande(pDateCommande);
+        this.setTypeAchat(pTypeAchat);
+        this.nomMedecin = nomMedecin;
+        this.nomPatient = nomPatient;
+        this.medicaments = new ArrayList<>();
+        if (medicament != null) {
+            this.medicaments.add(medicament);
+        }
+        this.quantite = quantite;
+        this.prix = prix;
+        this.mutuelle = mutuelle;
+        this.priseEnChargeMutuelle = priseEnChargeMutuelle;
+    }
+
+    /**
+     *
+     * @param pDateCommande the date commande
+     * @param pTypeAchat    the type achat
      * @param nomMedecin    the nom medecin
      * @param nomPatient    the nom patient
-     * @param nomMedic      the nom medic
+     * @param medicaments   the medicaments
+     * @param quantite      the quantite
+     * @param prix          the prix
+     * @throws SaisieException the saisie exception
+     */
+// Constructeurs de compatibilité (sans mutuelle)
+    public Commande(Date pDateCommande,
+                    TypeAchat pTypeAchat,
+                    String nomMedecin,
+                    String nomPatient,
+                    List<Medicament> medicaments,
+                    int quantite,
+                    double prix) throws SaisieException {
+        this(pDateCommande, pTypeAchat, nomMedecin, nomPatient, medicaments, quantite, prix, null, false);
+    }
+
+    /**
+     *
+     * @param pDateCommande the date commande
+     * @param pTypeAchat    the type achat
+     * @param nomMedecin    the nom medecin
+     * @param nomPatient    the nom patient
+     * @param medicament    the medicament
      * @param quantite      the quantite
      * @param prix          the prix
      * @throws SaisieException the saisie exception
@@ -43,16 +137,34 @@ public class Commande {
                     TypeAchat pTypeAchat,
                     String nomMedecin,
                     String nomPatient,
-                    String nomMedic,
+                    Medicament medicament,
                     int quantite,
                     double prix) throws SaisieException {
-        this.setDateCommande(pDateCommande);
-        this.setTypeAchat(pTypeAchat);
-        this.nomMedecin = nomMedecin;
-        this.nomPatient = nomPatient;
-        this.nomMedic = nomMedic;
-        this.quantite = quantite;
-        this.prix = prix;
+        this(pDateCommande, pTypeAchat, nomMedecin, nomPatient, medicament, quantite, prix, null, false);
+    }
+
+    /**
+     *
+     * @param pDateCommande         the date commande
+     * @param pTypeAchat            the type achat
+     * @param nomMedecin            the nom medecin
+     * @param nomPatient            the nom patient
+     * @param medicaments           the medicaments
+     * @param quantite              the quantite
+     * @param prix                  the prix
+     * @param priseEnChargeMutuelle the prise en charge mutuelle
+     * @throws SaisieException the saisie exception
+     */
+// Constructeurs avec boolean seulement (pour compatibilité)
+    public Commande(Date pDateCommande,
+                    TypeAchat pTypeAchat,
+                    String nomMedecin,
+                    String nomPatient,
+                    List<Medicament> medicaments,
+                    int quantite,
+                    double prix,
+                    boolean priseEnChargeMutuelle) throws SaisieException {
+        this(pDateCommande, pTypeAchat, nomMedecin, nomPatient, medicaments, quantite, prix, null, priseEnChargeMutuelle);
     }
 
     public static List<Commande> getCommandes() { return commandes; }
@@ -117,11 +229,46 @@ public class Commande {
     public String getNomPatient() { return nomPatient; }
 
     /**
-     * Gets nom medic.
+     * Gets medicaments.
      *
-     * @return the nom medic
+     * @return the liste des medicaments
      */
-    public String getNomMedic() { return nomMedic; }
+    public List<Medicament> getMedicaments() {
+        return new ArrayList<>(this.medicaments); // Retourne une copie défensive
+    }
+
+    /**
+     * Sets medicaments.
+     *
+     * @param medicaments the liste des medicaments
+     */
+    public void setMedicaments(List<Medicament> medicaments) {
+        this.medicaments = new ArrayList<>();
+        if (medicaments != null && !medicaments.isEmpty()) {
+            this.medicaments.addAll(medicaments);
+        }
+    }
+
+    /**
+     * Ajouter un médicament à la commande.
+     *
+     * @param medicament the medicament à ajouter
+     */
+    public void ajouterMedicament(Medicament medicament) {
+        if (medicament != null) {
+            this.medicaments.add(medicament);
+        }
+    }
+
+    /**
+     * Supprimer un médicament de la commande.
+     *
+     * @param medicament the medicament à supprimer
+     * @return true si le médicament a été supprimé, false sinon
+     */
+    public boolean supprimerMedicament(Medicament medicament) {
+        return this.medicaments.remove(medicament);
+    }
 
     /**
      * Gets quantite.
@@ -137,6 +284,89 @@ public class Commande {
      */
     public double getPrix() { return prix; }
 
+    /**
+     * Gets mutuelle.
+     *
+     * @return the mutuelle
+     */
+    public Mutuelle getMutuelle() { return mutuelle; }
+
+    /**
+     * Sets mutuelle.
+     *
+     * @param mutuelle the mutuelle
+     */
+    public void setMutuelle(Mutuelle mutuelle) { this.mutuelle = mutuelle; }
+
+    /**
+     * Gets prise en charge mutuelle.
+     *
+     * @return true si prise en charge mutuelle, false sinon
+     */
+    public boolean isPriseEnChargeMutuelle() { return priseEnChargeMutuelle; }
+
+    /**
+     * Sets prise en charge mutuelle.
+     *
+     * @param priseEnChargeMutuelle the prise en charge mutuelle
+     */
+    public void setPriseEnChargeMutuelle(boolean priseEnChargeMutuelle) {
+        this.priseEnChargeMutuelle = priseEnChargeMutuelle;
+    }
+
+    /**
+     * Gets taux mutuelle utilisé pour cette commande.
+     *
+     * @return le taux de la mutuelle en décimal (ex: 0.30 pour 30%)
+     */
+    public double getTauxMutuelle() {
+        if (mutuelle != null) {
+            return mutuelle.getTauxPriseEnCharge() / 100.0; // Conversion pourcentage vers décimal
+        }
+        return 0.0;
+    }
+
+    /**
+     * Calcule le prix total de la commande basé sur les médicaments.
+     *
+     * @return the prix total calculé
+     */
+    public double getPrixTotal() {
+        double total = 0.0;
+        for (Medicament med : medicaments) {
+            total += med.getPrix() * med.getQuantite();
+        }
+        return total;
+    }
+
+    /**
+     * Calcule le prix total après déduction mutuelle si applicable.
+     *
+     * @return le prix total après déduction mutuelle
+     */
+    public double getPrixTotalApresDeduction() {
+        double prixTotal = getPrixTotal();
+
+        // Si c'est une commande par ordonnance avec prise en charge mutuelle
+        if (typeAchat == TypeAchat.ORDONNANCE && priseEnChargeMutuelle && mutuelle != null) {
+            return prixTotal * (1 - getTauxMutuelle());
+        }
+
+        return prixTotal;
+    }
+
+    /**
+     * Calcule le montant de la déduction mutuelle.
+     *
+     * @return le montant de la déduction
+     */
+    public double getMontantDeductionMutuelle() {
+        if (typeAchat == TypeAchat.ORDONNANCE && priseEnChargeMutuelle && mutuelle != null) {
+            return getPrixTotal() * getTauxMutuelle();
+        }
+        return 0.0;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -145,11 +375,34 @@ public class Commande {
         sb.append("- Type achat : ").append(typeAchat).append('\n');
         sb.append("- Nom medecin : ").append(nomMedecin).append('\n');
         sb.append("- Nom patient : ").append(nomPatient).append('\n');
-        sb.append("- Nom medicament : ").append(nomMedic).append('\n');
-        sb.append("- Quantite : ").append(quantite).append('\n');
-        sb.append("- Prix : ").append(prix).append('\n');
+
+        sb.append("- Médicaments : ").append('\n');
+        if (medicaments.isEmpty()) {
+            sb.append("  Aucun médicament dans la commande").append('\n');
+        } else {
+            for (int i = 0; i < medicaments.size(); i++) {
+                sb.append("  ").append(i + 1).append(". ");
+                sb.append("Nom: ").append(medicaments.get(i).getNom());
+                sb.append(", Quantité: ").append(medicaments.get(i).getQuantite());
+                sb.append(", Prix unitaire: ").append(medicaments.get(i).getPrix()).append("€");
+                sb.append('\n');
+            }
+        }
+
+        sb.append("- Quantite totale : ").append(quantite).append('\n');
+        sb.append("- Prix : ").append(prix).append("€").append('\n');
+        sb.append("- Prix total calculé : ").append(String.format("%.2f", getPrixTotal())).append("€").append('\n');
+
+        if (typeAchat == TypeAchat.ORDONNANCE) {
+            sb.append("- Prise en charge mutuelle : ").append(priseEnChargeMutuelle ? "Oui" : "Non").append('\n');
+            if (priseEnChargeMutuelle && mutuelle != null) {
+                sb.append("- Mutuelle : ").append(mutuelle.getNom()).append('\n');
+                sb.append("- Taux de prise en charge : ").append(String.format("%.1f", mutuelle.getTauxPriseEnCharge())).append("%").append('\n');
+                sb.append("- Déduction mutuelle : ").append(String.format("%.2f", getMontantDeductionMutuelle())).append("€").append('\n');
+                sb.append("- Prix à payer : ").append(String.format("%.2f", getPrixTotalApresDeduction())).append("€").append('\n');
+            }
+        }
 
         return sb.toString();
     }
-
 }

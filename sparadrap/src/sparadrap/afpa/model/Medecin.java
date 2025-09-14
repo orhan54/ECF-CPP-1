@@ -23,7 +23,7 @@ public class Medecin extends Personne {
      * @param lieu             the Lieu lieu
      * @throws SaisieException the saisie exception
      */
-    // Constructeur qui extends de la classe Personne et Obj Lieu
+// Constructeur qui extends de la classe Personne et Obj Lieu
     public Medecin(String pNom, String pPrenom, String pNumeroAgreement, Lieu lieu) throws SaisieException {
         super(pNom, pPrenom, lieu);
         this.setNumeroAgreement(pNumeroAgreement);

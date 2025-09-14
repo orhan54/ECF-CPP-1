@@ -37,6 +37,9 @@ public class MainSwingUI {
             Medicament medic4 = new Medicament(2, "22-01-2025", 25.99, "Hypnotiques", "Méthaqualone");
             Medicament medic5 = new Medicament(4, "02-03-2025", 15.99, "Triptans", "Élétriptan");
 
+            // Médicaments supplémentaires pour les commandes
+            Medicament medic6 = new Medicament(10, "15-04-2025", 8.50, "Antibiotiques", "Amoxicilline");
+
             // Création de 5 ordonnances avec différents médicaments
             // Ordonnance 1 - Dr Martin pour Jean Dupont (2 médicaments)
             List<Medicament> medicamentsOrdo1 = new ArrayList<>();
@@ -68,18 +71,18 @@ public class MainSwingUI {
             Ordonnance ordo5 = new Ordonnance("05/08/2025","Dr Lefevre Julien", "Lucas Bernard", medicamentsOrdo5);
 
             // Création des mutuelles
-            Mutuelle m1 = new Mutuelle("macif", 30, 54, lieu3);
+            Mutuelle m1 = new Mutuelle("Macif", 30, 54, lieu3);
             Mutuelle m2 = new Mutuelle("France Mutuelle", 30, 57, lieu4);
             Mutuelle m3 = new Mutuelle("Mutuelle Verte", 30, 88, lieu5);
             Mutuelle m4 = new Mutuelle("France Maladie", 30, 88, lieu6);
             Mutuelle m5 = new Mutuelle("Mutuelle Europe", 30, 88, lieu7);
 
             // Création des médecins
-            Medecin med1 = new Medecin("Martin", "Paul", "1234567891234", lieu2);
-            Medecin med2 = new Medecin("Robert", "François", "2234567891234", lieu3);
-            Medecin med3 = new Medecin("Dubois", "Anne", "3234567891234", lieu4);
-            Medecin med4 = new Medecin("Morel", "Hélène", "4234567891234", lieu5);
-            Medecin med5 = new Medecin("Lefevre", "Julien", "5234567891234", lieu6);
+            Medecin med1 = new Medecin("Dr Martin", "Paul", "1234567891234", lieu2);
+            Medecin med2 = new Medecin("Dr Robert", "François", "2234567891234", lieu3);
+            Medecin med3 = new Medecin("Dr Dubois", "Anne", "3234567891234", lieu4);
+            Medecin med4 = new Medecin("Dr Morel", "Hélène", "4234567891234", lieu5);
+            Medecin med5 = new Medecin("Dr Lefevre", "Julien", "5234567891234", lieu6);
 
             // Création des patients
             Patient p1 = new Patient("Dupont", "Jean","16-05-1985", lieu1, m1, med1);
@@ -88,45 +91,66 @@ public class MainSwingUI {
             Patient p4 = new Patient("Petit", "Sophie", "25-10-1973", lieu4, m4, med4);
             Patient p5 = new Patient("Bernard", "Lucas", "22-09-1965", lieu5, m5, med5);
 
-            // Création des commandes
-            Commande cmd1 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT,
+            // Création des commandes avec la nouvelle structure (liste de médicaments)
+
+            // Commande 1 - Achat direct avec un médicament
+            List<Medicament> medicamentsCmd1 = new ArrayList<>();
+            medicamentsCmd1.add(medic1); // Digoxine
+            Commande cmd1 = new Commande(new Date(System.currentTimeMillis()),
+                    Commande.TypeAchat.DIRECT,
                     "Dr Martin",
                     "Jean Dupont",
-                    "Digoxine",
+                    medicamentsCmd1,
                     2,
-                    4.5
+                    21.0  // Prix total pour 2 Digoxine
             );
 
-            Commande cmd2 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.ORDONNANCE,
+            // Commande 2 - Ordonnance avec un médicament
+            List<Medicament> medicamentsCmd2 = new ArrayList<>();
+            medicamentsCmd2.add(medic6); // Amoxicilline
+            Commande cmd2 = new Commande(new Date(System.currentTimeMillis()),
+                    Commande.TypeAchat.ORDONNANCE,
                     "Dr Bernard",
                     "Paul Durand",
-                    "Amoxicilline",
+                    medicamentsCmd2,
                     5,
-                    12.0
+                    42.5  // Prix total pour 5 Amoxicilline
             );
 
-            Commande cmd3 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT,
+            // Commande 3 - Achat direct avec plusieurs médicaments
+            List<Medicament> medicamentsCmd3 = new ArrayList<>();
+            medicamentsCmd3.add(medic3); // Mannitol
+            medicamentsCmd3.add(medic2); // Bisoprolol
+            Commande cmd3 = new Commande(new Date(System.currentTimeMillis()),
+                    Commande.TypeAchat.DIRECT,
                     "Dr Bernard",
                     "Paul Durand",
-                    "Diurétiques",
+                    medicamentsCmd3,
                     4,
-                    12.0
+                    63.92  // Prix total calculé
             );
 
-            Commande cmd4 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.DIRECT,
+            // Commande 4 - Achat direct avec un seul médicament (utilisation du constructeur alternatif)
+            Commande cmd4 = new Commande(new Date(System.currentTimeMillis()),
+                    Commande.TypeAchat.DIRECT,
                     "Dr Bernard",
                     "Paul Durand",
-                    "Hypnotiques",
+                    medic4, // Méthaqualone (constructeur avec un seul médicament)
                     6,
-                    12.0
+                    155.94  // Prix total pour 6 Méthaqualone
             );
 
-            Commande cmd5 = new Commande(new Date(System.currentTimeMillis()), Commande.TypeAchat.ORDONNANCE,
+            // Commande 5 - Ordonnance avec plusieurs médicaments
+            List<Medicament> medicamentsCmd5 = new ArrayList<>();
+            medicamentsCmd5.add(medic5); // Élétriptan
+            medicamentsCmd5.add(medic1); // Digoxine
+            Commande cmd5 = new Commande(new Date(System.currentTimeMillis()),
+                    Commande.TypeAchat.ORDONNANCE,
                     "Dr Bernard",
                     "Paul Durand",
-                    "Triptans",
+                    medicamentsCmd5,
                     8,
-                    12.0
+                    210.0  // Prix total calculé
             );
 
             // Ajout des mutuelles dans la liste statique
@@ -160,9 +184,10 @@ public class MainSwingUI {
             Medicament.getMedicaments().add(medic3);
             Medicament.getMedicaments().add(medic4);
             Medicament.getMedicaments().add(medic5);
+            Medicament.getMedicaments().add(medic6); // Ajout du médicament supplémentaire
 
             // Ajout des commandes
-            System.out.println("=== LISTE DES MEDICAMENTS ===");
+            System.out.println("=== COMMANDES CRÉÉES ===");
             Commande.getCommandes().add(cmd1);
             Commande.getCommandes().add(cmd2);
             Commande.getCommandes().add(cmd3);
@@ -175,8 +200,15 @@ public class MainSwingUI {
             System.out.println(p1);
             System.out.println(p2);
             System.out.println(med1);
+
+            // Affichage des commandes avec les nouvelles informations
+            System.out.println("=== COMMANDES AVEC MÉDICAMENTS ===");
             System.out.println(cmd1);
             System.out.println(cmd2);
+            System.out.println(cmd3);
+            System.out.println(cmd4);
+            System.out.println(cmd5);
+
             System.out.println("Medicaments disponibles : " + "\n" + Medicament.getMedicaments());
 
             // Affichage des ordonnances créées
@@ -187,11 +219,9 @@ public class MainSwingUI {
             System.out.println(ordo4);
             System.out.println(ordo5);
 
-            // Affichage du nombre total d'ordonnances
-            System.out.println("Nombre total d'ordonnances créées : " + Ordonnance.getOrdonnances().size());
-
         }catch(Exception e){
             System.out.println("Erreur de la vue initialisation menu swing " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

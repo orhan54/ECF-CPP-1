@@ -19,12 +19,15 @@ public class Patient extends Personne {
     /**
      * Instantiates a new Patient.
      *
-     * @param pNom    the nom patient
-     * @param pPrenom the prenom patient
-     * @param lieu    the lieu patient
+     * @param pNom           the nom patient
+     * @param pPrenom        the prenom patient
+     * @param pDateNaissance the p date naissance
+     * @param lieu           the lieu patient
+     * @param mutuelle       the mutuelle
+     * @param medecin        the medecin
      * @throws SaisieException the saisie exception
      */
-    // Constructeur qui extends de la classe Personne et Obj Lieu
+// Constructeur qui extends de la classe Personne et Obj Lieu
     public Patient(String pNom, String pPrenom, String pDateNaissance, Lieu lieu, Mutuelle mutuelle, Medecin medecin) throws SaisieException {
         super(pNom, pPrenom, lieu, mutuelle, medecin);
         this.setDateNaissance(String.valueOf(pDateNaissance));
@@ -110,11 +113,11 @@ public class Patient extends Personne {
      * @throws SaisieException          the saisie exception
      */
     public void setNumeroSecuriteSociale(String pNumeroSecuriteSociale) throws  SaisieException {
-        //if (numeroSecuriteSociale.length()!=15) {
-            //System.out.println("Error sur le numero de sécurité social : " + pNumeroSecuriteSociale);
-        //}else {
+        if (numeroSecuriteSociale.length()!=15) {
+            System.out.println("Error sur le numero de sécurité social : " + pNumeroSecuriteSociale);
+        }else {
             this.numeroSecuriteSociale = pNumeroSecuriteSociale;
-        //}
+        }
     }
 
     // StringBuilder pour afficher le toString de Patient

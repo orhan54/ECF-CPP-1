@@ -20,23 +20,20 @@ public class Medicament {
     /**
      * Instantiates a new Medicament.
      *
-     * @param pQuantite             the quantite
-     * @param pDateMiseEnService    the date mise en service
-     * @param pPrix                 the prix
-     * @param pCategorie            the categorie
-     * @param pNom                  the nom
-     * @throws SaisieException      the saisie exception
+     * @param pQuantite          the quantite
+     * @param pDateMiseEnService the date mise en service
+     * @param pPrix              the prix
+     * @param pCategorie         the categorie
+     * @param pNom               the nom
+     * @throws SaisieException the saisie exception
      */
-    // Constucteur de la classe Medicament
+// Constucteur de la classe Medicament
     public Medicament(int pQuantite, String pDateMiseEnService, double pPrix, String pCategorie, String pNom) throws SaisieException {
         this.setQuantite(pQuantite);
         this.setDateMiseEnService(pDateMiseEnService);
         this.setPrix(pPrix);
         this.setCategorie(pCategorie);
         this.setNom(pNom);
-    }
-
-    public void Medicament() throws SaisieException {
     }
 
     // Getters et Setters

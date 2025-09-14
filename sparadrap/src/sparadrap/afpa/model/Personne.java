@@ -17,12 +17,14 @@ public class Personne {
     /**
      * Instantiates a new Personne.
      *
-     * @param pNom    the nom
-     * @param pPrenom the prenom
-     * @param lieu    the lieu
+     * @param pNom     the nom
+     * @param pPrenom  the prenom
+     * @param lieu     the lieu
+     * @param mutuelle the mutuelle
+     * @param medecin  the medecin
      * @throws SaisieException the saisie exception
      */
-    // constructeur de lma classe personne
+// constructeur de lma classe personne
     public Personne(String pNom, String pPrenom, Lieu lieu,Mutuelle mutuelle, Medecin medecin) throws SaisieException {
         this.setNom(pNom);
         this.setPrenom(pPrenom);
@@ -31,6 +33,14 @@ public class Personne {
         this.setMedecin(medecin);
     }
 
+    /**
+     * Instantiates a new Personne.
+     *
+     * @param pNom    the p nom
+     * @param pPrenom the p prenom
+     * @param lieu    the lieu
+     * @throws SaisieException the saisie exception
+     */
     public Personne(String pNom, String pPrenom, Lieu lieu) throws SaisieException {
         this.setNom(pNom);
         this.setPrenom(pPrenom);

@@ -23,29 +23,15 @@ public class Ordonnance {
     /**
      * Constructeur pour la classe Ordonnance
      *
-     * @param pNomMedecin           le nom du médecin
-     * @param pNomPatient           le nom du patient
-     * @param medicaments           la liste des médicaments
-     * @throws SaisieException      exception de saisie
+     * @param date        the date
+     * @param pNomMedecin le nom du médecin
+     * @param pNomPatient le nom du patient
+     * @param medicaments la liste des médicaments
+     * @throws SaisieException exception de saisie
      */
-//    public Ordonnance(String pNomMedecin, String pNomPatient, List<Medicament> medicaments) throws SaisieException {
-//        this.dateOrdonnance = LocalDateTime.now();
-//        this.setNomMedecin(pNomMedecin);
-//        this.setNomPatient(pNomPatient);
-//
-//        // Initialiser la liste des médicaments
-//        this.medicaments = new ArrayList<>();
-//        if (medicaments != null && !medicaments.isEmpty()) {
-//            this.medicaments.addAll(medicaments);
-//        }
-//
-//        // Ajouter cette ordonnance à la liste statique
-//        Ordonnance.ordonnances.add(this);
-//    }
-
     public Ordonnance(String date, String pNomMedecin, String pNomPatient, List<Medicament> medicaments) throws SaisieException {
         this.setDate(date);
-//        this.dateOrdonnance = LocalDateTime.now();  *** mise en commentaire pour tester les differentes dates de initialisation ***
+//        this.dateOrdonnance = LocalDateTime.now();  // *** mise en commentaire pour tester les differentes dates de initialisation ***
         this.setNomMedecin(pNomMedecin);
         this.setNomPatient(pNomPatient);
 
@@ -167,7 +153,6 @@ public class Ordonnance {
         StringBuilder sbo = new StringBuilder();
         sbo.append("\nOrdonnance :\n");
         sbo.append("- Date ordonnance : ").append(date).append("\n");
-//        sbo.append("- Date ordonnance : ").append(getDateOrdonnanceCreation()).append("\n");
         sbo.append("- Nom médecin : ").append(nomMedecin).append("\n");
         sbo.append("- Nom patient : ").append(nomPatient).append("\n");
         sbo.append("Liste des médicaments :\n");

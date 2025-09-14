@@ -22,13 +22,13 @@ public class Mutuelle {
     /**
      * Instantiates a new Mutuelle.
      *
-     * @param pNom                  the nom mutuelle
-     * @param pTauxPriseEnCharge    the taux prise en charge
-     * @param pDepartement          the departement
-     * @param lieu                  the Lieu lieu
-     * @throws SaisieException      the saisie exception
+     * @param pNom               the nom mutuelle
+     * @param pTauxPriseEnCharge the taux prise en charge
+     * @param pDepartement       the departement
+     * @param lieu               the Lieu lieu
+     * @throws SaisieException the saisie exception
      */
-    // Constucteur qui extends de la classe Lieu
+// Constucteur qui extends de la classe Lieu
     public Mutuelle(String pNom, double pTauxPriseEnCharge, int pDepartement, Lieu lieu) throws SaisieException {
         this.setNom(pNom);
         this.setTauxPriseEnCharge(pTauxPriseEnCharge);
@@ -83,8 +83,8 @@ public class Mutuelle {
     /**
      * Sets taux prise en charge.
      *
-     * @param pTauxPriseEnCharge    the taux prise en charge
-     * @throws SaisieException      the saisie exception
+     * @param pTauxPriseEnCharge the taux prise en charge
+     * @throws SaisieException the saisie exception
      */
     public void setTauxPriseEnCharge(double pTauxPriseEnCharge) throws SaisieException {
         if (!positifInt(String.valueOf(pTauxPriseEnCharge)) && pTauxPriseEnCharge < 0){
