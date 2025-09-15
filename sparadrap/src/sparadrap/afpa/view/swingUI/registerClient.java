@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class registerClient extends JFrame {
+    private int id;
     private JPanel contentPane;
     private JPanel logoRegisterClient;
     private JPanel mainRegisterClient;

@@ -7,11 +7,16 @@ import java.util.List;
 import java.util.Random;
 
 import static sparadrap.afpa.utility.RegexUtility.dateValide;
+import static sparadrap.afpa.utility.RegexUtility.positifInt;
 
 public class Patient extends Personne {
 
+    private static int getId;
+    private static int nextId = 1;
+    private int id;
+
     // Attribut de la classe Client
-    private String numeroSecuriteSociale, dateNaissance, nomMedecin;
+    private String numeroSecuriteSociale, dateNaissance;
 
     // List des patients enregistrer
     private static List<Patient> patients = new ArrayList<Patient>();
@@ -30,13 +35,11 @@ public class Patient extends Personne {
 // Constructeur qui extends de la classe Personne et Obj Lieu
     public Patient(String pNom, String pPrenom, String pDateNaissance, Lieu lieu, Mutuelle mutuelle, Medecin medecin) throws SaisieException {
         super(pNom, pPrenom, lieu, mutuelle, medecin);
+        this.setId(id);
         this.setDateNaissance(String.valueOf(pDateNaissance));
         this.numeroSecuriteSociale = generateNumSecu();
         this.getMutuelle().getNom();
         this.getMedecin().getNom();
-    }
-
-    private void setNomMedecin(String s) {
     }
 
     /**
@@ -74,6 +77,29 @@ public class Patient extends Personne {
     }
 
     // Getters et Setters
+
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     * @throws SaisieException the saisie exception
+     */
+    public void setId(int id) throws SaisieException {
+        if(!positifInt(String.valueOf(id))){
+            throw new SaisieException("Error sur id Patient : ");
+        }else{
+            this.id = nextId++;
+        }
+    }
+
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
 
     /**
      * Gets date naissance.

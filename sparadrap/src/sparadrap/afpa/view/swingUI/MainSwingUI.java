@@ -86,13 +86,12 @@ public class MainSwingUI {
 
             // Création des patients
             Patient p1 = new Patient("Dupont", "Jean","16-05-1985", lieu1, m1, med1);
-            Patient p2 = new Patient("Martin", "Claire", "20-06-1982", lieu2, m2, med2);
-            Patient p3 = new Patient("Durand", "Paul", "19-02-1975", lieu3, m3, med3);
+            Patient p2 = new Patient("Martin", "Claire","20-06-1982", lieu2, m2, med2);
+            Patient p3 = new Patient("Durand", "Paul","19-02-1975", lieu3, m3, med3);
             Patient p4 = new Patient("Petit", "Sophie", "25-10-1973", lieu4, m4, med4);
             Patient p5 = new Patient("Bernard", "Lucas", "22-09-1965", lieu5, m5, med5);
 
             // Création des commandes avec la nouvelle structure (liste de médicaments)
-
             // Commande 1 - Achat direct avec un médicament
             List<Medicament> medicamentsCmd1 = new ArrayList<>();
             medicamentsCmd1.add(medic1); // Digoxine

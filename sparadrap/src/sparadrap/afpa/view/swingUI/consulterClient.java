@@ -37,7 +37,7 @@ public class consulterClient extends JFrame {
         this.setResizable(false);
         this.setContentPane(contentPane);
 
-        String[] colonnes = {"Nom", "Prenom", "Adresse", "Code postal", "Ville", "Téléphone", "Email", "Numero sécurité social", "Date de naissance", "Mutuelle", "Medecin"};
+        String[] colonnes = {"id", "Nom", "Prenom", "Adresse", "Code postal", "Ville", "Téléphone", "Email", "Numero sécurité social", "Date de naissance", "Mutuelle", "Medecin"};
         tableModelClient = new DefaultTableModel(colonnes, 0);
         tableClient.setModel(tableModelClient);
 
@@ -111,6 +111,7 @@ public class consulterClient extends JFrame {
                     for(Patient p : Patient.getPatients()) {
                         if(selected.equals(p.getNom() + " " + p.getPrenom())) {
                             tableModelClient.addRow(new Object[]{
+                                    p.getId(),
                                     p.getNom(),
                                     p.getPrenom(),
                                     p.getLieu().getAdresse(),
