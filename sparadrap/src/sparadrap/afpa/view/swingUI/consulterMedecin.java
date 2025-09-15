@@ -62,14 +62,14 @@ public class consulterMedecin extends JFrame {
 
     private void remplirComboBox() {
         comboBoxMedecin.removeAllItems();
+
+        comboBoxMedecin.addItem("Choisir un client");
+        comboBoxMedecin.setSelectedIndex(0);
+
         for(Medecin m : Medecin.getMedecins()) {
-            if(comboBoxMedecin.getItemCount() < 1) {
-                comboBoxMedecin.addItem("Choisir un medecin");
-                comboBoxMedecin.setSelectedIndex(0);
-            }else{
-                comboBoxMedecin.addItem(m.getNom() + " " + m.getPrenom());
-            }
+            comboBoxMedecin.addItem(m.getNom() + " " + m.getPrenom());
         }
+
         comboBoxMedecin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -101,26 +101,26 @@ public class consulterMedecin extends JFrame {
         });
     }
 
-    private void afficherMedecin() {
-        tableModelMedecin.setRowCount(0);
-
-        if(Medecin.getMedecins().isEmpty()) {
-            tableModelMedecin.addRow(new Object[]{"", "", "", "", "", "", ""});
-        }else{
-            for(Medecin m : Medecin.getMedecins()) {
-                tableModelMedecin.addRow(new Object[]{
-                        m.getNom(),
-                        m.getPrenom(),
-                        m.getLieu().getAdresse(),
-                        m.getLieu().getCodePostal(),
-                        m.getLieu().getVille(),
-                        m.getLieu().getTelephone(),
-                        m.getLieu().getEmail(),
-                        m.getNumeroAgreement()
-                });
-            }
-        }
-    }
+//    private void afficherMedecin() {  // *** Afficher tout les medecins ***
+//        tableModelMedecin.setRowCount(0);
+//
+//        if(Medecin.getMedecins().isEmpty()) {
+//            tableModelMedecin.addRow(new Object[]{"", "", "", "", "", "", ""});
+//        }else{
+//            for(Medecin m : Medecin.getMedecins()) {
+//                tableModelMedecin.addRow(new Object[]{
+//                        m.getNom(),
+//                        m.getPrenom(),
+//                        m.getLieu().getAdresse(),
+//                        m.getLieu().getCodePostal(),
+//                        m.getLieu().getVille(),
+//                        m.getLieu().getTelephone(),
+//                        m.getLieu().getEmail(),
+//                        m.getNumeroAgreement()
+//                });
+//            }
+//        }
+//    }
 
     private void retour() {
         this.dispose();

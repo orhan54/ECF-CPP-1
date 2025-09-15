@@ -24,6 +24,7 @@ public class validationAchat extends JFrame {
     private JComboBox<String> comboBoxPatient;
     private JComboBox<String> comboBoxMedicament;
     private JComboBox<String> comboBoxMedecin;
+    private JTextField textFieldPrixTotalPayer;
 
     // Nouveaux composants pour la prise en charge mutuelle
     private JCheckBox checkBoxMutuelle;

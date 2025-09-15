@@ -126,7 +126,8 @@ public class registerClient extends JFrame {
                     "Succès",
                     JOptionPane.INFORMATION_MESSAGE);
 
-            this.dispose();
+            consulterClient consulterClient = new consulterClient();
+            consulterClient.setVisible(true);
 
         } catch (NumberFormatException e) {
             throw new SaisieException("Code postal ou Numéro de sécu invalide !");

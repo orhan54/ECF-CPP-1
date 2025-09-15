@@ -21,11 +21,13 @@ public class Commande {
     private TypeAchat typeAchat;
     private String nomMedecin;
     private String nomPatient;
-    private List<Medicament> medicaments; // Remplace nomMedic
+    private List<Medicament> medicaments;
     private int quantite;
     private double prix;
-    private Mutuelle mutuelle; // Référence à la mutuelle du patient
-    private boolean priseEnChargeMutuelle; // Si la commande utilise la mutuelle
+    private Mutuelle mutuelle;
+    private boolean priseEnChargeMutuelle;
+
+    private String dateTest;
 
     private static List<Commande> commandes = new ArrayList<>();
 
@@ -155,7 +157,7 @@ public class Commande {
      * @param priseEnChargeMutuelle the prise en charge mutuelle
      * @throws SaisieException the saisie exception
      */
-// Constructeurs avec boolean seulement (pour compatibilité)
+    // Constructeurs avec boolean seulement (pour compatibilité)
     public Commande(Date pDateCommande,
                     TypeAchat pTypeAchat,
                     String nomMedecin,
@@ -296,14 +298,18 @@ public class Commande {
      *
      * @param mutuelle the mutuelle
      */
-    public void setMutuelle(Mutuelle mutuelle) { this.mutuelle = mutuelle; }
+    public void setMutuelle(Mutuelle mutuelle) {
+        this.mutuelle = mutuelle;
+    }
 
     /**
      * Gets prise en charge mutuelle.
      *
      * @return true si prise en charge mutuelle, false sinon
      */
-    public boolean isPriseEnChargeMutuelle() { return priseEnChargeMutuelle; }
+    public boolean isPriseEnChargeMutuelle() {
+        return priseEnChargeMutuelle;
+    }
 
     /**
      * Sets prise en charge mutuelle.

@@ -131,29 +131,29 @@ public class consulterClient extends JFrame {
         });
     }
 
-    private void afficherClient() throws SaisieException {
-        tableModelClient.setRowCount(0);
-
-        if(Patient.getPatients().isEmpty()) {
-            tableModelClient.addRow(new Object[]{"Aucun client"});
-        }else{
-            for (Patient patients : Patient.getPatients()) {
-                tableModelClient.addRow(new Object[]{
-                        patients.getNom(),
-                        patients.getPrenom(),
-                        patients.getLieu().getAdresse(),
-                        patients.getLieu().getCodePostal(),
-                        patients.getLieu().getVille(),
-                        patients.getLieu().getTelephone(),
-                        patients.getLieu().getEmail(),
-                        patients.getNumeroSecuriteSociale(),
-                        patients.getDateNaissance(),
-                        patients.getMutuelle().getNom(),
-                        patients.getMedecin().getNom()
-                });
-            }
-        }
-    }
+//    private void afficherClient() throws SaisieException {
+//        tableModelClient.setRowCount(0);
+//
+//        if(Patient.getPatients().isEmpty()) {
+//            tableModelClient.addRow(new Object[]{"Aucun client"});
+//        }else{
+//            for (Patient patients : Patient.getPatients()) {
+//                tableModelClient.addRow(new Object[]{
+//                        patients.getNom(),
+//                        patients.getPrenom(),
+//                        patients.getLieu().getAdresse(),
+//                        patients.getLieu().getCodePostal(),
+//                        patients.getLieu().getVille(),
+//                        patients.getLieu().getTelephone(),
+//                        patients.getLieu().getEmail(),
+//                        patients.getNumeroSecuriteSociale(),
+//                        patients.getDateNaissance(),
+//                        patients.getMutuelle().getNom(),
+//                        patients.getMedecin().getNom()
+//                });
+//            }
+//        }
+//    }
 
     private void addClient() {
         registerClient registerClient = new registerClient();
