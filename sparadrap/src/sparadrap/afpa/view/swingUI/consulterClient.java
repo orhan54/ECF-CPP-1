@@ -1,6 +1,8 @@
 package sparadrap.afpa.view.swingUI;
 
 import sparadrap.afpa.exception.SaisieException;
+import sparadrap.afpa.model.Medecin;
+import sparadrap.afpa.model.Mutuelle;
 import sparadrap.afpa.model.Patient;
 
 import javax.swing.*;
@@ -168,6 +170,7 @@ public class consulterClient extends JFrame {
     private void updateClient() {
 
     }
+
 
     private void deleteClient() {
         int selectedRow = tableClient.getSelectedRow();

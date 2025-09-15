@@ -91,65 +91,67 @@ public class MainSwingUI {
             Patient p4 = new Patient("Petit", "Sophie", "25-10-1973", lieu4, m4, med4);
             Patient p5 = new Patient("Bernard", "Lucas", "22-09-1965", lieu5, m5, med5);
 
-            // Création des commandes avec la nouvelle structure (liste de médicaments)
-            // Commande 1 - Achat direct avec un médicament
+            // Création des commandes avec dates différentes
+            // Commande 1 - Achat direct (pas de mutuelle)
             List<Medicament> medicamentsCmd1 = new ArrayList<>();
             medicamentsCmd1.add(medic1); // Digoxine
-            Commande cmd1 = new Commande(new Date(System.currentTimeMillis()),
+            Commande cmd1 = new Commande(Date.valueOf("2025-05-12"),
                     Commande.TypeAchat.DIRECT,
                     "Dr Martin",
                     "Jean Dupont",
                     medicamentsCmd1,
                     2,
-                    21.0  // Prix total pour 2 Digoxine
+                    21.0
             );
 
-            // Commande 2 - Ordonnance avec un médicament
+            // Commande 2 - Ordonnance avec mutuelle
             List<Medicament> medicamentsCmd2 = new ArrayList<>();
             medicamentsCmd2.add(medic6); // Amoxicilline
-            Commande cmd2 = new Commande(new Date(System.currentTimeMillis()),
+            Commande cmd2 = new Commande(Date.valueOf("2025-06-15"),
                     Commande.TypeAchat.ORDONNANCE,
                     "Dr Bernard",
                     "Paul Durand",
                     medicamentsCmd2,
                     5,
-                    42.5  // Prix total pour 5 Amoxicilline
+                    42.5,
+                    true // prise en charge mutuelle activée
             );
 
-            // Commande 3 - Achat direct avec plusieurs médicaments
+            // Commande 3 - Achat direct (pas de mutuelle)
             List<Medicament> medicamentsCmd3 = new ArrayList<>();
             medicamentsCmd3.add(medic3); // Mannitol
             medicamentsCmd3.add(medic2); // Bisoprolol
-            Commande cmd3 = new Commande(new Date(System.currentTimeMillis()),
+            Commande cmd3 = new Commande(Date.valueOf("2025-07-01"),
                     Commande.TypeAchat.DIRECT,
                     "Dr Bernard",
                     "Paul Durand",
                     medicamentsCmd3,
                     4,
-                    63.92  // Prix total calculé
+                    63.92
             );
 
-            // Commande 4 - Achat direct avec un seul médicament (utilisation du constructeur alternatif)
-            Commande cmd4 = new Commande(new Date(System.currentTimeMillis()),
+            // Commande 4 - Achat direct avec un seul médicament
+            Commande cmd4 = new Commande(Date.valueOf("2025-07-20"),
                     Commande.TypeAchat.DIRECT,
                     "Dr Bernard",
                     "Paul Durand",
-                    medic4, // Méthaqualone (constructeur avec un seul médicament)
+                    medic4, // Méthaqualone
                     6,
-                    155.94  // Prix total pour 6 Méthaqualone
+                    155.94
             );
 
-            // Commande 5 - Ordonnance avec plusieurs médicaments
+            // Commande 5 - Ordonnance avec mutuelle
             List<Medicament> medicamentsCmd5 = new ArrayList<>();
             medicamentsCmd5.add(medic5); // Élétriptan
             medicamentsCmd5.add(medic1); // Digoxine
-            Commande cmd5 = new Commande(new Date(System.currentTimeMillis()),
+            Commande cmd5 = new Commande(Date.valueOf("2025-08-05"),
                     Commande.TypeAchat.ORDONNANCE,
                     "Dr Bernard",
                     "Paul Durand",
                     medicamentsCmd5,
                     8,
-                    210.0  // Prix total calculé
+                    210.0,
+                    true // prise en charge mutuelle activée
             );
 
             // Ajout des mutuelles dans la liste statique
