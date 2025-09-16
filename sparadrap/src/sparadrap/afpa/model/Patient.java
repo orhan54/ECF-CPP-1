@@ -26,13 +26,13 @@ public class Patient extends Personne {
      *
      * @param pNom           the nom patient
      * @param pPrenom        the prenom patient
-     * @param pDateNaissance the p date naissance
+     * @param pDateNaissance the date naissance
      * @param lieu           the lieu patient
      * @param mutuelle       the mutuelle
      * @param medecin        the medecin
      * @throws SaisieException the saisie exception
      */
-// Constructeur qui extends de la classe Personne et Obj Lieu
+    // Constructeur qui extends de la classe Personne et Obj Lieu
     public Patient(String pNom, String pPrenom, String pDateNaissance, Lieu lieu, Mutuelle mutuelle, Medecin medecin) throws SaisieException {
         super(pNom, pPrenom, lieu, mutuelle, medecin);
         this.setId(id);

@@ -178,7 +178,6 @@ public class historiqueAchat extends JFrame {
 
         if (dateValide) {
             appliquerFiltres();
-            JOptionPane.showMessageDialog(this, "Filtres appliqués avec succès !", "Filtrage", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 

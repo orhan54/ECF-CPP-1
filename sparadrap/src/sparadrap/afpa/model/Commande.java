@@ -113,7 +113,7 @@ public class Commande {
      * @param prix          the prix
      * @throws SaisieException the saisie exception
      */
-// Constructeurs de compatibilité (sans mutuelle)
+    // Constructeurs de compatibilité (sans mutuelle)
     public Commande(Date pDateCommande,
                     TypeAchat pTypeAchat,
                     String nomMedecin,

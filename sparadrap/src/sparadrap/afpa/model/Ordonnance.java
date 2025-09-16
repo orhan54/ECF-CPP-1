@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static sparadrap.afpa.utility.RegexUtility.dateValide;
 import static sparadrap.afpa.utility.RegexUtility.regexAlpha;
 
 public class Ordonnance {
@@ -43,18 +44,6 @@ public class Ordonnance {
 
         // Ajouter cette ordonnance à la liste statique
         Ordonnance.ordonnances.add(this);
-    }
-
-
-    /**
-     * Constructeur sans liste de médicaments (ordonnance vide)
-     *
-     * @param pNomMedecin           le nom du médecin
-     * @param pNomPatient           le nom du patient
-     * @throws SaisieException      exception de saisie
-     */
-    public Ordonnance(String date, String pNomMedecin, String pNomPatient) throws SaisieException {
-        this(date, pNomMedecin, pNomPatient, new ArrayList<>());
     }
 
     // Méthodes pour gérer les médicaments
@@ -94,8 +83,18 @@ public class Ordonnance {
         return dateOrdonnance.format(formatter);
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    /**
+     * Sets date.
+     *
+     * @param date the date
+     * @throws SaisieException the saisie exception
+     */
+    public void setDate(String date) throws SaisieException {
+        if (!dateValide(date)) {
+            throw new SaisieException("Le date n'est pas valide.");
+        }else{
+            this.date = date;
+        }
     }
 
     public String getDate() {

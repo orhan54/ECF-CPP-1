@@ -45,7 +45,6 @@ public class Personne {
         this.setNom(pNom);
         this.setPrenom(pPrenom);
         this.setLieu(lieu);
-        this.setMutuelle(mutuelle);
     }
 
     // Getters & Setters

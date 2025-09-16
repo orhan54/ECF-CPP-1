@@ -1,15 +1,13 @@
 package sparadrap.afpa.view.swingUI;
 
 import sparadrap.afpa.exception.SaisieException;
-import sparadrap.afpa.model.Medecin;
-import sparadrap.afpa.model.Mutuelle;
 import sparadrap.afpa.model.Patient;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static sparadrap.afpa.model.Medecin.patient;
 
 public class consulterClient extends JFrame {
     private JPanel contentPane;
@@ -168,7 +166,18 @@ public class consulterClient extends JFrame {
     }
 
     private void updateClient() {
-
+        try {
+            String selectedClient = comboBoxClient.getSelectedItem().toString();
+            for (Patient p : Patient.getPatients()) {
+                if (selectedClient.equals(p.getNom() + " " + p.getPrenom())) {
+                    registerClient updateClient = new registerClient(p);
+                    updateClient.setVisible(true);
+                    System.out.println(p);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error sur le lancement de la view update client : " + e.getMessage());
+        }
     }
 
 

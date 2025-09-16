@@ -8,6 +8,7 @@ import sparadrap.afpa.model.Patient;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class registerClient extends JFrame {
     private int id;
@@ -73,6 +74,53 @@ public class registerClient extends JFrame {
         for (Mutuelle mut : Mutuelle.getMutuelles()) {
             comboBoxMutuelle.addItem(mut.getNom());
         }
+    }
+
+    public registerClient(Patient patient) {
+
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
+        Dimension dimension = new Dimension(1600, 1000);
+
+        // Attributs fenêtre
+        this.setTitle("Sparadrap");
+        this.setIconImage(imageIcon.getImage());
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setPreferredSize(dimension);
+        this.setResizable(false);
+        this.setContentPane(contentPane);
+
+        remplirComboBox();
+
+        this.pack();
+        this.setLocationRelativeTo(null);
+
+        if (patient != null) {
+            textFieldRegisterNom.setText(patient.getNom());
+            textFieldRegisterPrenom.setText(patient.getPrenom());
+            textFieldRegisterAdresse.setText(patient.getLieu().getAdresse());
+            textFieldRegisterCodePostal.setText(String.valueOf(patient.getLieu().getCodePostal()));
+            textFieldRegisterVille.setText(patient.getLieu().getVille());
+            textFieldRegisterTel.setText(patient.getLieu().getTelephone());
+            textFieldRegisterEmail.setText(patient.getLieu().getEmail());
+            textFieldregisterNumSecu.setText(patient.getNumeroSecuriteSociale());
+            textFieldRegisterDateNaissance.setText(patient.getDateNaissance());
+            comboBoxMutuelle.setSelectedItem(patient.getMutuelle().getNom());
+            comboBoxNomMedecin.setSelectedItem(patient.getMedecin().getNom());
+        }
+
+        Patient.getPatients().remove(patient);
+
+        // Actions boutons
+        buttonRetourRegisterClient.addActionListener(e -> retour());
+        buttonValideRegisterClient.addActionListener(e -> {
+            try {
+                valider();
+            } catch (SaisieException ex) {
+                JOptionPane.showMessageDialog(this, "Erreur : " + ex.getMessage());
+            }
+        });
+        quitterButton.addActionListener(e -> quitter());
+
     }
 
     private void retour() {
