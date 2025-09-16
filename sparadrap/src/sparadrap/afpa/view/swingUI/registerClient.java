@@ -8,7 +8,6 @@ import sparadrap.afpa.model.Patient;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class registerClient extends JFrame {
     private int id;
@@ -32,22 +31,15 @@ public class registerClient extends JFrame {
     private JComboBox<String> comboBoxNomMedecin;
     private JComboBox<String> comboBoxMutuelle;
 
+    // Patient en cours (null = création, sinon update)
+    private Patient currentPatient;
+
+    /**
+     * Constructeur pour la création d'un nouveau patient
+     */
     public registerClient() {
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
-        Dimension dimension = new Dimension(1600, 1000);
-
-        // Attributs fenêtre
-        this.setTitle("Sparadrap");
-        this.setIconImage(imageIcon.getImage());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setPreferredSize(dimension);
-        this.setResizable(false);
-        this.setContentPane(contentPane);
-
+        initUI();
         remplirComboBox();
-
-        this.pack();
-        this.setLocationRelativeTo(null);
 
         // Actions boutons
         buttonRetourRegisterClient.addActionListener(e -> retour());
@@ -59,6 +51,59 @@ public class registerClient extends JFrame {
             }
         });
         quitterButton.addActionListener(e -> quitter());
+    }
+
+    /**
+     * Constructeur pour l'édition d'un patient existant
+     */
+    public registerClient(Patient patient) {
+        initUI();
+        remplirComboBox();
+
+        this.currentPatient = patient;
+
+        if (patient != null) {
+            textFieldRegisterNom.setText(patient.getNom());
+            textFieldRegisterPrenom.setText(patient.getPrenom());
+            textFieldRegisterAdresse.setText(patient.getLieu().getAdresse());
+            textFieldRegisterCodePostal.setText(String.valueOf(patient.getLieu().getCodePostal()));
+            textFieldRegisterVille.setText(patient.getLieu().getVille());
+            textFieldRegisterTel.setText(patient.getLieu().getTelephone());
+            textFieldRegisterEmail.setText(patient.getLieu().getEmail());
+            textFieldregisterNumSecu.setText(patient.getNumeroSecuriteSociale());
+            textFieldRegisterDateNaissance.setText(patient.getDateNaissance());
+            comboBoxMutuelle.setSelectedItem(patient.getMutuelle().getNom());
+            comboBoxNomMedecin.setSelectedItem(patient.getMedecin().getNom() + " " + patient.getMedecin().getPrenom());
+        }
+
+        // Actions boutons
+        buttonRetourRegisterClient.addActionListener(e -> retour());
+        buttonValideRegisterClient.addActionListener(e -> {
+            try {
+                valider();
+            } catch (SaisieException ex) {
+                JOptionPane.showMessageDialog(this, "Erreur : " + ex.getMessage());
+            }
+        });
+        quitterButton.addActionListener(e -> quitter());
+    }
+
+    /**
+     * Initialisation de la fenêtre
+     */
+    private void initUI() {
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
+        Dimension dimension = new Dimension(1600, 1000);
+
+        this.setTitle("Sparadrap");
+        this.setIconImage(imageIcon.getImage());
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setPreferredSize(dimension);
+        this.setResizable(false);
+        this.setContentPane(contentPane);
+
+        this.pack();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -76,57 +121,16 @@ public class registerClient extends JFrame {
         }
     }
 
-    public registerClient(Patient patient) {
-
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
-        Dimension dimension = new Dimension(1600, 1000);
-
-        // Attributs fenêtre
-        this.setTitle("Sparadrap");
-        this.setIconImage(imageIcon.getImage());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setPreferredSize(dimension);
-        this.setResizable(false);
-        this.setContentPane(contentPane);
-
-        remplirComboBox();
-
-        this.pack();
-        this.setLocationRelativeTo(null);
-
-        if (patient != null) {
-            textFieldRegisterNom.setText(patient.getNom());
-            textFieldRegisterPrenom.setText(patient.getPrenom());
-            textFieldRegisterAdresse.setText(patient.getLieu().getAdresse());
-            textFieldRegisterCodePostal.setText(String.valueOf(patient.getLieu().getCodePostal()));
-            textFieldRegisterVille.setText(patient.getLieu().getVille());
-            textFieldRegisterTel.setText(patient.getLieu().getTelephone());
-            textFieldRegisterEmail.setText(patient.getLieu().getEmail());
-            textFieldregisterNumSecu.setText(patient.getNumeroSecuriteSociale());
-            textFieldRegisterDateNaissance.setText(patient.getDateNaissance());
-            comboBoxMutuelle.setSelectedItem(patient.getMutuelle().getNom());
-            comboBoxNomMedecin.setSelectedItem(patient.getMedecin().getNom());
-        }
-
-        Patient.getPatients().remove(patient);
-
-        // Actions boutons
-        buttonRetourRegisterClient.addActionListener(e -> retour());
-        buttonValideRegisterClient.addActionListener(e -> {
-            try {
-                valider();
-            } catch (SaisieException ex) {
-                JOptionPane.showMessageDialog(this, "Erreur : " + ex.getMessage());
-            }
-        });
-        quitterButton.addActionListener(e -> quitter());
-
-    }
-
+    /**
+     * Retour à la fenêtre précédente
+     */
     private void retour() {
         this.dispose();
     }
 
+    /**
+     * Validation du formulaire
+     */
     private void valider() throws SaisieException {
         try {
             // Champs saisis
@@ -161,28 +165,54 @@ public class registerClient extends JFrame {
                 }
             }
 
-            // Création du lieu
-            Lieu lieu = new Lieu(adresse, email, tel, ville, codePostal);
+            if (currentPatient != null) {
+                // -------- MODE UPDATE --------
+                currentPatient.setNom(nom);
+                currentPatient.setPrenom(prenom);
+                currentPatient.setNumeroSecuriteSociale(numSecu);
+                currentPatient.setDateNaissance(dateNaissance);
 
-            // Création et ajout du nouveau patient
-            Patient newPatient = new Patient(nom, prenom, dateNaissance, lieu, mutuelleChoisie, medecinChoisi);
-            newPatient.setNumeroSecuriteSociale(numSecu);
+                Lieu lieu = currentPatient.getLieu();
+                lieu.setAdresse(adresse);
+                lieu.setEmail(email);
+                lieu.setTelephone(tel);
+                lieu.setVille(ville);
+                lieu.setCodePostal(codePostal);
 
-            Patient.getPatients().add(newPatient);
+                currentPatient.setMutuelle(mutuelleChoisie);
+                currentPatient.setMedecin(medecinChoisi);
 
-            JOptionPane.showMessageDialog(this,
-                    "Nouveau patient ajouté avec succès !",
-                    "Succès",
-                    JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "Patient mis à jour avec succès !",
+                        "Succès",
+                        JOptionPane.INFORMATION_MESSAGE);
 
+            } else {
+                // -------- MODE CREATION --------
+                Lieu lieu = new Lieu(adresse, email, tel, ville, codePostal);
+                Patient newPatient = new Patient(nom, prenom, dateNaissance, lieu, mutuelleChoisie, medecinChoisi);
+                newPatient.setNumeroSecuriteSociale(numSecu);
+                Patient.getPatients().add(newPatient);
+
+                JOptionPane.showMessageDialog(this,
+                        "Nouveau patient ajouté avec succès !",
+                        "Succès",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            // retour vers consulterClient
             consulterClient consulterClient = new consulterClient();
             consulterClient.setVisible(true);
+            this.dispose();
 
         } catch (NumberFormatException e) {
             throw new SaisieException("Code postal ou Numéro de sécu invalide !");
         }
     }
 
+    /**
+     * Quitter l'application
+     */
     private void quitter() {
         int reponse = JOptionPane.showConfirmDialog(registerClient.this,
                 "Voulez-vous quitter l'application ?", "Quitter",
