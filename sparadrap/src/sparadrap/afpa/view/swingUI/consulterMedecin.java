@@ -1,28 +1,36 @@
 package sparadrap.afpa.view.swingUI;
 
 import sparadrap.afpa.model.Medecin;
+import sparadrap.afpa.model.Ordonnance;
+import sparadrap.afpa.model.Patient;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class consulterMedecin extends JFrame {
     private JPanel contentPane;
     private JLabel titreMenu;
     private JTable tableMedecin;
-    private JButton creerButton;
     private JButton modifierButton;
     private JButton supprimerButton;
     private JButton quitterButton;
     private JButton retourButton;
-    private JButton infoButton;
     private JComboBox<String> comboBoxMedecin;
     private JButton créerUnMédecinButton;
+    private JComboBox comboBoxInformation;
+    private JTable tableFiltreInformation;
+    private JLabel titreFiltreInfo;
     private String selectedValue;
 
     private DefaultTableModel tableModelMedecin;
+
+    private String[] HEADER_PATIENT = new String[] {"id", "Nom", "Prenom", "Adresse", "Code postal", "Ville", "Téléphone", "Email", "Numero sécurité social", "Date de naissance", "Mutuelle", "Medecin"};
+    private String[] HEADER_ORDONNANCE = new String[] {"Date", "Nom médecin", "Nom patient", "Liste des médicaments"};
 
     public consulterMedecin() {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
@@ -40,7 +48,14 @@ public class consulterMedecin extends JFrame {
         tableModelMedecin = new DefaultTableModel(colonnes, 0);
         tableMedecin.setModel(tableModelMedecin);
 
+        comboBoxInformation.addItem("Choisir le filtre...");
+        comboBoxInformation.addItem("Liste des patients du médecin");
+        comboBoxInformation.addItem("Liste des ordonnances du médecin");
+
+        comboBoxInformation.setSelectedIndex(0);
+
         remplirComboBox();
+        displayInformation();
         //afficherMedecin();
 
         this.pack();
@@ -77,6 +92,61 @@ public class consulterMedecin extends JFrame {
                 deleteMedecin();
             }
         });
+    }
+
+    public void displayInformation() {
+        switch (comboBoxMedecin.getSelectedIndex()) {
+            case 0:
+                titreMenu.setText("Choisir un filtre : ");
+            case 1:
+                titreFiltreInfo.setText("Listes des patients : ");
+                configureTable(Patient.getPatients(), HEADER_PATIENT);
+                constructDataTable(Patient.getPatients(), HEADER_PATIENT);
+                break;
+            case 2:
+//                titreFiltreInfo.setText("Liste des ordonnances : ");
+//                configureTable(Ordonnance.getOrdonnances(), HEADER_ORDONNANCE);
+//                constructDataTable(Ordonnance.getOrdonnances(), HEADER_ORDONNANCE);
+//                break;
+        }
+    }
+
+    private <T> void configureTable(List<Patient> patients, String[] header) {
+        TableModel model = new DefaultTableModel(header, 0);
+        this.tableFiltreInformation.setModel(model);
+        this.tableFiltreInformation.revalidate();
+        this.tableFiltreInformation.repaint();
+    }
+
+    private <T> void constructDataTable(List<T> dataListe, String[] header) {
+        // Création des données tu tableau filtre
+        String[][] data = new String[dataListe.size()][header.length];
+
+        // Remplissage du tableau selon le filtre
+        for (int i = 0; i < dataListe.size(); i++) {
+            Object obj = dataListe.get(i);
+            if(obj instanceof Patient) {
+                Patient p = (Patient) obj;
+                data[i][0] = String.valueOf(p.getId());
+                data[i][1] = p.getNom();
+                data[i][2] = p.getPrenom();
+                data[i][3] = p.getLieu().getAdresse();
+                data[i][4] = String.valueOf(p.getLieu().getCodePostal());
+                data[i][5] = p.getLieu().getVille();
+                data[i][6] = p.getLieu().getTelephone();
+                data[i][7] = String.valueOf(p.getLieu().getEmail());
+                data[i][8] = p.getNumeroSecuriteSociale();
+                data[i][9] = p.getDateNaissance();
+                data[i][10] = String.valueOf(p.getMutuelle());
+                data[i][11] = String.valueOf(p.getMedecin());
+            }else if(obj instanceof Ordonnance) {
+                Ordonnance o = (Ordonnance) obj;
+                data[i][0] = o.getDate();
+                data[i][1] = o.getNomMedecin();
+                data[i][2] = o.getNomPatient();
+                data[i][3] = o.getMedicaments().toString();
+            }
+        }
     }
 
     private void remplirComboBox() {
