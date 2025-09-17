@@ -2,6 +2,7 @@ package sparadrap.afpa.model;
 
 import sparadrap.afpa.exception.SaisieException;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class Medecin extends Personne {
      * @throws SaisieException the saisie exception
      */
     public void setNumeroAgreement(String pNumeroAgreement) throws SaisieException {
-        if (!positifInt(pNumeroAgreement) && (!numAgreementValide(pNumeroAgreement))) {
+        if (!numAgreementValide(pNumeroAgreement)) {
             throw new SaisieException("Error sur numéro agreement : " + pNumeroAgreement);
         }else{
             this.numeroAgreement = pNumeroAgreement;

@@ -34,28 +34,16 @@ public class registerMedecin extends JFrame {
     public registerMedecin() {
         initUI();
 
-        buttonRetourRegisterMedecin.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                retour();
+        // Actions boutons
+        buttonRetourRegisterMedecin.addActionListener(e -> retour());
+        buttonValideRegisterMedecin.addActionListener(e -> {
+            try {
+                valider();
+            } catch (SaisieException ex) {
+                JOptionPane.showMessageDialog(this, "Erreur : " + ex.getMessage());
             }
         });
-        buttonValideRegisterMedecin.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    valider();
-                } catch (SaisieException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-        buttonQuitter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                quitter();
-            }
-        });
+        buttonQuitter.addActionListener(e -> quitter());
     }
 
     public registerMedecin(Medecin medecin) {
@@ -81,14 +69,13 @@ public class registerMedecin extends JFrame {
                 valider();
             } catch (SaisieException ex) {
                 JOptionPane.showMessageDialog(this,
-                        "Erreur sur la validation de la mise a jour médecin :"
+                        "Erreur sur la validation de la mise a jour médecin : "
                                 + ex.getMessage());
             }
         });
         buttonQuitter.addActionListener(e -> quitter());
 
     }
-
 
     /**
      * Initialisation de la fenêtre

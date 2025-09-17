@@ -17,7 +17,7 @@ public class RegexUtility {
     private static String POSITIVE_INT_REGEX = "\\d+";
 
     // regex numéro agréement
-    private static String NUMERO_AGREEMENT = "/^[0-9][0-9]{10}$/";
+    private static String NUMERO_AGREEMENT = "^[0-9][0-9]{10}$";
 
     // Regex email
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
@@ -32,6 +32,8 @@ public class RegexUtility {
     // Regex pour adresse postal
     private static final String ADRESSE_VALIDE = "^[0-9]+\\s+[a-zA-ZéèêàâôûùïüçÉÈÊÀÂÔÛÙÏÜÇ]+(\\s+[a-zA-ZéèêàâôûùïüçÉÈÊÀÂÔÛÙÏÜÇ]+)*$";
 
+
+    // *** Vérification de toutes les Regex avec "input.matches" ***
 
     public static boolean numAgreementValide(String input){ return input != null && input.matches(NUMERO_AGREEMENT); }
 
