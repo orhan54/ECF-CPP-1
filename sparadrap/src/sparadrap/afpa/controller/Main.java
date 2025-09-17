@@ -48,11 +48,11 @@ public class Main {
             Mutuelle m5 = new Mutuelle("Mutuelle Europe", 30, 88, lieu7);
 
 //            Medecin med1 = new Medecin("Martin", "Paul", "1234567891234", lieu2, med1);
-            Medecin med1 = new Medecin("Martin", "Paul", "1234567891234", lieu1);
-            Medecin med2 = new Medecin("Robert", "François", "2234567891234", lieu3);
-            Medecin med3 = new Medecin("Dubois", "Anne", "3234567891234", lieu4);
-            Medecin med4 = new Medecin("Morel", "Hélène", "4234567891234", lieu5);
-            Medecin med5 = new Medecin("Lefevre", "Julien", "5234567891234", lieu6);
+            Medecin med1 = new Medecin("Martin", "Paul", "12345678912", lieu1);
+            Medecin med2 = new Medecin("Robert", "François", "22345678912", lieu3);
+            Medecin med3 = new Medecin("Dubois", "Anne", "32345678912", lieu4);
+            Medecin med4 = new Medecin("Morel", "Hélène", "42345678912", lieu5);
+            Medecin med5 = new Medecin("Lefevre", "Julien", "52345678912", lieu6);
 
             Patient p1 = new Patient("Dupont", "Jean","16-05-1985",  lieu1, m1 ,med1);
             Patient p2 = new Patient("Martin", "Claire", "20-06-1982", lieu2, m2, med2);

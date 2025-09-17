@@ -78,11 +78,11 @@ public class MainSwingUI {
             Mutuelle m5 = new Mutuelle("Mutuelle Europe", 30, 88, lieu7);
 
             // Création des médecins
-            Medecin med1 = new Medecin("Dr Martin", "Paul", "1234567891234", lieu2);
-            Medecin med2 = new Medecin("Dr Robert", "François", "2234567891234", lieu3);
-            Medecin med3 = new Medecin("Dr Dubois", "Anne", "3234567891234", lieu4);
-            Medecin med4 = new Medecin("Dr Morel", "Hélène", "4234567891234", lieu5);
-            Medecin med5 = new Medecin("Dr Lefevre", "Julien", "5234567891234", lieu6);
+            Medecin med1 = new Medecin("Dr Martin", "Paul", "12345678912", lieu2);
+            Medecin med2 = new Medecin("Dr Robert", "François", "22345678912", lieu3);
+            Medecin med3 = new Medecin("Dr Dubois", "Anne", "32345678912", lieu4);
+            Medecin med4 = new Medecin("Dr Morel", "Hélène", "42345678912", lieu5);
+            Medecin med5 = new Medecin("Dr Lefevre", "Julien", "52345678912", lieu6);
 
             // Création des patients
             Patient p1 = new Patient("Dupont", "Jean","16-05-1985", lieu1, m1, med1);

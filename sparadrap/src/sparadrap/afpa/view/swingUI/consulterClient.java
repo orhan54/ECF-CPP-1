@@ -7,7 +7,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static sparadrap.afpa.model.Medecin.patient;
 
 public class consulterClient extends JFrame {
     private JPanel contentPane;
@@ -16,11 +15,9 @@ public class consulterClient extends JFrame {
     private JButton modifierButton;
     private JButton supprimerButton;
     private JButton retourButton;
-    private JButton infoButton;
     private JButton quitterButton;
     private JButton créerUnCompteButton;
     private JComboBox comboBoxClient;
-    private JButton creerButton;
     private String selectedValue;
 
     private DefaultTableModel tableModelClient;

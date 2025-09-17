@@ -19,6 +19,7 @@ public class consulterMedecin extends JFrame {
     private JButton retourButton;
     private JButton infoButton;
     private JComboBox<String> comboBoxMedecin;
+    private JButton créerUnMédecinButton;
     private String selectedValue;
 
     private DefaultTableModel tableModelMedecin;
@@ -58,12 +59,30 @@ public class consulterMedecin extends JFrame {
                 quitter();
             }
         });
+        créerUnMédecinButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                creerMedecin();
+            }
+        });
+        modifierButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateMedecin();
+            }
+        });
+        supprimerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteMedecin();
+            }
+        });
     }
 
     private void remplirComboBox() {
         comboBoxMedecin.removeAllItems();
 
-        comboBoxMedecin.addItem("Choisir un client");
+        comboBoxMedecin.addItem("Choisir un médecin");
         comboBoxMedecin.setSelectedIndex(0);
 
         for(Medecin m : Medecin.getMedecins()) {
@@ -99,6 +118,59 @@ public class consulterMedecin extends JFrame {
 
             }
         });
+    }
+
+    private void creerMedecin() {
+        registerMedecin registerMedecin = new registerMedecin();
+        try{
+            registerMedecin.setVisible(true);
+        }catch(Exception e){
+            System.out.println("Error sur le lancement de la view creation d'un médecin" +e.getMessage());
+        }
+    }
+
+    private void updateMedecin() {
+        try{
+            String selected = (String) comboBoxMedecin.getSelectedItem();
+            for(Medecin m : Medecin.getMedecins()) {
+                if(selectedValue.equals(m.getNom() + " " + m.getPrenom())) {
+                    registerMedecin updateMedecin = new registerMedecin(m);
+                    updateMedecin.setVisible(true);
+                    System.out.println(m);
+                }
+            }
+        }catch(Exception e){
+            System.out.println("Error au lancement de la view updateMedecin" +e.getMessage());
+        }
+    }
+
+    private void deleteMedecin() {
+        int selectedRow = tableMedecin.getSelectedRow();
+
+        if(selectedRow >= 0 && selectedValue != null) {
+            Medecin medecinToRemove = null;
+            for(Medecin m : Medecin.getMedecins()) {
+                if(selectedValue.equals(m.getNom() + " " + m.getPrenom())) {
+                    medecinToRemove = m;
+                    break;
+                }
+            }
+
+            if(medecinToRemove != null) {
+                Medecin.getMedecins().remove(medecinToRemove);
+
+                // Mise à jour comboBox
+                comboBoxMedecin.removeItem(selectedValue);
+
+                // Vider le tableau après suppression
+                tableModelMedecin.setRowCount(0);
+
+                // Rénitialiser la selection
+                selectedValue = null;
+                comboBoxMedecin.setSelectedIndex(0); // revient sur "Choisir un médecin"
+
+            }
+        }
     }
 
 //    private void afficherMedecin() {  // *** Afficher tout les medecins ***

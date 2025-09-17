@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class RegexUtility {
     // Regex format date
-    private static String dateValide = "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[13-9]|1[0-2])" +
+    private static String DATE_VALIDE = "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[13-9]|1[0-2])" +
             "\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]" +
             "\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1" +
             "\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$";
@@ -15,6 +15,9 @@ public class RegexUtility {
 
     // Regex pour un nombre entier
     private static String POSITIVE_INT_REGEX = "\\d+";
+
+    // regex numéro agréement
+    private static String NUMERO_AGREEMENT = "/^[0-9][0-9]{10}$/";
 
     // Regex email
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
@@ -30,16 +33,17 @@ public class RegexUtility {
     private static final String ADRESSE_VALIDE = "^[0-9]+\\s+[a-zA-ZéèêàâôûùïüçÉÈÊÀÂÔÛÙÏÜÇ]+(\\s+[a-zA-ZéèêàâôûùïüçÉÈÊÀÂÔÛÙÏÜÇ]+)*$";
 
 
+    public static boolean numAgreementValide(String input){ return input != null && input.matches(NUMERO_AGREEMENT); }
 
     public static boolean dateValide(String input) {
-        return input != null && input.matches(dateValide);
+        return input != null && input.matches(DATE_VALIDE);
     }
 
     public static boolean regexAlpha(String input) {
         return input != null && input.matches(ALPHA);
     }
 
-    public static boolean positifInt (String input) {
+    public static boolean positifInt(String input) {
         return input != null && input.matches(POSITIVE_INT_REGEX);
     }
 

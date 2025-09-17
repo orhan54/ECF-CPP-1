@@ -11,7 +11,6 @@ import static sparadrap.afpa.utility.RegexUtility.positifInt;
 
 public class Patient extends Personne {
 
-    private static int getId;
     private static int nextId = 1;
     private int id;
 

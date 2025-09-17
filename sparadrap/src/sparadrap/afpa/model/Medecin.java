@@ -5,6 +5,7 @@ import sparadrap.afpa.exception.SaisieException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static sparadrap.afpa.utility.RegexUtility.numAgreementValide;
 import static sparadrap.afpa.utility.RegexUtility.positifInt;
 
 public class Medecin extends Personne {
@@ -59,7 +60,7 @@ public class Medecin extends Personne {
      * @throws SaisieException the saisie exception
      */
     public void setNumeroAgreement(String pNumeroAgreement) throws SaisieException {
-        if (!positifInt(String.valueOf(pNumeroAgreement)) && String.valueOf(pNumeroAgreement).length() == 9) {
+        if (!positifInt(pNumeroAgreement) && (!numAgreementValide(pNumeroAgreement))) {
             throw new SaisieException("Error sur numéro agreement : " + pNumeroAgreement);
         }else{
             this.numeroAgreement = pNumeroAgreement;

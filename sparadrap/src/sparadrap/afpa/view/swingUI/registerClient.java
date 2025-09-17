@@ -82,7 +82,7 @@ public class registerClient extends JFrame {
             try {
                 valider();
             } catch (SaisieException ex) {
-                JOptionPane.showMessageDialog(this, "Erreur : " + ex.getMessage());
+                JOptionPane.showMessageDialog(this, "Erreur sur la validation de la mise a jour patient : " + ex.getMessage());
             }
         });
         quitterButton.addActionListener(e -> quitter());
