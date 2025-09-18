@@ -32,12 +32,32 @@ Ce projet Java permet de gérer les commandes, les patients, les médecins et le
 
 - Java 21+
 
+## Tâche réalisée
+• Priorité 1
+
+• Priorité 2
+
+• Priorité 3 (1er point) 
+
+"Sur la page détails d’un médicament
+
+•L’utilisateur pourra afficher la liste des médicaments.
+
+•L’utilisateur pourra consulter tous les détails d’un médicament.
+
+•L’utilisateur pourra revenir à la page précédente à tout moment ou quitter l’application."
+
+## Reste a faire
+• Terminer des Tests Unitaire
+
+• Priorité 3 (point 2 et point 3)
+
+• Extra Bonus
+
 ## Compilation et exécution
 
 •Des données sont instanciées et disponibles au lancement du programme, et seront utilisées ensuite pour la simulation.
 
-•Clone projet disponible sur github.
+•Clone du projet disponible sur github.
 ```bash
 https://github.com/orhan54/ECF-CPP-1
-
-
