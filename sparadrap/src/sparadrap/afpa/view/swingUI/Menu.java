@@ -19,6 +19,7 @@ public class Menu extends JFrame {
     private JLabel titreMenu;
     private JButton buttonQuitterMenu;
     private JButton buttonHistoriqueOrdo;
+    private JButton buttonAddMedic;
 
     public Menu() {
 
@@ -87,6 +88,16 @@ public class Menu extends JFrame {
                 historiqueOrdonnance.setVisible(true);
             }
         });
+        buttonAddMedic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    displayAddMedic();
+                } catch (SaisieException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
 
     private void displayTypeAchat() {
@@ -107,6 +118,11 @@ public class Menu extends JFrame {
     private void displayAddClient() throws SaisieException {
         consulterClient consulterClient = new consulterClient();
         consulterClient.setVisible(true);
+    }
+
+    private void displayAddMedic() throws SaisieException {
+        addMedic addMedic = new addMedic();
+        addMedic.setVisible(true);
     }
 
     private void quitter() {

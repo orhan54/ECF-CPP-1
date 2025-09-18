@@ -193,12 +193,13 @@ public class historiqueAchat extends JFrame {
     }
 
     private void informationCommande() {
-        JFrame frame = new JFrame();
-        frame.setTitle("Information Commande");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
+//        JFrame frame = new JFrame();
+//        frame.setTitle("Information Commande");
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        JPanel panel = new JPanel();
+//        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+//
 //        JFrame frame = new JFrame("Information de commande");
 //        ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
 //        Dimension dimension = new Dimension(600, 500);
