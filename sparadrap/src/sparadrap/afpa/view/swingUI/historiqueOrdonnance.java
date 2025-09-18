@@ -78,7 +78,7 @@ public class historiqueOrdonnance extends JFrame {
                     if(selectedMedecin.equals(ordo.getNomMedecin())) {
 
                         String medicamentStr = ordo.getMedicaments().stream()
-                                .map(m -> m.getNom() + "(" + m.getQuantite() + ")")
+                                .map(m -> m.getNom())
                                 .collect(Collectors.joining(", "));
 //                        System.out.println(medicamentStr);
 

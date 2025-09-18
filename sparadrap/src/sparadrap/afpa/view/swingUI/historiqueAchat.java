@@ -6,6 +6,8 @@ import sparadrap.afpa.model.Medicament;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -21,6 +23,7 @@ public class historiqueAchat extends JFrame {
     private JLabel titreHistorique;
     private JTable tableHistorique;
     private JButton rechercherButton;
+    private JButton informationButton;
 
     private DefaultTableModel tableModelHistorique;
 
@@ -64,6 +67,14 @@ public class historiqueAchat extends JFrame {
 
         // Bouton rechercher
         rechercherButton.addActionListener(e -> valider());
+
+        //Button information qui va ouvrir une nouvelle JFrame
+        informationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                informationCommande();
+            }
+        });
     }
 
     private void initialiserComboBox() {
@@ -99,7 +110,7 @@ public class historiqueAchat extends JFrame {
         for (int i = 0; i < commande.getMedicaments().size(); i++) {
             Medicament med = commande.getMedicaments().get(i);
             if (i > 0) sb.append(", ");
-            sb.append(med.getNom()).append(" (").append(med.getQuantite()).append(")");
+            sb.append(med.getNom());
         }
         String result = sb.toString();
         return result.length() > 50 ? result.substring(0, 47) + "..." : result;
@@ -179,6 +190,28 @@ public class historiqueAchat extends JFrame {
         if (dateValide) {
             appliquerFiltres();
         }
+    }
+
+    private void informationCommande() {
+        JFrame frame = new JFrame();
+        frame.setTitle("Information Commande");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+//        JFrame frame = new JFrame("Information de commande");
+//        ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
+//        Dimension dimension = new Dimension(600, 500);
+//
+//        this.setIconImage(imageIcon.getImage());
+//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.setPreferredSize(dimension);
+//        this.setResizable(false);
+//        this.setContentPane(contentPane);
+//
+//        initialiserComboBox();
+//        afficherCommandes();
+
     }
 
     private void retour() { this.dispose(); }

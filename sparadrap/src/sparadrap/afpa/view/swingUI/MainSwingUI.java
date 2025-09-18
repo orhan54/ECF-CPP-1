@@ -109,7 +109,7 @@ public class MainSwingUI {
             medicamentsCmd2.add(medic6); // Amoxicilline
             Commande cmd2 = new Commande(Date.valueOf("2025-06-15"),
                     Commande.TypeAchat.ORDONNANCE,
-                    "Dr Bernard",
+                    "Dr Robert",
                     "Paul Durand",
                     medicamentsCmd2,
                     5,
@@ -124,7 +124,7 @@ public class MainSwingUI {
             Commande cmd3 = new Commande(Date.valueOf("2025-07-01"),
                     Commande.TypeAchat.DIRECT,
                     "Dr Bernard",
-                    "Paul Durand",
+                    "Claire Martin",
                     medicamentsCmd3,
                     4,
                     63.92
@@ -133,8 +133,8 @@ public class MainSwingUI {
             // Commande 4 - Achat direct avec un seul médicament
             Commande cmd4 = new Commande(Date.valueOf("2025-07-20"),
                     Commande.TypeAchat.DIRECT,
-                    "Dr Bernard",
-                    "Paul Durand",
+                    "Dr Dubois",
+                    "Sophie Petit",
                     medic4, // Méthaqualone
                     6,
                     155.94
@@ -146,8 +146,8 @@ public class MainSwingUI {
             medicamentsCmd5.add(medic1); // Digoxine
             Commande cmd5 = new Commande(Date.valueOf("2025-08-05"),
                     Commande.TypeAchat.ORDONNANCE,
-                    "Dr Bernard",
-                    "Paul Durand",
+                    "Dr Morel",
+                    "Lucas Bernard",
                     medicamentsCmd5,
                     8,
                     210.0,
