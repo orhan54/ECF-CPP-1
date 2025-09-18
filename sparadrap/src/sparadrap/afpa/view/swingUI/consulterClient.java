@@ -41,9 +41,6 @@ public class consulterClient extends JFrame {
         // Ajout list item dans combobox
         remplirComboBox();
 
-        // Afficher tout les clients
-        //afficherClient();
-
         this.pack();
         this.setLocationRelativeTo(null);
 
@@ -129,30 +126,7 @@ public class consulterClient extends JFrame {
         });
     }
 
-//    private void afficherClient() throws SaisieException {
-//        tableModelClient.setRowCount(0);
-//
-//        if(Patient.getPatients().isEmpty()) {
-//            tableModelClient.addRow(new Object[]{"Aucun client"});
-//        }else{
-//            for (Patient patients : Patient.getPatients()) {
-//                tableModelClient.addRow(new Object[]{
-//                        patients.getNom(),
-//                        patients.getPrenom(),
-//                        patients.getLieu().getAdresse(),
-//                        patients.getLieu().getCodePostal(),
-//                        patients.getLieu().getVille(),
-//                        patients.getLieu().getTelephone(),
-//                        patients.getLieu().getEmail(),
-//                        patients.getNumeroSecuriteSociale(),
-//                        patients.getDateNaissance(),
-//                        patients.getMutuelle().getNom(),
-//                        patients.getMedecin().getNom()
-//                });
-//            }
-//        }
-//    }
-
+    // Appel de la view pour créer un client
     private void addClient() {
         registerClient registerClient = new registerClient();
         try {
@@ -162,6 +136,7 @@ public class consulterClient extends JFrame {
         }
     }
 
+    // Maj d'un client
     private void updateClient() {
         try {
             String selectedClient = comboBoxClient.getSelectedItem().toString();
@@ -177,7 +152,7 @@ public class consulterClient extends JFrame {
         }
     }
 
-
+    // delete client
     private void deleteClient() {
         int selectedRow = tableClient.getSelectedRow();
 

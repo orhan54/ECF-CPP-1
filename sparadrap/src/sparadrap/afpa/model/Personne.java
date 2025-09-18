@@ -24,7 +24,7 @@ public class Personne {
      * @param medecin  the medecin
      * @throws SaisieException the saisie exception
      */
-// constructeur de lma classe personne
+    // constructeur de lma classe personne
     public Personne(String pNom, String pPrenom, Lieu lieu,Mutuelle mutuelle, Medecin medecin) throws SaisieException {
         this.setNom(pNom);
         this.setPrenom(pPrenom);

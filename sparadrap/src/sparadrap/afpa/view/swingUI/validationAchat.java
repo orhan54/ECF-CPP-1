@@ -25,7 +25,6 @@ public class validationAchat extends JFrame {
     private JComboBox<String> comboBoxMedicament;
     private JComboBox<String> comboBoxMedecin;
     private JTextField textFieldPrixTotalPayer;
-
     private JCheckBox checkBoxMutuelle;
     private JComboBox<String> comboBoxMutuelle;
     private JLabel labelPrixTotal;
@@ -63,11 +62,12 @@ public class validationAchat extends JFrame {
             checkBoxMutuelle.setSelected(true); // auto-activer mutuelle pour ordonnance
         }
 
-        // Tableaux
+        // Tableaux pour les medicaments diponible
         String[] colonne = {"Quantité", "Date mise en service", "Prix", "Categorie", "Nom"};
         tableModelMedicDispo = new DefaultTableModel(colonne, 0);
         tableMedicDispo.setModel(tableModelMedicDispo);
 
+        // Tableaux pour passer la commade des médicaments
         String[] colonnes = {"Nom medicament", "Quantite", "Prix unitaire", "Prix total"};
         tableModelCommande = new DefaultTableModel(colonnes, 0);
         tableMedic.setModel(tableModelCommande);
@@ -138,16 +138,6 @@ public class validationAchat extends JFrame {
             String item = mutuelle.getNom() + " (" + String.format("%.1f", mutuelle.getTauxPriseEnCharge()) + "%)";
             comboBoxMutuelle.addItem(item);
         }
-    }
-
-    private Mutuelle getMutuelleSelectionnee() {
-        if (comboBoxMutuelle.getSelectedIndex() <= 0) return null;
-        String selectedItem = comboBoxMutuelle.getSelectedItem().toString();
-        String nomMutuelle = selectedItem.split(" \\(")[0];
-        for (Mutuelle mutuelle : Mutuelle.getMutuelles()) {
-            if (mutuelle.getNom().equals(nomMutuelle)) return mutuelle;
-        }
-        return null;
     }
 
     private void mettreAJourAffichagePrix() {

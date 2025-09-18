@@ -55,6 +55,8 @@ public class registerClient extends JFrame {
 
     /**
      * Constructeur pour l'édition d'un patient existant
+     *
+     * @param patient the patient
      */
     public registerClient(Patient patient) {
         initUI();

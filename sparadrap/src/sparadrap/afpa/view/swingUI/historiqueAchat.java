@@ -46,9 +46,9 @@ public class historiqueAchat extends JFrame {
         initialiserComboBox();
         afficherCommandes();
 
-        // Tooltips pour les dates
-        textFieldDate1.setToolTipText("Format: dd/MM/yyyy");
-        textFieldDate2.setToolTipText("Format: dd/MM/yyyy");
+        // Champs input pour les dates
+        textFieldDate1.setToolTipText("Format: dd/MM/yyyy"); // Debut
+        textFieldDate2.setToolTipText("Format: dd/MM/yyyy"); // Fin
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -84,6 +84,7 @@ public class historiqueAchat extends JFrame {
         comboBoxTypeHistoriqueAchat.addItem("ORDONNANCE");
     }
 
+    // afficher les commandes
     private void afficherCommandes() {
         tableModelHistorique.setRowCount(0);
         if (Commande.getCommandes().isEmpty()) {
@@ -116,6 +117,7 @@ public class historiqueAchat extends JFrame {
         return result.length() > 50 ? result.substring(0, 47) + "..." : result;
     }
 
+    // Filtre qui affiche les commandes entre 2 date
     private void appliquerFiltres() {
         tableModelHistorique.setRowCount(0);
 
@@ -158,6 +160,7 @@ public class historiqueAchat extends JFrame {
             tableModelHistorique.addRow(new Object[]{"Aucun résultat", "pour les critères", "de recherche", "sélectionnés", "", "", ""});
     }
 
+    // Validation des 2 champs input date et verification pattern
     private void valider() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         boolean dateValide = true;
@@ -192,28 +195,67 @@ public class historiqueAchat extends JFrame {
         }
     }
 
+    // Affichage commande avec détails
     private void informationCommande() {
+        int selectedRow = tableHistorique.getSelectedRow();
+        if (selectedRow == -1 || Commande.getCommandes().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Veuillez sélectionner une commande dans le tableau.",
+                    "Aucune sélection", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-//        JFrame frame = new JFrame();
-//        frame.setTitle("Information Commande");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        JPanel panel = new JPanel();
-//        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-//
-//        JFrame frame = new JFrame("Information de commande");
-//        ImageIcon imageIcon = new ImageIcon("C:\\Users\\User\\Desktop\\ECF-CPP1_CICEK_Orhan\\ECF-CPP-1\\sparadrap\\src\\sparadrap\\afpa\\image\\miniLogo.png");
-//        Dimension dimension = new Dimension(600, 500);
-//
-//        this.setIconImage(imageIcon.getImage());
-//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        this.setPreferredSize(dimension);
-//        this.setResizable(false);
-//        this.setContentPane(contentPane);
-//
-//        initialiserComboBox();
-//        afficherCommandes();
+        // Récupération de la commande correspondante (même index que dans la liste Commandes)
+        Commande commande = Commande.getCommandes().get(selectedRow);
 
+        // Création de la fenêtre popup
+        JDialog dialog = new JDialog(this, "Informations sur la commande", true);
+        dialog.setSize(600, 400);
+        dialog.setLocationRelativeTo(this);
+        dialog.setLayout(new BorderLayout());
+
+        // Panel principal
+        JPanel panelInfos = new JPanel();
+        panelInfos.setLayout(new BoxLayout(panelInfos, BoxLayout.Y_AXIS));
+        panelInfos.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        // Infos générales
+        panelInfos.add(new JLabel("Date : " + commande.getDateCommandeCreation()));
+        panelInfos.add(new JLabel("Type d'achat : " + commande.getTypeAchat()));
+        panelInfos.add(new JLabel("Médecin : " + commande.getNomMedecin()));
+        panelInfos.add(new JLabel("Patient : " + commande.getNomPatient()));
+        panelInfos.add(new JLabel(""));
+
+        // Tableau des médicaments
+        String[] colonnes = {"Médicament", "Quantité"};
+        DefaultTableModel modelMed = new DefaultTableModel(colonnes, 0);
+
+        if (commande.getMedicaments() != null && !commande.getMedicaments().isEmpty()) {
+            for (Medicament med : commande.getMedicaments()) {
+                modelMed.addRow(new Object[]{med.getNom(), med.getQuantite()});
+            }
+        } else {
+            modelMed.addRow(new Object[]{"Aucun médicament", ""});
+        }
+
+        JTable tableMeds = new JTable(modelMed);
+        JScrollPane scrollPane = new JScrollPane(tableMeds);
+
+        // Ajout au dialog
+        dialog.add(panelInfos, BorderLayout.NORTH);
+        dialog.add(scrollPane, BorderLayout.CENTER);
+
+        // Bouton fermer
+        JButton closeBtn = new JButton("Fermer");
+        closeBtn.addActionListener(e -> dialog.dispose());
+        JPanel panelBtn = new JPanel();
+        panelBtn.add(closeBtn);
+
+        dialog.add(panelBtn, BorderLayout.SOUTH);
+
+        dialog.setVisible(true);
     }
+
 
     private void retour() { this.dispose(); }
 

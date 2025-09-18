@@ -208,11 +208,13 @@ public class consulterMedecin extends JFrame {
         });
     }
 
+    // Appel de la view pour créer un médecin
     private void creerMedecin() {
         registerMedecin registerMedecin = new registerMedecin();
         registerMedecin.setVisible(true);
     }
 
+    // Update un médecin
     private void updateMedecin() {
         try {
             String selected = (String) comboBoxMedecin.getSelectedItem();
@@ -227,6 +229,7 @@ public class consulterMedecin extends JFrame {
         }
     }
 
+    // Delete un médecin
     private void deleteMedecin() {
         int selectedRow = tableMedecin.getSelectedRow();
 
@@ -248,11 +251,12 @@ public class consulterMedecin extends JFrame {
         }
     }
 
-    // Navigation
+    // Retour de la page
     private void retour() {
         this.dispose();
     }
 
+    // Quitter l'application
     private void quitter() {
         int reponse = JOptionPane.showConfirmDialog(consulterMedecin.this, "Voulez-vous quitter l'application ?", "Quitter", JOptionPane.YES_NO_OPTION);
         if (reponse == JOptionPane.YES_OPTION) {

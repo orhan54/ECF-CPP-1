@@ -28,7 +28,7 @@ public class Mutuelle {
      * @param lieu               the Lieu lieu
      * @throws SaisieException   the saisie exception
      */
-// Constucteur qui extends de la classe Lieu
+    // Constucteur qui extends de la classe Lieu
     public Mutuelle(String pNom, double pTauxPriseEnCharge, int pDepartement, Lieu lieu) throws SaisieException {
         this.setNom(pNom);
         this.setTauxPriseEnCharge(pTauxPriseEnCharge);

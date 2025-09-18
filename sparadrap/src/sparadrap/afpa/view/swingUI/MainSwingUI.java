@@ -40,35 +40,93 @@ public class MainSwingUI {
             // Médicaments supplémentaires pour les commandes
             Medicament medic6 = new Medicament(10, "15-04-2025", 8.50, "Antibiotiques", "Amoxicilline");
 
-            // Création de 5 ordonnances avec différents médicaments
-            // Ordonnance 1 - Dr Martin pour Jean Dupont (2 médicaments)
-            List<Medicament> medicamentsOrdo1 = new ArrayList<>();
-            medicamentsOrdo1.add(medic1); // Digoxine
-            medicamentsOrdo1.add(medic2); // Bisoprolol
-            Ordonnance ordo1 = new Ordonnance("12/05/2025","Dr Martin Paul", "Jean Dupont", medicamentsOrdo1);
+            // === Création de plusieurs ordonnances par médecin ===
+            // Dr Martin (3 ordonnances)
+            List<Medicament> ordoM1a = new ArrayList<>();
+            ordoM1a.add(medic1); // Digoxine
+            ordoM1a.add(medic2); // Bisoprolol
+            Ordonnance ordoM1_1 = new Ordonnance("12/05/2025", "Dr Martin Paul", "Jean Dupont", ordoM1a);
 
-            // Ordonnance 2 - Dr Robert pour Claire Martin (1 médicament)
-            List<Medicament> medicamentsOrdo2 = new ArrayList<>();
-            medicamentsOrdo2.add(medic3); // Mannitol
-            Ordonnance ordo2 = new Ordonnance("20/06/2025","Dr Martin Paul", "Claire Martin", medicamentsOrdo2);
+            List<Medicament> ordoM1b = new ArrayList<>();
+            ordoM1b.add(medic3); // Mannitol
+            Ordonnance ordoM1_2 = new Ordonnance("18/06/2025", "Dr Martin Paul", "Claire Martin", ordoM1b);
 
-            // Ordonnance 3 - Dr Dubois pour Paul Durand (3 médicaments)
-            List<Medicament> medicamentsOrdo3 = new ArrayList<>();
-            medicamentsOrdo3.add(medic1); // Digoxine
-            medicamentsOrdo3.add(medic4); // Méthaqualone
-            medicamentsOrdo3.add(medic5); // Élétriptan
-            Ordonnance ordo3 = new Ordonnance("28/07/2025","Dr Dubois Anne", "Paul Durand", medicamentsOrdo3);
+            List<Medicament> ordoM1c = new ArrayList<>();
+            ordoM1c.add(medic5); // Élétriptan
+            ordoM1c.add(medic6); // Amoxicilline
+            Ordonnance ordoM1_3 = new Ordonnance("02/07/2025", "Dr Martin Paul", "Paul Durand", ordoM1c);
 
-            // Ordonnance 4 - Dr Morel pour Sophie Petit (2 médicaments)
-            List<Medicament> medicamentsOrdo4 = new ArrayList<>();
-            medicamentsOrdo4.add(medic2); // Bisoprolol
-            medicamentsOrdo4.add(medic3); // Mannitol
-            Ordonnance ordo4 = new Ordonnance("29/07/2025","Dr Morel Hélène", "Sophie Petit", medicamentsOrdo4);
 
-            // Ordonnance 5 - Dr Lefevre pour Lucas Bernard (1 médicament)
-            List<Medicament> medicamentsOrdo5 = new ArrayList<>();
-            medicamentsOrdo5.add(medic5); // Élétriptan
-            Ordonnance ordo5 = new Ordonnance("05/08/2025","Dr Lefevre Julien", "Lucas Bernard", medicamentsOrdo5);
+            // Dr Robert (4 ordonnances)
+            List<Medicament> ordoM2a = new ArrayList<>();
+            ordoM2a.add(medic3); // Mannitol
+            Ordonnance ordoM2_1 = new Ordonnance("20/06/2025", "Dr Robert François", "Claire Martin", ordoM2a);
+
+            List<Medicament> ordoM2b = new ArrayList<>();
+            ordoM2b.add(medic4); // Méthaqualone
+            ordoM2b.add(medic2); // Bisoprolol
+            Ordonnance ordoM2_2 = new Ordonnance("25/07/2025", "Dr Robert François", "Lucas Bernard", ordoM2b);
+
+            List<Medicament> ordoM2c = new ArrayList<>();
+            ordoM2c.add(medic1);
+            ordoM2c.add(medic5);
+            ordoM2c.add(medic6);
+            Ordonnance ordoM2_3 = new Ordonnance("01/08/2025", "Dr Robert François", "Jean Dupont", ordoM2c);
+
+            List<Medicament> ordoM2d = new ArrayList<>();
+            ordoM2d.add(medic2);
+            Ordonnance ordoM2_4 = new Ordonnance("10/08/2025", "Dr Robert François", "Paul Durand", ordoM2d);
+
+
+            // Dr Dubois (3 ordonnances)
+            List<Medicament> ordoM3a = new ArrayList<>();
+            ordoM3a.add(medic1);
+            ordoM3a.add(medic4);
+            ordoM3a.add(medic5);
+            Ordonnance ordoM3_1 = new Ordonnance("28/07/2025", "Dr Dubois Anne", "Paul Durand", ordoM3a);
+
+            List<Medicament> ordoM3b = new ArrayList<>();
+            ordoM3b.add(medic6);
+            ordoM3b.add(medic3);
+            Ordonnance ordoM3_2 = new Ordonnance("05/08/2025", "Dr Dubois Anne", "Sophie Petit", ordoM3b);
+
+            List<Medicament> ordoM3c = new ArrayList<>();
+            ordoM3c.add(medic2);
+            ordoM3c.add(medic5);
+            Ordonnance ordoM3_3 = new Ordonnance("18/08/2025", "Dr Dubois Anne", "Lucas Bernard", ordoM3c);
+
+
+            // Dr Morel (3 ordonnances)
+            List<Medicament> ordoM4a = new ArrayList<>();
+            ordoM4a.add(medic2);
+            ordoM4a.add(medic3);
+            Ordonnance ordoM4_1 = new Ordonnance("29/07/2025", "Dr Morel Hélène", "Sophie Petit", ordoM4a);
+
+            List<Medicament> ordoM4b = new ArrayList<>();
+            ordoM4b.add(medic4);
+            Ordonnance ordoM4_2 = new Ordonnance("03/08/2025", "Dr Morel Hélène", "Jean Dupont", ordoM4b);
+
+            List<Medicament> ordoM4c = new ArrayList<>();
+            ordoM4c.add(medic1);
+            ordoM4c.add(medic5);
+            ordoM4c.add(medic6);
+            Ordonnance ordoM4_3 = new Ordonnance("15/08/2025", "Dr Morel Hélène", "Claire Martin", ordoM4c);
+
+
+            // Dr Lefevre (3 ordonnances)
+            List<Medicament> ordoM5a = new ArrayList<>();
+            ordoM5a.add(medic5);
+            Ordonnance ordoM5_1 = new Ordonnance("05/08/2025", "Dr Lefevre Julien", "Lucas Bernard", ordoM5a);
+
+            List<Medicament> ordoM5b = new ArrayList<>();
+            ordoM5b.add(medic2);
+            ordoM5b.add(medic3);
+            Ordonnance ordoM5_2 = new Ordonnance("12/08/2025", "Dr Lefevre Julien", "Paul Durand", ordoM5b);
+
+            List<Medicament> ordoM5c = new ArrayList<>();
+            ordoM5c.add(medic1);
+            ordoM5c.add(medic6);
+            Ordonnance ordoM5_3 = new Ordonnance("22/08/2025", "Dr Lefevre Julien", "Sophie Petit", ordoM5c);
 
             // Création des mutuelles
             Mutuelle m1 = new Mutuelle("Macif", 30, 54, lieu3);
@@ -214,11 +272,32 @@ public class MainSwingUI {
 
             // Affichage des ordonnances créées
             System.out.println("=== ORDONNANCES CRÉÉES ===");
-            System.out.println(ordo1);
-            System.out.println(ordo2);
-            System.out.println(ordo3);
-            System.out.println(ordo4);
-            System.out.println(ordo5);
+
+            // Dr Martin
+            System.out.println(ordoM1_1);
+            System.out.println(ordoM1_2);
+            System.out.println(ordoM1_3);
+
+            // Dr Robert
+            System.out.println(ordoM2_1);
+            System.out.println(ordoM2_2);
+            System.out.println(ordoM2_3);
+            System.out.println(ordoM2_4);
+
+            // Dr Dubois
+            System.out.println(ordoM3_1);
+            System.out.println(ordoM3_2);
+            System.out.println(ordoM3_3);
+
+            // Dr Morel
+            System.out.println(ordoM4_1);
+            System.out.println(ordoM4_2);
+            System.out.println(ordoM4_3);
+
+            // Dr Lefevre
+            System.out.println(ordoM5_1);
+            System.out.println(ordoM5_2);
+            System.out.println(ordoM5_3);
 
         }catch(Exception e){
             System.out.println("Erreur de la vue initialisation menu swing " + e.getMessage());

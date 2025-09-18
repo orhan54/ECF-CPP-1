@@ -91,7 +91,6 @@ public class addMedic extends JFrame {
 
             }
         });
-
     }
 
     private void retour() {

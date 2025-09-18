@@ -35,7 +35,6 @@ public class historiqueOrdonnance extends JFrame {
         this.setContentPane(contentPane);
 
         remplirComboBox();
-        //displayOrdonnance();
 
         String[] colonnes = {"Date", "Nom du médecin", "Nom du patient", "Liste des médicaments"};
         tableModelOrdo = new DefaultTableModel(colonnes, 0);
@@ -80,9 +79,8 @@ public class historiqueOrdonnance extends JFrame {
                         String medicamentStr = ordo.getMedicaments().stream()
                                 .map(m -> m.getNom())
                                 .collect(Collectors.joining(", "));
-//                        System.out.println(medicamentStr);
+                                // System.out.println(medicamentStr);
 
-                        // Il y a 2 ordonnance avec le Dr Martin Paul et les autre 1 ordonnance sauf Dr Robert francois qui en a 0
                         tableModelOrdo.addRow(new Object[]{
                                 ordo.getDate(),
                                 ordo.getNomMedecin(),
@@ -94,13 +92,8 @@ public class historiqueOrdonnance extends JFrame {
                         System.out.println("Le médecin " + ordo.getNomMedecin() + " n'a pas encore d'ordonnance !");
                     }
                 }
-
-
-
-
             }
         });
-
     }
 
     private void retour() {

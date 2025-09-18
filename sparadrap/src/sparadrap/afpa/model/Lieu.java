@@ -22,7 +22,7 @@ public class Lieu {
      * @param pCodePostal       the code postal
      * @throws SaisieException  the saisie exception
      */
-// constructeur de la classe Lieu
+    // constructeur de la classe Lieu
     public Lieu(String pAdresse, String pEmail, String pTelephone, String pVille, int pCodePostal) throws SaisieException {
         this.setAdresse(pAdresse);
         this.setEmail(pEmail);
