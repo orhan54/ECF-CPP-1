@@ -15,12 +15,12 @@ public class Lieu {
     /**
      * Instantiates a new Lieu.
      *
-     * @param pAdresse    the adresse
-     * @param pEmail      the email
-     * @param pTelephone  the telephone
-     * @param pVille      the ville
-     * @param pCodePostal the code postal
-     * @throws SaisieException the saisie exception
+     * @param pAdresse          the adresse
+     * @param pEmail            the email
+     * @param pTelephone        the telephone
+     * @param pVille            the ville
+     * @param pCodePostal       the code postal
+     * @throws SaisieException  the saisie exception
      */
 // constructeur de la classe Lieu
     public Lieu(String pAdresse, String pEmail, String pTelephone, String pVille, int pCodePostal) throws SaisieException {

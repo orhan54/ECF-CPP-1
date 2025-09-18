@@ -41,7 +41,7 @@ public class consulterClient extends JFrame {
         // Ajout list item dans combobox
         remplirComboBox();
 
-        // Afficher les clients
+        // Afficher tout les clients
         //afficherClient();
 
         this.pack();

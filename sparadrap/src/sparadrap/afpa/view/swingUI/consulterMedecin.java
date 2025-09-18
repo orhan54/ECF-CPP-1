@@ -208,7 +208,6 @@ public class consulterMedecin extends JFrame {
         });
     }
 
-    // CRUD Médecin
     private void creerMedecin() {
         registerMedecin registerMedecin = new registerMedecin();
         registerMedecin.setVisible(true);

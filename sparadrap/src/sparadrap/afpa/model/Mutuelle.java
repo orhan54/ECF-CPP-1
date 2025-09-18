@@ -26,7 +26,7 @@ public class Mutuelle {
      * @param pTauxPriseEnCharge the taux prise en charge
      * @param pDepartement       the departement
      * @param lieu               the Lieu lieu
-     * @throws SaisieException the saisie exception
+     * @throws SaisieException   the saisie exception
      */
 // Constucteur qui extends de la classe Lieu
     public Mutuelle(String pNom, double pTauxPriseEnCharge, int pDepartement, Lieu lieu) throws SaisieException {

@@ -18,6 +18,7 @@ public class Menu extends JFrame {
     private JButton buttonAddClientMenu;
     private JLabel titreMenu;
     private JButton buttonQuitterMenu;
+    private JButton buttonHistoriqueOrdo;
 
     public Menu() {
 
@@ -74,6 +75,18 @@ public class Menu extends JFrame {
             }
         });
 
+        buttonHistoriqueOrdo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                historiqueOrdonnance historiqueOrdonnance = null;
+                try {
+                    historiqueOrdonnance = new historiqueOrdonnance();
+                } catch (SaisieException ex) {
+                    throw new RuntimeException(ex);
+                }
+                historiqueOrdonnance.setVisible(true);
+            }
+        });
     }
 
     private void displayTypeAchat() {

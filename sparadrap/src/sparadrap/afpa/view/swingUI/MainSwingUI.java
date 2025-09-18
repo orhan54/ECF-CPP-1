@@ -50,7 +50,7 @@ public class MainSwingUI {
             // Ordonnance 2 - Dr Robert pour Claire Martin (1 médicament)
             List<Medicament> medicamentsOrdo2 = new ArrayList<>();
             medicamentsOrdo2.add(medic3); // Mannitol
-            Ordonnance ordo2 = new Ordonnance("20/06/2025","Dr Robert François", "Claire Martin", medicamentsOrdo2);
+            Ordonnance ordo2 = new Ordonnance("20/06/2025","Dr Martin Paul", "Claire Martin", medicamentsOrdo2);
 
             // Ordonnance 3 - Dr Dubois pour Paul Durand (3 médicaments)
             List<Medicament> medicamentsOrdo3 = new ArrayList<>();
