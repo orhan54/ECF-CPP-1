@@ -34,6 +34,10 @@ Ce projet Java permet de gérer les commandes, les patients, les médecins et le
 
 ## Compilation et exécution
 
+•Des données sont instanciées et disponibles au lancement du programme, et seront utilisées ensuite pour la simulation.
+
+•Clone projet disponible sur github.
 ```bash
-mvn clean install
-mvn exec:java -Dexec.mainClass="sparadrap.afpa.Main"
+https://github.com/orhan54/ECF-CPP-1
+
+
