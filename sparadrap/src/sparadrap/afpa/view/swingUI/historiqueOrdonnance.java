@@ -60,7 +60,6 @@ public class historiqueOrdonnance extends JFrame {
 
     private void remplirComboBox() throws SaisieException {
         comboBoxOrdoMedecin.removeAllItems();
-
         comboBoxOrdoMedecin.addItem("Choisir le médecin");
         comboBoxOrdoMedecin.setSelectedItem(0);
 
@@ -71,28 +70,28 @@ public class historiqueOrdonnance extends JFrame {
         comboBoxOrdoMedecin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                e.getSource();
-
                 String selected = (String)  comboBoxOrdoMedecin.getSelectedItem();
                 selectedMedecin = selected;
-
-                Ordonnance o = Ordonnance.getOrdonnances().stream().filter(ordonnance -> (ordonnance.getNomMedecin()).equals(selectedMedecin)).findFirst().orElse(null);
-
                 tableModelOrdo.setRowCount(0);
 
-                String medicamentStr = o.getMedicaments().stream()
+                for(Ordonnance ordo : Ordonnance.getOrdonnances()) {
+                    if(selectedMedecin.equals(ordo.getNomMedecin())) {
+
+                        String medicamentStr = ordo.getMedicaments().stream()
                                 .map(m -> m.getNom() + "(" + m.getQuantite() + ")")
                                 .collect(Collectors.joining(", "));
+//                        System.out.println(medicamentStr);
 
-
-                for(Ordonnance ordo : Ordonnance.getOrdonnances()) {
-                    if(o==ordo) {
+                        // Il y a 2 ordonnance avec le Dr Martin Paul et les autre 1 ordonnance sauf Dr Robert francois qui en a 0
                         tableModelOrdo.addRow(new Object[]{
                                 ordo.getDate(),
                                 ordo.getNomMedecin(),
                                 ordo.getNomPatient(),
                                 medicamentStr // nom et quantités
                         });
+
+                    }else if (false){
+                        System.out.println("Le médecin " + ordo.getNomMedecin() + " n'a pas encore d'ordonnance !");
                     }
                 }
 
