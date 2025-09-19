@@ -243,7 +243,7 @@ public class MainSwingUI {
             Medicament.getMedicaments().add(medic3);
             Medicament.getMedicaments().add(medic4);
             Medicament.getMedicaments().add(medic5);
-            Medicament.getMedicaments().add(medic6); // Ajout du médicament supplémentaire
+            Medicament.getMedicaments().add(medic6);
 
             // Ajout des commandes
             System.out.println("=== COMMANDES CRÉÉES ===");
